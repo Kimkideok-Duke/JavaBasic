@@ -1,0 +1,19 @@
+package javaexp.a02_start;
+
+public class A06_CharCodeExp {
+	
+	public static void main(String[] args) {
+		// 1)
+		char a = 'a', A = 'A', z = 'z', Z = 'Z';
+		System.out.println("a = " + (int)a);
+		System.out.println("A = " + (int)A);
+		System.out.println("z = " + (int)z);
+		System.out.println("Z = " + (int)Z);
+		
+		// 2)
+		int num1 = 69, num2 = 80;
+		System.out.println("69 = " + (char)num1);
+		System.out.println("80 = " + (char)num2);
+	}
+
+}

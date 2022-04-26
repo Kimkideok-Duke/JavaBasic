@@ -1,0 +1,29 @@
+package javaexp.a02_start;
+
+public class A07_Casting {
+	
+	public static void main(String[] args) {
+		
+		/*
+		 # 데이터의 형변환
+		 1. 데이터 타입을 다른 타입으로 변환하는 것을 말한다.
+		 	byte ==> int, int ==> double
+		 2. 종류
+		 	자동(묵시적)타입변환 : promotion
+		 	강제(명시적)타입변환 : casting
+		 3. 자동(묵시적)타입 변환
+		 	작은데이터유형에서 큰 데이터 유형으로 변환할 때는 추가 코드없이 자동으로 할당이 된다. 
+		 */
+		
+		byte num01 = 25;
+		int num02 = 25+num01;
+		int num03 = 30;
+		double num04 = num03;
+		System.out.println(" # 묵시적 형변환 결과 #");
+		System.out.println(num01);
+		System.out.println(num02);
+		System.out.println(num03);
+		System.out.println(num04);
+	}
+
+}

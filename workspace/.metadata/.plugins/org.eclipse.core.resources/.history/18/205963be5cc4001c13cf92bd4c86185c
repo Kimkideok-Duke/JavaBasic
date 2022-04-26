@@ -1,0 +1,9 @@
+package javaexp.a01_start;
+
+public class A03_CallProcess {
+	
+	public static void main(String[] args) {
+		System.out.println("자바 실행 순서");
+	}
+
+}
