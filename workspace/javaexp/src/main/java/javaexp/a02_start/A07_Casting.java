@@ -9,8 +9,8 @@ public class A07_Casting {
 		 1. 데이터 타입을 다른 타입으로 변환하는 것을 말한다.
 		 	byte ==> int, int ==> double
 		 2. 종류
-		 	자동(묵시적)타입변환 : promotion
-		 	강제(명시적)타입변환 : casting
+		 	자동(묵시적)타입변환
+		 	강제(명시적)타입변환
 		 3. 자동(묵시적)타입 변환
 		 	작은데이터유형에서 큰 데이터 유형으로 변환할 때는 추가 코드없이 자동으로 할당이 된다. 
 		 */
@@ -26,7 +26,7 @@ public class A07_Casting {
 		System.out.println(num04);
 		
 		/*
-		 4. 명시적 형변환(casting)
+		 4. 명시적 형변환
 		 	1) ()을 활용하여 특정한 데이터유형으로 변경이 명시적으로 필요할 때, 사용한다.
 		 	2)유형
 		 		큰데이터형 ==> 작은데이터형
@@ -35,6 +35,7 @@ public class A07_Casting {
 		 		 	int num02 = 10;
 		 		 	int num03 = 3;
 		 		 	double result = num02/(double)num03;
+					cf)자바에서는 정수와 정수형의 나눗셈은 정수형으로만 나온다. 실수형까지 처리하려면 피연산자중 하나는 실수형이여야 한다. 
 		 */
 		double dblNum = 25.27;
 		int num05 = (int)dblNum;

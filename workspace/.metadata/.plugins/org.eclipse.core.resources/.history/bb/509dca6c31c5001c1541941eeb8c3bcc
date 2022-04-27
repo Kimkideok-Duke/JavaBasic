@@ -37,19 +37,11 @@ public class A02_Calcu02 {
         System.out.println(str1+num05+num06);
         System.out.println(str1+str2+(num05+num06));
 
-        // 숫자를 문자열로 변환하기
-        String chStr1 = ""+num05;
-        String chStr2 = new Integer(num05).toString();
-
-        // 문자열을 숫자로 변환하기
-        // int num08 = Integer.parseInt("이십오");//오류발생
-        int num07 = Integer.parseInt("25");
-
         //투수의 자책점 4점, 경기이닝 5이닝, 방어율이 얼마?
-        int score = 4, inning = 5;
+        int score = 4, ining = 5;
         float ERA;
-        ERA = ((float)score*9)/(float)inning;
-        String era_print = String.format("%.2f", ERA);
+        ERA = ((float)score*9)/(float)ining;
+        String era_print = String.format("%.2f", ERA)
         System.out.println("투수의 방어율은 "+era_print);
 
     }

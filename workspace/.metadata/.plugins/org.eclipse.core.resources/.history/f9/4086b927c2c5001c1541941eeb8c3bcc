@@ -37,11 +37,10 @@ public class A02_Calcu02 {
         System.out.println(str1+num05+num06);
         System.out.println(str1+str2+(num05+num06));
 
-        // 숫자를 문자열로 변환하기
         String chStr1 = ""+num05;
-        String chStr2 = new Integer(num05).toString();
+        String chStr2 = new Integer(num05).toString;
 
-        // 문자열을 숫자로 변환하기
+        // 문자열 숫자로 변환하기
         // int num08 = Integer.parseInt("이십오");//오류발생
         int num07 = Integer.parseInt("25");
 
