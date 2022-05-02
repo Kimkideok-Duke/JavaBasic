@@ -21,6 +21,11 @@ public class A06_CharCodeExp {
 		//byte num300 = 300;
 		short num300 = 300;
 		System.out.println("print 300 -> " + num300);
+		// 연산이 들어가는 순간 데이터 유형은 int형 이상이 필요로 한다.
+		byte num08 = 25;
+		byte num09 = 7;
+		// byte num10 = num08+num09; 에러 발생
+		// System.out.println(num10);
 		
 		
 		// 2)
@@ -29,6 +34,18 @@ public class A06_CharCodeExp {
 		//int num3_5b = num1_5b+num2b;
 		long num3_5b = (long)num1_5b+(long)num2b;
 		System.out.println("print 3.5b -> " + num3_5b);
+
+		/**
+		 * Math.random() 함께 임시비밀번호 발급
+		 */
+		for(int code = 65;code<=90;code++) {
+			System.out.println(code + ":" + (char)code);
+		}
+		System.out.println("# 임의의 비밀번호(알파벳 대문자) #");
+		for(int cnt = 1; cnt<=8; cnt++) {
+			int ranCode = (int)(Math.random()*26+65);
+			System.out.println(ranCode + ":" + (char)ranCode);
+		}
 	}
 
 }

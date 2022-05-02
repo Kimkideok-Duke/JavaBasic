@@ -1,0 +1,336 @@
+{
+    // IntelliSense를 사용하여 가능한 특성에 대해 알아보세요.
+    // 기존 특성에 대한 설명을 보려면 가리킵니다.
+    // 자세한 내용을 보려면 https://go.microsoft.com/fwlink/?linkid=830387을(를) 방문하세요.
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Launch A01_Hellojava",
+            "request": "launch",
+            "mainClass": "javaexp.a01_start.A01_Hellojava",
+            "projectName": "javaexp"
+        },
+        {
+            "type": "java",
+            "name": "Launch A02_Variables",
+            "request": "launch",
+            "mainClass": "javaexp.a01_start.A02_Variables",
+            "projectName": "javaexp"
+        },
+        {
+            "type": "java",
+            "name": "Launch A03_CallProcess",
+            "request": "launch",
+            "mainClass": "javaexp.a01_start.A03_CallProcess",
+            "projectName": "javaexp"
+        },
+        {
+            "type": "java",
+            "name": "Launch A04_CallProExp",
+            "request": "launch",
+            "mainClass": "javaexp.a01_start.A04_CallProExp",
+            "projectName": "javaexp"
+        },
+        {
+            "type": "java",
+            "name": "Launch A05_Block",
+            "request": "launch",
+            "mainClass": "javaexp.a01_start.A05_Block",
+            "projectName": "javaexp"
+        },
+        {
+            "type": "java",
+            "name": "Launch A06_Comment",
+            "request": "launch",
+            "mainClass": "javaexp.a01_start.A06_Comment",
+            "projectName": "javaexp"
+        },
+        {
+            "type": "java",
+            "name": "Launch A07_SemiColon",
+            "request": "launch",
+            "mainClass": "javaexp.a01_start.A07_SemiColon",
+            "projectName": "javaexp"
+        },
+        {
+            "type": "java",
+            "name": "Launch A08_CommandExp",
+            "request": "launch",
+            "mainClass": "javaexp.a01_start.A08_CommandExp",
+            "projectName": "javaexp"
+        },
+        {
+            "type": "java",
+            "name": "Launch A01_Var",
+            "request": "launch",
+            "mainClass": "javaexp.a02_start.A01_Var",
+            "projectName": "javaexp"
+        },
+        {
+            "type": "java",
+            "name": "Launch A02_VarInit",
+            "request": "launch",
+            "mainClass": "javaexp.a02_start.A02_VarInit",
+            "projectName": "javaexp"
+        },
+        {
+            "type": "java",
+            "name": "Launch A03_VarInitExp",
+            "request": "launch",
+            "mainClass": "javaexp.a02_start.A03_VarInitExp",
+            "projectName": "javaexp"
+        },
+        {
+            "type": "java",
+            "name": "Launch A04_Literal_Block",
+            "request": "launch",
+            "mainClass": "javaexp.a02_start.A04_Literal_Block",
+            "projectName": "javaexp"
+        },
+        {
+            "type": "java",
+            "name": "Launch A05_PrimitiveDataType",
+            "request": "launch",
+            "mainClass": "javaexp.a02_start.A05_PrimitiveDataType",
+            "projectName": "javaexp"
+        },
+        {
+            "type": "java",
+            "name": "Launch A06_CharCodeExp",
+            "request": "launch",
+            "mainClass": "javaexp.a02_start.A06_CharCodeExp",
+            "projectName": "javaexp"
+        },
+        {
+            "type": "java",
+            "name": "Launch A07_Casting",
+            "request": "launch",
+            "mainClass": "javaexp.a02_start.A07_Casting",
+            "projectName": "javaexp"
+        },
+        {
+            "type": "java",
+            "name": "Launch A01_CalcuStart",
+            "request": "launch",
+            "mainClass": "javaexp.a03_calcu.A01_CalcuStart",
+            "projectName": "javaexp"
+        },
+        {
+            "type": "java",
+            "name": "Launch A02_Calcu02",
+            "request": "launch",
+            "mainClass": "javaexp.a03_calcu.A02_Calcu02",
+            "projectName": "javaexp"
+        },
+        {
+            "type": "java",
+            "name": "Launch A03_Calcu03",
+            "request": "launch",
+            "mainClass": "javaexp.a03_calcu.A03_Calcu03",
+            "projectName": "javaexp"
+        },
+        {
+            "type": "java",
+            "name": "Launch A04_Calcu04",
+            "request": "launch",
+            "mainClass": "javaexp.a03_calcu.A04_Calcu04",
+            "projectName": "javaexp"
+        },
+        {
+            "type": "java",
+            "name": "Launch A05_Calcu_equal",
+            "request": "launch",
+            "mainClass": "javaexp.a03_calcu.A05_Calcu_equal",
+            "projectName": "javaexp"
+        },
+        {
+            "type": "java",
+            "name": "Launch A06_Calcu_Logical",
+            "request": "launch",
+            "mainClass": "javaexp.a03_calcu.A06_Calcu_Logical",
+            "projectName": "javaexp"
+        },
+        {
+            "type": "java",
+            "name": "Launch A07_Calcu_Triple",
+            "request": "launch",
+            "mainClass": "javaexp.a03_calcu.A07_Calcu_Triple",
+            "projectName": "javaexp"
+        },
+        {
+            "type": "java",
+            "name": "Launch A01_Basic",
+            "request": "launch",
+            "mainClass": "javaexp.a04_process.A01_Basic",
+            "projectName": "javaexp"
+        },
+        {
+            "type": "java",
+            "name": "Launch A02_if_else",
+            "request": "launch",
+            "mainClass": "javaexp.a04_process.A02_if_else",
+            "projectName": "javaexp"
+        },
+        {
+            "type": "java",
+            "name": "Launch A03_Switch",
+            "request": "launch",
+            "mainClass": "javaexp.a04_process.A03_Switch",
+            "projectName": "javaexp"
+        },
+        {
+            "type": "java",
+            "name": "Launch A04_For",
+            "request": "launch",
+            "mainClass": "javaexp.a04_process.A04_For",
+            "projectName": "javaexp"
+        },
+        {
+            "type": "java",
+            "name": "Launch A05_For",
+            "request": "launch",
+            "mainClass": "javaexp.a04_process.A05_For",
+            "projectName": "javaexp"
+        },
+        {
+            "type": "java",
+            "name": "Launch A06_For",
+            "request": "launch",
+            "mainClass": "javaexp.a04_process.A06_For",
+            "projectName": "javaexp"
+        },
+        {
+            "type": "java",
+            "name": "Launch A07_break_continue",
+            "request": "launch",
+            "mainClass": "javaexp.a04_process.A07_break_continue",
+            "projectName": "javaexp"
+        },
+        {
+            "type": "java",
+            "name": "Launch A08_For_Double",
+            "request": "launch",
+            "mainClass": "javaexp.a04_process.A08_For_Double",
+            "projectName": "javaexp"
+        },
+        {
+            "type": "java",
+            "name": "Launch A09_while",
+            "request": "launch",
+            "mainClass": "javaexp.a04_process.A09_while",
+            "projectName": "javaexp"
+        },
+        {
+            "type": "java",
+            "name": "Launch A10_do_while",
+            "request": "launch",
+            "mainClass": "javaexp.a04_process.A10_do_while",
+            "projectName": "javaexp"
+        },
+        {
+            "type": "java",
+            "name": "Launch A01_Basic(1)",
+            "request": "launch",
+            "mainClass": "javaexp.a05_reference.A01_Basic",
+            "projectName": "javaexp"
+        },
+        {
+            "type": "java",
+            "name": "Launch A02_NullPointer",
+            "request": "launch",
+            "mainClass": "javaexp.a05_reference.A02_NullPointer",
+            "projectName": "javaexp"
+        },
+        {
+            "type": "java",
+            "name": "Launch A03_String",
+            "request": "launch",
+            "mainClass": "javaexp.a05_reference.A03_String",
+            "projectName": "javaexp"
+        },
+        {
+            "type": "java",
+            "name": "Launch A04_Array",
+            "request": "launch",
+            "mainClass": "javaexp.a05_reference.A04_Array",
+            "projectName": "javaexp"
+        },
+        {
+            "type": "java",
+            "name": "Launch A0425",
+            "request": "launch",
+            "mainClass": "javaexp.z01_homework.A0425",
+            "projectName": "javaexp"
+        },
+        {
+            "type": "java",
+            "name": "Launch A0426",
+            "request": "launch",
+            "mainClass": "javaexp.z01_homework.A0426",
+            "projectName": "javaexp"
+        },
+        {
+            "type": "java",
+            "name": "Launch A0427",
+            "request": "launch",
+            "mainClass": "javaexp.z01_homework.A0427",
+            "projectName": "javaexp"
+        },
+        {
+            "type": "java",
+            "name": "Launch A0428",
+            "request": "launch",
+            "mainClass": "javaexp.z01_homework.A0428",
+            "projectName": "javaexp"
+        },
+        {
+            "type": "java",
+            "name": "Launch A0429",
+            "request": "launch",
+            "mainClass": "javaexp.z01_homework.A0429",
+            "projectName": "javaexp"
+        },
+        {
+            "type": "java",
+            "name": "Launch A01_Scanner",
+            "request": "launch",
+            "mainClass": "javaexp.z02_util.A01_Scanner",
+            "projectName": "javaexp"
+        },
+        {
+            "type": "java",
+            "name": "Launch A02_Scanner",
+            "request": "launch",
+            "mainClass": "javaexp.z02_util.A02_Scanner",
+            "projectName": "javaexp"
+        },
+        {
+            "type": "java",
+            "name": "Launch A03_Random",
+            "request": "launch",
+            "mainClass": "javaexp.z02_util.A03_Random",
+            "projectName": "javaexp"
+        },
+        {
+            "type": "java",
+            "name": "Launch A04_Args",
+            "request": "launch",
+            "mainClass": "javaexp.z02_util.A04_Args",
+            "projectName": "javaexp"
+        },
+        {
+            "type": "java",
+            "name": "Launch A05_ArgsExp",
+            "request": "launch",
+            "mainClass": "javaexp.z02_util.A05_ArgsExp",
+            "projectName": "javaexp"
+        }
+    ]
+}

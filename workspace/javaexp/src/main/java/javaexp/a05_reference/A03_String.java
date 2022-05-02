@@ -11,6 +11,8 @@ public class A03_String {
 		 */
 		String name01 = "홍길동";
 		String name02 = "홍길동"; // 같은 heap메모리를 바라본다.
+		// 문자열은 변경되거나 기능적인 처리가 많이 필요하기 때문에 객체로 만들어 여러가지 기능메서드를 제공하여 처리할 수 있게 한다.
+		// name01.메서드
 		System.out.println(name01 == name02);
 		/**
 		2. 문자열의 일반적인 데이터 생성 형태는 내부적으로 new String()으로 사용된다.

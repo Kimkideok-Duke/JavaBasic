@@ -10,6 +10,10 @@ public class A07_Calcu_Triple {
         2. 앞의 조건식 결과에 따라 콜론 앞 뒤의 피연산자 선택 ==> 조건 연산기
         3. 형식
             (비교연산자, 조건연산자) ? true일때 : false일때
+
+            cf) 다중의 조건을 처리할 때, 위의 false일때에 다시 3항연산식을 사용한다.
+            if else if else if ...
+            조건1?결과1:(조건2?결과2:그외결과)
         */
 
         int point = 80;
