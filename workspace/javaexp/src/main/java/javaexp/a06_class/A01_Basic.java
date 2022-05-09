@@ -44,5 +44,20 @@ public class A01_Basic {
 
 }
 class Person{
+	Person(){}
+	// Person(){} 컴파일시 자동으로 생성자가 선언되지 않으면 만들어진다.
+	Person(String name){}
+	Person(int age){}
+	Person(byte age){}
+	Person(String name, int age){}
+	Person(int age, String name){}
+	/*
+	#오버로딩
+	1. 생성자나 메서드에 동일한 이름으로도 선언하여 사용할 수 있는 선언 규칙을 말한다.
+		1) 궁극적인 핵심 원리는 이 내용을 호출하는 곳에서 매개변수로 식별할 수 있을 때 선언이 가능하다.
+		2) 매개변수의 갯수가 다를 때
+		3) 매개변수의 갯수가 같더라도 데이터 유형이 다를 때
+		4) 매개변수의 갯수가 같고 데이터 유형이 같더라도 다른 유형의 순서로 선언된 경우
 
+	*/
 }
