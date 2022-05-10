@@ -7,6 +7,24 @@
         return 리턴데이터;
     }
 2. 리턴유형과 리턴데이터에 대한 연습
+    0) void : return할 데이터가 없는 경우.
+    1) 각 데이터 유형에 따른 리턴 데이터 처리
+    ex) 자판기
+        입력 : 지폐, 동전, 카드/물건 선택
+        프로세스 처리 : 돈은 인식, 물건을 선택하면 돈과 선택 버튼에 대한 판단
+            잔액과 실제 물건을 넘길 준비
+        리턴 : 잔액, 구매한 물건
+    ex) class Calculator{
+        ..
+        int plus(int num01, int num02) {
+            return num01+num02;
+        }
+    }
+    Calculator c01 = new Calculator();
+    System.out.println() : console창에 display(화면출력)
+    
+    int tot = c01.plus(25, 50);
+
 3. 매개변수의 처리
     1) 단일 데이터 처리
     2) 다중 데이터 처리

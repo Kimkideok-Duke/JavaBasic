@@ -12,3 +12,45 @@
         요청 처리 : url
         화면 호출 : url을 통해 출력할 화면
         화면에 데이터 리스트 처리
+2. 객체와 객체 관계 내용 계열화
+    1) 같은 클래스에서 만들어진 여러 객체에 대한 이해
+        Person p1 = new Person();
+        Person p2 = new Person();
+        Person arr[] = {new Person(), new Person(), new Person()};
+
+        ArrayList<Person> plist = new ArrayList<Person>();
+        plist.add(new Person());
+        plist.add(new Person());
+        plist.add(new Person());
+        - 반복문을 통한 활용
+        for(int idx = 0; idx<arr; idx++) {
+            Person p01 = arr[idx];
+        }
+    2) 같은 클래스에 나온 객체들 간에 공유 메모리 영역 static 활용
+        ex) 63빌딩의 도면의 가격은 앞으로 지어질 모든 63빌딩 건축비용에 동일하게 적용
+
+    3) 다른 클래스 간에 선언되는 객체 설정
+        class Product{
+            // 물건/가격/갯수
+        }
+        class Person{   1:1 관계
+            HandPhone hp;
+        }
+        class Mart{ 1:다 관계
+            Product[] prd;
+        }
+    
+    4) 객체간의 접근제어자 설정 문제
+        1:1관계 1:다관계에서 종속된 객체이지만 접근의 범위에 따라서 직접적인 접근을 하지 못하게 하는 설정 처리..
+        private, X(default), protected, public
+        cf) 집에 특정 리모콘/버튼을 통해서 해당 TV의 채널을 바꾸듯이 객체에서의 피드값이나 메서드는 적절한 접근 범위를 설정해
+            해당 범위를 통해서만 필드를 접근 가능하게 처리함으로써 프로그램의 안정화를 유지한다.
+    
+    5) 상속
+        - 실제 클래스 vs 실제 클래스
+        - 추상 클래스 vs 실제 클래스
+        - 인터페이스 vs 실제 클래스
+        - 오버라이딩(overriding) : 메서드 재정의 cf) 오버로딩(overloading) 메서드 중복 정의 차이
+        - 다형성(polymorphism)
+        
+    6) 종합적인 객체와 객체의 활용 처리
