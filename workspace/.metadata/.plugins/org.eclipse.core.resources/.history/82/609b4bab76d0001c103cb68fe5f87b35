@@ -1,0 +1,8 @@
+package javaexp.z01_homework.playroom;
+
+public class friend2 {
+
+    void callFriendinfo() {
+        
+    }
+}

@@ -1,0 +1,5 @@
+package javaexp.a08_access.a02_myhome;
+
+public enum Mine {
+
+}
