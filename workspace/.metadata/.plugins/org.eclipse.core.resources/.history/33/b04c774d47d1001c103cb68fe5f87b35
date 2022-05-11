@@ -1,0 +1,11 @@
+package javaexp.z03_vo;
+
+public class Seat {
+	private String num;
+    private String place;
+    public Seat() {
+		super();
+		// TODO Auto-generated constructor stub
+    }
+    
+}

@@ -1,0 +1,7 @@
+package javaexp.z03_vo;
+
+public class Seat {
+    private String num;
+    private String place;
+    
+}

@@ -1,0 +1,8 @@
+package javaexp.z03_vo;
+
+public class Student {
+    private int grade;
+    private String major;
+
+    
+}

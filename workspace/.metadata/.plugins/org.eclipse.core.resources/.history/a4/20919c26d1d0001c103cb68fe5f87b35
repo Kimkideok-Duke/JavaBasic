@@ -1,0 +1,16 @@
+package javaexp.z03_vo;
+
+import java.util.ArrayList;
+
+public class Mart {
+    private String name;
+    private ArrayList<Product> plist;
+    public Mart() {
+        // 기본생성자를 통해 동적배열을 초기화
+        plist = new ArrayList<Product>();
+    }
+	public Mart(String name) {
+		this.name = name;
+        plist = new ArrayList<Product>();
+	}
+}
