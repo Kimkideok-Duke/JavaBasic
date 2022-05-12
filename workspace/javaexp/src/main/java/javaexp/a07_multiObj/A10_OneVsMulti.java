@@ -1,5 +1,7 @@
 package javaexp.a07_multiObj;
 
+import java.util.ArrayList;
+
 import javaexp.z03_vo.BTeam;
 import javaexp.z03_vo.Bplayer;
 import javaexp.z03_vo.Mart;
@@ -58,6 +60,13 @@ public class A10_OneVsMulti {
 		// ex)
 		BTeam bt = new BTeam("두산베어스");
 		bt.showTeamList();
+		// 외부에서 등록할 멤버를 한번에 List형태로 만들어서 바로 할당 처리하는 경우
+		ArrayList<Bplayer> blist = new ArrayList<Bplayer>();
+		blist.add(new Bplayer(50, "김현수", "891225"));
+		blist.add(new Bplayer(30, "이종욱", "800202"));
+		blist.add(new Bplayer(60, "김동주", "700715"));
+		bt.setBlist(blist);
+
 		bt.addPlayer(new Bplayer(50, "김현수", "891225"));
 		bt.addPlayer(new Bplayer(30, "이종욱", "800202"));
 		bt.addPlayer(new Bplayer(60, "김동주", "700715"));
