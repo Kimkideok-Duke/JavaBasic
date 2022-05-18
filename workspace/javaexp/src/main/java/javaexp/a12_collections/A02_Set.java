@@ -1,5 +1,8 @@
 package javaexp.a12_collections;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class A02_Set {
 
     public static void main(String[] args) {
@@ -13,7 +16,20 @@ public class A02_Set {
         2. 구현 클래스
             HashSet,LinkedHashSet, TreeSet
         3. 주요 메서드
-            
+
          */
+    	// ex)
+        Set<String> pouch = new HashSet<String>();
+        pouch.add("빨강구슬");
+        pouch.add("빨강구슬");
+        pouch.add("파랑구슬");
+        pouch.add("파랑구슬");
+        pouch.add("파랑구슬");
+        pouch.add("노랑구슬");
+        pouch.add("노랑구슬");
+        System.out.println("# 주머니 속에 구슬 #");
+        for(String one:pouch) {
+            System.out.println(one);
+        }
     }
 }

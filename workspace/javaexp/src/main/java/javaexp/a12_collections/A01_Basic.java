@@ -21,7 +21,7 @@ public class A01_Basic {
 			2) java.util 패키지에 포함된다. import 하여야 한다.
 			3) 인터페이스를 통해서 정형화된 방법으로 다양한 컬렉션 클래스를 이용할 수 있다.
 				List (상위)
-					ArrayList (하위)
+					ArrayList (하위) ** : spring에 DB에서 저장된 데이터 처리.
 					Vector (하위)
 					LinkedList (하위)
 		4. 인터페이스 분류
