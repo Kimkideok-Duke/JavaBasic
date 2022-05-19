@@ -118,5 +118,5 @@ ORDER BY months_between(sysdate, hiredate) desc;
 -- hint)mod함수 활용
 SELECT sysdate+1000 "날짜", trunc(1000/365) || '년 ' 
                         || trunc(mod(1000, 365)/31) || '개월' 
-                        || mod(mod(1000, 365), 31) || '일' "걸린기간"
+                        || mod(mod(1000, 365), 31) || '일' "걸린기"
 FROM dual;

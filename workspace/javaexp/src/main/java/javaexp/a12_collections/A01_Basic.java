@@ -81,6 +81,7 @@ public class A01_Basic {
 		System.out.println("초기 할당 멤버");
 		for(int idx = 0; idx<mlist.size(); idx++) {
 			System.out.println(mlist.get(idx));
+			// 참조변수를 출력하면 toString()으로 재정의한 내용이 출력처리
 		}
 		mlist.add(1, new Member(4000, "박길동"));
 		System.out.println("두번째 회원 추가");

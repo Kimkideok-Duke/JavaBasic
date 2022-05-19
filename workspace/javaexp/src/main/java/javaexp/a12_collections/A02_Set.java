@@ -16,8 +16,24 @@ public class A02_Set {
         2. 구현 클래스
             HashSet,LinkedHashSet, TreeSet
         3. 주요 메서드
-
+            add()
+            contains()
+            isEmpty
+            Interator<E> iterator()
+            size()
+            clear()
+            remove(Object)
          */
+        // 상위 인터페이스 = 하위 실체 객체
+        Set<String> set = new HashSet<String>();
+        set.add("사과");
+        set.add("사과");
+        set.add("배");
+        set.add("바나나");
+        set.add("배");
+        for(String fruit:set) {
+            System.out.println(fruit);
+        }
     	// ex)
         Set<String> pouch = new HashSet<String>();
         pouch.add("빨강구슬");
