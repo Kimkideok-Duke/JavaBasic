@@ -51,3 +51,58 @@ SELECT ename, deptno,
                 40,'재무',
                 '기타과') 부서명
 FROM emp;
+/*
+# CASE 조건 함수 처리
+1. decode의 확장된 함수형식으로 비교/논리 연산식을 이용해서 해당 결과값이 true일 경우를 지정하여 처리한다.
+2. 기본형식
+    1) 형식1
+    CASE WHEN 논리/관계식1 THEN 처리할 데이터
+         WHEN 논리/관계식2 THEN 처리할 데이터
+         ...
+         ELSE 위에 선언된 논리/관계식이 아닐 때 처리할 데이터 
+    END
+    2) 형식2
+    CASE 컬럼|데이터
+        WHEN 컬럼에 데이터1일 때 THEN 처리할 데이터
+        WHEN 컬럼에 데이터2일 때 THEN 처리할 데이터
+        ...
+        ELSE 위에 WHEN에 나열된 데이터가 아닐 때, 처리할 데이터
+    END
+*/
+SELECT ename,
+    deptno,
+    CASE WHEN deptno = 10 THEN sal*0.2
+         WHEN deptno = 20 THEN sal*0.5
+         WHEN deptno = 30 THEN sal*0.7
+         ELSE sal*1.2
+    END 보너스
+FROM emp;
+-- ex)
+SELECT ename, sal,
+    CASE WHEN sal >= 5000 THEN 'A등급'
+         WHEN sal >= 4000 THEN 'B등급'
+         WHEN sal >= 3000 THEN 'C등급'
+         WHEN sal >= 2000 THEN 'D등급'
+         WHEN sal >= 1000 THEN 'E등급'
+         WHEN sal >= 0 THEN 'F등급'
+         ELSE '데이터 범위초과(숫자로 0이상)' 
+    END 급여등급
+FROM emp;
+SELECT ename, deptno
+    CASE deptno WHEN 10 THEN sal*0.2
+                WHEN 20 THEN sal*0.5
+                WHEN 30 THEN sal*0.7
+                ELSE sal*1.2
+    END show
+FROM emp;
+-- ex)
+SELECT DISTINCT job FROM emp;
+SELECT ename, job,
+    CASE job WHEN 'CLERK' THEN '서울'
+             WHEN 'SALESMAN' THEN '대구'
+             WHEN 'PRESIDENT' THEN '부산'
+             WHEN 'MANAGER' THEN '광주'
+             WHEN 'ANALYST' THEN '제주도'
+             ELSE '범위에 없음'
+    END 출생지
+FROM emp;

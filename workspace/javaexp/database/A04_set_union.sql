@@ -2,6 +2,16 @@
 # 집합 연산자
 1. 테이블을 구성하는 행집합에 대해 테이블의 부분 집합을 결과로 변환하는 연산자.
 2. 잡합 연산의 대상이 되는 두 테이블의 컬럼 수가 같고, 대응되는 컬럼까지 데이터 타입이 동일할 때 활용된다.
+    ex)
+    select empno
+    from emp;
+
+    select empno
+    from emp2;
+
+    위와 같이 emp에 있는 empno와 emp2에 있는 empno를 두개의 집합개념으로 union, union all, 
+    intersect, minus로 집합 연산자에 의해서 처리하는 것을 말한다.
+    
 3. 기본 형식
     select 명령문1
     union, union all, intersect, minus

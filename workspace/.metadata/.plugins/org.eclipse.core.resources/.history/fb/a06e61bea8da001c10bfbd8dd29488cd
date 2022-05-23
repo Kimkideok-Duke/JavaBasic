@@ -256,18 +256,11 @@ FROM emp;
                 ORDER BY floor(sal/1000) desc;
 -- [1단계:개념] 7. 조인이란 무엇인가? 기본 예제를 통하여 기술하세요
                 -- 하나의 sql명령문에 의해 여러 테이블에 저장된 데이터를 한번에 조회할 수 있는 기능을 말한다.
-                
+                SELECT 
 -- [1단계:확인] 8. [조인]연봉이 1000~2000사이의 사원의 부서명을 출력하세요.
-                SELECT e.job, d.*
+                SELECT e.job, d.job
                 FROM emp e, dept d
-                WHERE e.deptno = d.deptno
-                AND sal>=1000 
-                AND sal<=2000;
-
+                WHERE e.deptno = d=deptno
+                AND sal>=1000 AND sal<=2000;
 -- [1단계:확인] 9. 부서위치(loc)별 평균 연봉을 출력하세요.
-                SELECT d.loc 부서위치, round(avg(e.sal),0) 평균연봉
-                FROM emp e, dept d
-                WHERE e.deptno = d.deptno
-                GROUP BY d.loc;
-
 SELECT * FROM emp;
