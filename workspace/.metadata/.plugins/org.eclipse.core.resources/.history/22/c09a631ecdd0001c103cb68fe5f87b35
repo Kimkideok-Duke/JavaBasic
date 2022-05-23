@@ -1,8 +1,0 @@
-package javaexp.z03_vo;
-
-public class Product {
-    // 필드 선언
-    private String name;
-    private int price;
-    private int cnt;
-}

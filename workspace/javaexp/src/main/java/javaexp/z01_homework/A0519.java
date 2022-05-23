@@ -65,7 +65,14 @@ public class A0519 {
 					// trunc : 지정한 소숫점 자리까지 남기고 절삭처리
 
 		// [1단계:확인] 10. 근무일수를 2분위로 나누어서(중앙값을 기준)서 보너스를 급여의 150%,200% 차등 지급하기로 했다. 사원명, 입사일, 분류, 보너스금액
-
+					// SELECT ename, hiredate,
+					// 		floor(sysdate - hiredate) workdate2,
+					// 		floor((sysdate - hiredate)/14955) 구분자,
+					// 		sal,
+					// 		(floor(((sysdate-hiredate)/14955)+3)*0.5)*100 || '%' "보너스 비율",
+					// 		sal*(floor((sysdate - hiredate)/14955)+3)*0.5 "보너스 급여"
+					// FROM emp; 
+					
 		// [1단계:확인] 11. 오늘을 1일을 기준으로 1000일 기념일의 날짜와  걸린 기간을 @@년 @@개월 @@일 형식으로 표기하세요. hint)mod함수 활용
 					// SELECT sysdate+1000 "날짜", trunc(1000/365) || '년 ' 
 					// 				|| trunc(mod(1000, 365)/31) || '개월' 

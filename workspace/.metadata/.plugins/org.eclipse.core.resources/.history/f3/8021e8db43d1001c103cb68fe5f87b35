@@ -1,6 +1,0 @@
-package javaexp.z03_vo;
-
-public class professor {
-    private String name;
-    
-}

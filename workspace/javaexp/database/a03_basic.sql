@@ -3,6 +3,12 @@
 1. database에서는 테이블 내에 특정 컬럼에 데이터가 없는 것을 NULL이라고 한다.
 2. 미확인 값이나 아직 값이 적용되지 않는 것을 의미
 3. 0이나 ''(공백)과 구분되어 정의되지 않는 값을 의미한다.
+*/
+SELECT * FROM EMP_CP100;
+INSERT INTO EMP_CP100(ename) value(null);
+INSERT INTO EMP_CP100(ename) value(''); -- DB에서는 null로 처리한다.
+INSERT INTO EMP_CP100(ename) value(' ');
+/*
 4. NULL값은 다른 데이터와 연산 결과같은 NULL로 된다.
     select sal + NULL ==> NULL
 5. 위와 같이 특정한 숫자형 데이터와 연산시, NULL이 되므로, NULL값이 나올 때는 defalut 값을 0으로 설정하여야 정상적인 연산을 할 수 있다.

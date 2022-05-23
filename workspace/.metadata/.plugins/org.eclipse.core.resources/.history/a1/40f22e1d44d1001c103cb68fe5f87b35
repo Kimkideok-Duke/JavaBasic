@@ -1,8 +1,0 @@
-package javaexp.z03_vo;
-
-public class Professor {
-    private String name;
-    private ArrayList<Student> slist;
-
-    
-}

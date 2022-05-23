@@ -24,3 +24,5 @@
     프로젝트 하위
     javaexp\src\main\webapp\WEB-INF\lib\ojdbc6.jar
 9. 플러그인 프로그램으로 xe 서버 연동
+
+# sql편집기 저장시 상단에 연결정보가 

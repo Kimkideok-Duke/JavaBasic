@@ -13,6 +13,7 @@
     select *
     from 테이블
     where..
+    group by 그룹함수
     order by 컬럼 [asc/desc]
     asc : default 로 오름차순 정렬
     desc : 내림차순 정렬

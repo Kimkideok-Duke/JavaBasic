@@ -87,6 +87,8 @@ WHERE (deptno=10 OR sal <3000);
     다음의 논리식과 동일  컬럼명 >= A and 컬럼명 <= B
 3. 컬럼명 in (데이터1, 데이터2, ...)
     해당 컬럼의 데이터를 나열된 조건으로 or 처리되는 결과값을 가져올 때 사용된다.
+    ex) 컬럼명 = 데이터1 or 컬럼명 = 데이터2...
+        컬럼명 in (select @@@ from @@@)
 4. 컬럼명 like '키워드 검색'
     1) 키워드 검색 유형
         '데이터%' : 해당 데이터로 시작
@@ -94,6 +96,9 @@ WHERE (deptno=10 OR sal <3000);
         '%데이터%' : 해당 데이터 포함
         '_데이터' : 첫자이후에 특정데이터 포함 - 자릿수 keyword 검색
         '데이터_' : 데이터가 마지막 한자 데이터 포함
+        ex) '_A_' : 3자리이고 중간에 A가 포함된 데이터
+            '__B%' : 세번째 자리에 B포함한 데이터
+            '%C_' : 뒤에서 두번째 데이터 C로 끝나는 데이터
 */
 SELECT *
 FROM emp
@@ -138,6 +143,13 @@ WHERE to_char(hiredate) LIKE '%81%';
 SELECT to_char(hiredate), e.*
 FROM emp e
 WHERE to_char(hiredate) LIKE '81/04%'; -- 1981년 4월에 입사한 사람
+SELECT hiredate, to_char(hiredate),
+        to_char(hiredate,'YYYY/MM/DD'),
+        to_char(hiredate,'YYYY"년"MM"월"DD"일"')
+FROM emp;
+-- 날짜형식을 원하는 형식으로 보거나/검색할 때는 to_char(날짜, '형식')
+--  활용을 하고, 특히 형식도 oracle에서 지원하는 형식 format 코드가(YYYY,-,/)되어있다.
+--  이외에 출력형식으로 추가가 필요하면 ' "추가형식" '로 하여야 한다.
 
 -- # like 문자열% : 해당문자열로 시작, like %문자열 : 해당문자열로 끝,
 --   like __A__ : 총 5자리이고 3번째 자리에 A가 들어가는 경우..
