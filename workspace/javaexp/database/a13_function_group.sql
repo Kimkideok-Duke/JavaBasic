@@ -59,6 +59,12 @@ GROUP BY job;
 SELECT to_number(to_char(hiredate, 'MM')) 월, sal
 FROM emp
 ORDER BY 월;
+/*
+# alias(별칭) 사용 주의
+1. 정렬은 별칭으로 사용이 가능하나,
+2. group을 처리한 데이터를 별칭사용하지 않기 때문에 그래도 처리하여야 한다.
+    - 결과 건수만 같으면, 중첩함수 적용을 하지 않아도 된다.
+*/
 
 SELECT to_number(to_char(hiredate, 'MM')) 월, max(sal) "최대급여", avg(sal)
 FROM emp
@@ -91,3 +97,12 @@ GROUP BY mod(empno,2);
     그룹화하는 행 집합을 줄여서 내부 정렬 시간을 단축
     SQL처리 성능 향상
 */
+SELECT deptno, avg(sal) 평균
+FROM emp
+GROUP BY deptno;
+-- sal가 2000이상인 것을 대상으로 그룹함수를 처리
+SELECT deptno, avg(sal) 평균
+FROM emp
+GROUP BY deptno
+HAVING avg(sal)>=2000;
+-- 그룹함수가 처리된 결과에서 avg(sal)을 조건으로 처리
