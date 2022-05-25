@@ -308,7 +308,7 @@ SELECT * FROM emp;
 
                 -- 1분위 : 서울 2분위 : 부산 3분위 : 제주  4분위 : LA
                 SELECT min(empno) 최소,
-                        round((min(empno)+round(median(empno)))/2) "1분위",
+                        (min(empno)+round(median(empno)))/2 "1분위"
                         round(median(empno)) 중앙,
                         (round(median(empno))+max(empno))/2 "3분위",
                         max(empno) 최대
@@ -363,19 +363,16 @@ SELECT * FROM emp;
                 WHERE sal < (
                         SELECT min(sal)
                         FROM emp
-                        WHERE mgr IN (
-                                SELECT empno
-                                FROM emp
-                                WHERE job = 'MANAGER'
-                        )
+                        WHERE job = 'MANAGER'
                 );
 
 -- [1단계:확인] 9. emp, salgrade테이블과 조인하여, 등급이 1~2등급인 사원의 최고 급여보다 많은 사원을 출력하세요.
-                SELECT *
-                FROM emp
-                WHERE sal > (
+                SELECT ename, sal
+                FROM emp, salgrade
+                WHERE sal BETWEEN losal AND hisal
+                AND sal > (
                         SELECT max(sal)
-                        FROM emp e, salgrade s
+                        FROM emp, salgrade
                         WHERE sal BETWEEN losal AND hisal
-                        AND grade in (1,2)
+                        AND grade <= 2
                 );

@@ -10,6 +10,7 @@
 3. 처리 과정
     1) 서브 쿼리는 메인 쿼리가 실행되기 전에 한번씩 실행되고,
     2) 서브 쿼리에서 실행된 결과가 메인 쿼리에 전달되어 최종적인 결과를 출력 처리
+    # 서브쿼리가 라인상으로는 하위에 있지만 실행은 먼저하고, 그 결과를 기준으로 데이터를 처리한다.
 */
 -- ex1)
 SELECT *
@@ -119,10 +120,14 @@ WHERE deptno = 20;
 SELECT *
 FROM EMP
 WHERE sal > any(
+-- any는 어느 하나라도 충족하면 된다. or 조건으로 연결
     SELECT sal
     FROM emp
     WHERE deptno = 20
+-- 800~, 2975~, 3000~
+-- 시작이 800
 );
+
 SELECT *
 FROM emp
 WHERE sal > all(
@@ -142,9 +147,36 @@ WHERE sal > (
 1. 서브쿼리에서 검색된 결과가 하나라도 존재하면 메인쿼리 조건절이 참이 되는 연산자
 2. 서브쿼리에서 검색된 결과가 존재하지 않으면 메인쿼리의 조건절은 거짓
     - 선책된 레코드가 없습니다라는 메시지 존재
+    # 하위에 있는 데이터가 있기만 하면 상위 쿼리를 수행처리한다.
 3. not exists
     1) exists와 상반되는 연산자
     2) 서브쿼리에서 검색된 결과가 하나도 존재하지 않으면 메인쿼리의 조건절이 참이 되는 연산자.
 */
 -- 관리자 번호가 null인것이 존재할 때, 사원 정보를 조회하라
-SELECT * FROM emp;
+SELECT * 
+FROM emp
+WHERE exists(
+    SELECT mgr
+    FROM EMP e
+    WHERE mgr IS NULL
+);
+-- ex1)
+SELECT *
+FROM emp
+WHERE not exists(
+    SELECT deptno
+    FROM emp e
+    WHERE deptno = 40
+) AND deptno = 10;
+-- AND deptno = 10;
+-- ex2)
+SELECT *
+FROM emp
+WHERE exists(
+    SELECT comm
+    FROM emp
+    WHERE comm = 0) 
+AND comm IS NOT NULL;
+-- null에 대한 검색 조건 -> 컬럼명 = null(x)
+-- 컬럼명 is null : 해당 데이터가 없을 때
+-- 컬럼명 is not null : 해당 데이터가 있을 때

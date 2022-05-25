@@ -363,19 +363,15 @@ SELECT * FROM emp;
                 WHERE sal < (
                         SELECT min(sal)
                         FROM emp
-                        WHERE mgr IN (
-                                SELECT empno
-                                FROM emp
-                                WHERE job = 'MANAGER'
-                        )
+                        WHERE job = 'MANAGER'
                 );
 
 -- [1단계:확인] 9. emp, salgrade테이블과 조인하여, 등급이 1~2등급인 사원의 최고 급여보다 많은 사원을 출력하세요.
                 SELECT *
-                FROM emp
-                WHERE sal > (
+                FROM emp e
+                AND sal > (
                         SELECT max(sal)
-                        FROM emp e, salgrade s
+                        FROM emp, salgrade
                         WHERE sal BETWEEN losal AND hisal
                         AND grade in (1,2)
                 );
