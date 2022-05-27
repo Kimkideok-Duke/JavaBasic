@@ -106,3 +106,12 @@ FROM emp
 GROUP BY deptno
 HAVING avg(sal)>=2000;
 -- 그룹함수가 처리된 결과에서 avg(sal)을 조건으로 처리
+-- 1. 사원정보중에 부서별 평균급여를 처리한다.
+SELECT deptno, avg(sal) 평균
+FROM emp
+GROUP BY deptno;
+-- 2. 그룹별로 평균급여를 기준으로 조건을 처리할 때, having을 처리
+SELECT deptno, avg(sal) 평균
+FROM emp
+GROUP BY deptno
+HAVING avg(sal)>=2000;
