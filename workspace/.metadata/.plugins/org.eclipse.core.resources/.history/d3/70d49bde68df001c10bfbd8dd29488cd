@@ -263,7 +263,7 @@ CREATE TABLE member011(
                     name varchar2(50) NOT NULL,
                     auth varchar2(50) CONSTRAINT member021_auth_ck check( auth IN('관리자','일반사용자','슈퍼유저') ),
                     point NUMBER check(point >= 0)
-                );
+                )
                 INSERT INTO member021 values('ABC123', 'qwerty1', '홍길동', '관리자', 100);
                 INSERT INTO member021 values(null, 'qwerty2', '김길동', '일반사용자', 101); --오류
                 INSERT INTO member021 values('ABC123', 'qwerty3', '이길동', '관리자', 200); -- 오류
@@ -286,21 +286,11 @@ CREATE TABLE member011(
 --       1000 사과   3000 개  10     10 과일류 1
 --       1001 소고기 10000 g  20     20 육류  2
 --         제품구분의 분류번호와 물건의 분류번호는 foreign key 관계로 설정하세요.
-                CREATE TABLE product021(
-                    num NUMBER NOT NULL check(num >= 0),
-                    name varchar2(50) NOT NULL,
-                    price NUMBER NOT NULL check(price>=0),
-                    unit varchar2(50) NOT NULL,
-                    no NUMBER PRIMARY key
-                );
-                INSERT INTO product021 values(1000, '시과', 3000, '개', 10);
-                INSERT INTO product021 values(1001, '소고기', 10000, 'g', 20);
-                SELECT * FROM product021;
-                CREATE TABLE category(
-                    num NUMBER REFERENCES product021(no),
-                    name varchar2(50) NOT NULL,
-                    priority NUMBER NOT NULL
-                );
-                INSERT INTO category values(10, '과일류', 1);
-                INSERT INTO category values(20, '육류', 2);
-                SELECT * FROM category;
+CREATE TABLE product021(
+    num varchar2(50) NOT NULL check(num >= 0),
+    name varchar2(50) NOT NULL,
+    price NUMBER NOT NULL check(num>=0),
+    couting varchar2(50) NOT NULL,
+    no NUMBER PRIMARY key
+);
+INSERT INTO product021 values('1000', '시과', )

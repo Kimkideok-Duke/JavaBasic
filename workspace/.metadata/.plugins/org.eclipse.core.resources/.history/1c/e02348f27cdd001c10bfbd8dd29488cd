@@ -115,7 +115,7 @@ SELECT * FROM dept;
 -- [1단계:확인] 1. inline view을 활용하여 분기별 최저급여자의 사원 정보를 출력하세요.
                 SELECT q.div, q.sal, e.empno, e.ename
                 FROM (
-                    SELECT to_char(hiredate, 'Q') div, min(sal) sal
+                    SELECT to_char(hiredate, 'Q') 분기, min(sal) sal
                     FROM emp
                     GROUP BY to_char(hiredate, 'Q')
                 )q, emp e
@@ -163,29 +163,8 @@ SELECT * FROM dept;
 
 -- [1단계:확인] 5. 물건테이블과 회원테이블을 만들어 기본 데이터 5개를 입력하되, merge를 이용하여
 --             등록/수정처리해보세요.
-CREATE TABLE product011(
-    name varchar2(50),
-    price NUMBER,
-    cnt number
-);
-SELECT '사과' name, 3000 price, 2 cnt FROM dual;
-MERGE INTO product011 t
-USING (SELECT '수박' name, 8000 price, 4 cnt FROM dual) s
-ON (t.name = s.name)
-WHEN MATCHED THEN
-    UPDATE SET t.price = s.price,
-               t.cnt = s.cnt
-WHEN NOT MATCHED THEN
-    INSERT values(s.name, s.price, s.cnt);
-SELECT * FROM product011;
 
-CREATE TABLE member011(
-    id varchar2(50),
-    pass varchar2(50),
-    name varchar2(50),
-    point NUMBER,
-    auth varchar2(50)
-);
+
 -- [1단계:개념] 6. 문자열, 숫자형, 날짜형 데이터 유형을 기능별로 설명하세요
             -- 문자형
             --     char(size) : 
@@ -220,87 +199,3 @@ CREATE TABLE member011(
             );
             INSERT INTO product0526 values('8LPP2809', '27gl850', 'LG', 540000, 20, '모니터');
             SELECT * FROM product0526;
-
-
-
-
-
--- 2022-05-27
--- [1단계:개념] 1. 무결성 제약조건을 설정하는 목적을 기술하세요.
-            -- 데이터의 정확성과 일관성을 보장
-            -- 테이블 생성시 무결성 제약조건을 정의 가능
-            -- 테이블에 대한 정의, 데이터 딕션너리에 저장되므로 응용프로그램에서 입력된 모든 데이터에 대해 동일하게 적용
-            -- 제약조건을 활성화, 비활성화 할 수 있는 융통성
-
--- [1단계:개념] 2. not null 무결성 제약조건의 기본예제와 함께 제약조건의 내용을 기술하세요
-            -- not null : 열이 null을 포함할 수 없음
-                CREATE TABLE example01(
-                    num NUMBER PRIMARY key,
-                    str varchar2(50) NOT NULL
-                );
-                INSERT INTO example01 values(1000, '예제2');
-                INSERT INTO example01 values(2000, null); --> 오류
-                SELECT * FROM example01;
-
--- [1단계:개념] 3. unique 무결성 제약조건의 기본예제와 함께 제약조건의 내용을 기술하세요
-            -- unique : 중복데이터 입력 불가 처리, 단 null은 중복이 가능하다.
-                CREATE TABLE example02(
-                    num NUMBER unique,
-                    str varchar2(50) 
-                );
-                INSERT INTO example02 values(1000, '예제3-1');
-                INSERT INTO example02 values(1000, '예제3-2'); --> 오류
-                INSERT INTO example02 values(1001, '예제3-3');
-                SELECT * FROM example02;
-
--- [1단계:확인] 4. 회원테이블에서 id, pass, 이름, 권한, 포인트를 설정하되,
---       제약조건의 이름은 모두가 설정하고,
---       id : not null, unique, pass : not null, 이름: not null
---       권한 : 관리자/일반사용자/슈퍼유저 만등록, 포인트 : 0이상 등록 가능
-                CREATE TABLE member021(
-                    id varchar2(50) NOT NULL unique,
-                    pass char(8) NOT NULL,
-                    name varchar2(50) NOT NULL,
-                    auth varchar2(50) CONSTRAINT member021_auth_ck check( auth IN('관리자','일반사용자','슈퍼유저') ),
-                    point NUMBER check(point >= 0)
-                );
-                INSERT INTO member021 values('ABC123', 'qwerty1', '홍길동', '관리자', 100);
-                INSERT INTO member021 values(null, 'qwerty2', '김길동', '일반사용자', 101); --오류
-                INSERT INTO member021 values('ABC123', 'qwerty3', '이길동', '관리자', 200); -- 오류
-                INSERT INTO member021 values('DEF456', null, '신길동', '일반사용자', 300); -- 오류
-                INSERT INTO member021 values('GHI789', 'qwerty5', '최길동', '슈퍼유저', 3000);
-                INSERT INTO member021 values('JKL123', 'qwerty6', '금길동', '유저', 1000); -- 오류
-                INSERT INTO member021 values('MNO456', 'qwerty7', '유길동', '관리자', -200); -- 오류
-                SELECT * FROM member021;
-
--- [1단계:개념] 5. 무결성 제약 조건의 null의 관계를 기술하세요.
-            -- 기본키(primary key) : null 입력 불가
-            -- 고유키(unique key) : null 중복 가능
-            -- not null : 열이 null을 포함할 수 없음
-
--- [1단계:개념] 6. 무결성 제약조건의 이름을 쓰는 경우와 쓰지 않는 경우 형식의 차이를 기술하세요.
-            -- 제약조건의 이름을 붙일 때는 constraint 제약명
-            --     컬럼명 데이터유형 [xonstraint 제약명] 제약조건keyword
-
--- [1단계:확인] 7. 물건(물건번호, 이름, 가격, 단위, 분류번호) 제품구분(분류번호, 분류명, 우선순위)
---       1000 사과   3000 개  10     10 과일류 1
---       1001 소고기 10000 g  20     20 육류  2
---         제품구분의 분류번호와 물건의 분류번호는 foreign key 관계로 설정하세요.
-                CREATE TABLE product021(
-                    num NUMBER NOT NULL check(num >= 0),
-                    name varchar2(50) NOT NULL,
-                    price NUMBER NOT NULL check(price>=0),
-                    unit varchar2(50) NOT NULL,
-                    no NUMBER PRIMARY key
-                );
-                INSERT INTO product021 values(1000, '시과', 3000, '개', 10);
-                INSERT INTO product021 values(1001, '소고기', 10000, 'g', 20);
-                SELECT * FROM product021;
-                CREATE TABLE category(
-                    num NUMBER REFERENCES product021(no),
-                    name varchar2(50) NOT NULL,
-                    priority NUMBER NOT NULL
-                );
-                INSERT INTO category values(10, '과일류', 1);
-                INSERT INTO category values(20, '육류', 2);
-                SELECT * FROM category;

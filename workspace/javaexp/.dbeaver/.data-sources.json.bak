@@ -32,20 +32,6 @@
 			}
 		}
 	},
-	"virtual-models": {
-		"oracle_thin-180cfa75978-1dca4584a4c4cfd4": {
-			"SCOTT": {
-				":SALGRADE02": {
-					"constraints": {
-						"VIRTUAL_PK": {
-							"type": "vpk",
-							"useAllColumns": true
-						}
-					}
-				}
-			}
-		}
-	},
 	"connection-types": {
 		"dev": {
 			"name": "Development",
