@@ -304,3 +304,125 @@ CREATE TABLE member011(
                 INSERT INTO category values(10, '과일류', 1);
                 INSERT INTO category values(20, '육류', 2);
                 SELECT * FROM category;
+
+
+
+
+
+
+
+
+
+
+
+
+-- 2022-05-30
+-- [1단계:개념] 1. sequence를 사용하는 이유와 기본형식을 예제를 통해서 기술하세요.
+            -- 1) 유일한 식별자
+            -- 2) 기본 키 값을 자동으로 생성하기 위하여 일련번호 생성 객체
+            -- 3) 여러 테이블에서 공유 가능
+            CREATE SEQUENCE seq_hw01
+                INCREMENT BY 1
+                START WITH 1
+                MAXVALUE 10
+                CYCLE
+                cache 2;
+            SELECT seq_hw01.nextval FROM dual;
+
+-- [1단계:확인] 2. 회원테이블은 만들고, 회원번호가 'N'(일반), 'S'(수퍼고객), 'A'(관리자)
+--       가 붙어서 N1000, S1001, A1002 형식으로 시퀀스와 조합해서 만들어 진다고 한다.
+--       회원번호, 회원아이디, 회원명, 회원패스워드로 구성된 테이블과 각각
+--       권한에 따를 번호를 입력하세요.
+            DROP TABLE member031;
+            CREATE TABLE member031(
+                no varchar2(50),
+                id varchar2(50),
+                name varchar2(50),
+                passwd varchar2(50)
+            );
+            DROP SEQUENCE seq_hw02;
+            CREATE SEQUENCE seq_hw02
+                INCREMENT BY 1
+                START WITH 1000;
+            INSERT INTO member031 values('N'||seq_hw02.nextval, 'qwerty1', '홍길동', 'qwerty');
+            INSERT INTO member031 values('S'||seq_hw02.nextval, 'qwerty2', '김길동', 'qwerty');
+            INSERT INTO member031 values('A'||seq_hw02.nextval, 'qwerty3', '이길동', 'qwerty');
+            SELECT * FROM member031;
+
+-- [1단계:개념] 3. sequence 수정의 한계를 기술하고, 이를 보완하는 방법을 예제를 통해서 기술하세요
+            -- start with 절은 생성 직후의 시작값을 의미, 변경 불가
+            --     ==> 시작값을 변경하기 위해서는 
+            --         drop sequence 시퀀스명; (삭제명령어)
+            --         다시 생성처리
+            DROP SEQUENCE seq_hw01;
+            CREATE SEQUENCE seq_hw01
+                INCREMENT BY 1
+                START WITH 100
+                MAXVALUE 1000
+                CYCLE
+                cache 2;
+            SELECT seq_hw01.nextval FROM dual;
+
+-- [1단계:개념] 4. 복사테이블의 유형을 예제를 통해서 기술하세요.
+            -- 1. 컬럼 구조 + 데이터 복사
+            --     create table 테이블명
+            --     as select * from 테이블명;
+            CREATE TABLE emp_cp0530_1
+            AS SELECT * FROM emp;
+            SELECT * FROM emp_cp0530_1;
+            -- 2. 컬럼 구조만 복사
+            --     create table 테이블명
+            --     as select * from 테이블명 where 1=0;
+            CREATE TABLE emp_cp0530_2
+            AS SELECT * FROM emp WHERE 1=0;
+            SELECT * FROM emp_cp0530_2;
+            -- 3. 컬럼명 변경
+            --     create table 테이블명
+            --     as select 컬럼1 변경명1, 컬럼2 변경명2
+            --     from 테이블명
+            CREATE TABLE emp_cp0530_3
+            AS SELECT empno no, ename name
+            FROM emp;
+            SELECT * FROM emp_cp0530_3;
+            -- 4. 유형변경
+            --     create table 테이블명
+            --     as select 함수명(컬럼명) from 테이블명
+            CREATE TABLE emp_cp0530_4
+            AS SELECT to_char(hiredate, 'YYYY/MM/DD') 입사년월 FROM emp;
+            SELECT * FROM emp_cp0530_4;
+
+-- [1단계:확인] 5. 부서별 최고급여자의 사원정보컬럼전체가 들어가는 복사테이블 emp200을 만드세요.
+            DROP TABLE emp200;
+            CREATE TABLE emp200 
+            AS SELECT * 
+            FROM emp
+            WHERE (sal) in (
+                SELECT max(sal) sal
+                FROM emp
+                GROUP by deptno
+            );
+            SELECT * FROM emp200;
+
+-- [1단계:개념] 6. 테이블의 구조 변경의 원칙을 예제를 통해서 기술하세요.
+            -- alter table add 명령문 사용
+            -- 추가되는 컬럼은 테이블의 마지막 부분에 생성, 위치 지정 불가능
+            -- 추가된 컬럼에 기본 값을 지정 가능
+            -- 수정할 테이블에 기존 데이터가 존재하면 컬럼 값은 null로 입력
+
+-- [1단계:확인] 7. 부서테이블과 사원테이블을 결합한 복사테이블을 만들고, 부서번호 컬럼 삭제
+--               문자열 컬럼은  최대크기로 컬럼을 변경하고, 컬럼명도 empno ==> no,
+--          ename ==> name, sal ==> salary로 변경 하세요.
+DROP TABLE emp2021;
+CREATE TABLE emp2021
+AS SELECT e.*, dname, loc
+FROM emp e, dept d
+WHERE e.deptno = d.deptno;
+SELECT * FROM emp2021;
+ALTER TABLE emp2021
+DROP COLUMN deptno;
+SELECT max(LENGTHB(ename)), max(LENGTHB(job)), max(LENGTHB(DNAME)), MAX(LENGTHB(LOC))  FROM emp2021;
+ALTER TABLE emp2021
+MODIFY (ename varchar(6), job varchar2(9), dname varchar2(10), loc varchar2(8));
+ALTER TABLE emp2021 RENAME COLUMN empno TO NO;
+ALTER TABLE emp2021 RENAME COLUMN ename TO name;
+ALTER TABLE emp2021 RENAME COLUMN sal TO salary;

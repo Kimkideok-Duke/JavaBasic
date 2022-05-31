@@ -24,6 +24,13 @@
 				<item key="enabledPanelIds" value="value-view"/>
 				<item key="activePanelId" value="value-view"/>
 				<item key="panelRatio" value="300"/>
+				<item key="panelsVisible" value="false"/>
+				<item key="verticalLayout" value="false"/>
+			</section>
+			<section name="plaintext">
+				<item key="enabledPanelIds" value="value-view"/>
+				<item key="activePanelId" value="value-view"/>
+				<item key="panelRatio" value="0"/>
 				<item key="panelsVisible" value="true"/>
 				<item key="verticalLayout" value="false"/>
 			</section>
@@ -48,11 +55,11 @@
 		<item key="DIALOG_FONT_NAME" value="1|.AppleSystemUIFont|11.0|0|COCOA|1|.AppleSystemUIFont"/>
 	</section>
 	<section name="DBeaver.StandardErrorDialog">
-		<item key="showDetails" value="false"/>
+		<item key="showDetails" value="true"/>
 		<item key="DIALOG_X_ORIGIN" value="868"/>
 		<item key="DIALOG_Y_ORIGIN" value="481"/>
-		<item key="DIALOG_WIDTH" value="370"/>
-		<item key="DIALOG_HEIGHT" value="196"/>
+		<item key="DIALOG_WIDTH" value="469"/>
+		<item key="DIALOG_HEIGHT" value="370"/>
 		<item key="DIALOG_FONT_NAME" value="1|.AppleSystemUIFont|11.0|0|COCOA|1|.AppleSystemUIFont"/>
 	</section>
 	<section name="DBeaver.TransactionLogDialog">
@@ -72,5 +79,19 @@
 	<section name="ValueViewDialog">
 		<item key="DefaultValueViewDialog-NUMBER-dialogSize" value="344:407"/>
 		<item key="TextViewDialog-VARCHAR2-dialogSize" value="453:670"/>
+	</section>
+	<section name="DBeaver.ViewSQLDialog">
+		<item key="DIALOG_X_ORIGIN" value="791"/>
+		<item key="DIALOG_Y_ORIGIN" value="279"/>
+		<item key="DIALOG_WIDTH" value="524"/>
+		<item key="DIALOG_HEIGHT" value="499"/>
+		<item key="DIALOG_FONT_NAME" value="1|.AppleSystemUIFont|11.0|0|COCOA|1|.AppleSystemUIFont"/>
+	</section>
+	<section name="DBeaver.EditConnectionDialog">
+		<item key="DIALOG_X_ORIGIN" value="370"/>
+		<item key="DIALOG_Y_ORIGIN" value="104"/>
+		<item key="DIALOG_WIDTH" value="700"/>
+		<item key="DIALOG_HEIGHT" value="579"/>
+		<item key="DIALOG_FONT_NAME" value="1|.AppleSystemUIFont|11.0|0|COCOA|1|.AppleSystemUIFont"/>
 	</section>
 </section>
