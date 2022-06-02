@@ -474,3 +474,89 @@ ALTER TABLE emp2021 RENAME COLUMN sal TO salary;
 -- [1단계:개념] 5. DB권한과 역할을 종류를 기술하세요
 
 -- [1단계:확인] 6. 관리자 권한에서 scott3계정을 만들고, 해당 계정으로 접근하게 처리하세요
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- 2022-06-02
+-- [1단계:개념] 1. 잘못된 설계에 의한 이상현상을 종류 기술하세요
+            -- 1) 삭제 이상
+            --     - 튜플(데이터 row단위) 삭제 시 같이 저장된 다른 정보까지 연쇄적으로 삭제되는 현상
+            --     - 연쇄 삭제문제 발생
+            --     ex) 장미란 학생을 삭제하면 장미란이 듣고있는 스포츠 경영학이 삭제된다.
+            -- 2) 삽입 이상
+            --     - 튜플 삽입 시 특정 속성에 해당하는 값이 없어 null 값을 입력해야 하는 현상
+            --         ==> null 값 문제 발생
+            --     - 박세리 학생을 삽입하면 강좌이름, 강의실이 null이되어 메모리의 비효율성 문제가 발생한다.
+            -- 3) 수정 이상
+            --     - 튜플 수정 시 중복된 데이터의 일부만 수정되어 데이터의 불일치 문제가 일어나는 현상
+            --     - 불일치 문제 발생
+
+-- [1단계:확인] 2. 오늘 만든 수강테이블의 삭제이상의 경우를 처리하고 문제점을 기술하세요
+            SELECT * FROM studclass1;
+            DELETE FROM studclass1
+            WHERE name = '장미란';
+            -- 특정한 학생의 수강정보를 취소했는데, 강좌 정보도 다 삭제처리됨. 현재 어떤 강좌가 개설되었는지 알수가 없음
+
+-- [1단계:확인] 3. 수강테이블의 등록이상의 경우를 처리하고 문제점을 기술하세요
+            INSERT INTO studclass1 values (null, null, null, null, '컴퓨터구조론', '공학관201');
+            SELECT * FROM studclass1;
+            -- 학생 정보에 해당하는 값이 없어 null 값을 입력해야 하는 현상
+            -- ==> null 값 문제 발생
+
+-- [1단계:확인] 4. 수강테이블의 수정이상의 경우를 처리하고 문제점을 기술하세요
+            UPDATE studclass1
+                SET lcroom = '공학관 103'
+                WHERE name = '박지성';
+            SELECT * FROM studclass1;
+            -- 박지성이 수강하는 모든 강의의 강의실이 공학관 103호로 변경됨.
+            -- 원치않는 강의도 변경이 됨.
+
+-- [1단계:확인] 5. 수강테이블의 이상현상을 없애기 위한 테이블 구조를 erd를 통해 분리시키고, 테이블을 작성하고 데이터를 입력하세요
+            DROP TABLE studInfo1;
+            CREATE TABLE studInfo1
+            AS
+            SELECT DISTINCT stuno, name, department, address, lecture
+            FROM studclass1;
+            SELECT * FROM studInfo1;
+            DROP TABLE classInfo1;
+            CREATE TABLE classInfo1
+            AS
+            SELECT DISTINCT lecture, lcroom
+            FROM studclass1;
+            SELECT * FROM classInfo1;
+
+            SELECT stuno, name, department, address, s.lecture, lcroom
+            FROM studInfo1 s, classInfo1 c
+            WHERE s.lecture = c.lecture;
+
+-- [1단계:확인] 5. 분리된 테이블에서 이상 현상이 더 이상 발생하지 않음을 sql을 통해 처리결과를 출력해보세요.
+			-- 삭제
+			DELETE FROM studInfo1
+			WHERE name = '장미란';
+            SELECT * FROM classInfo1;
+            -- 삽입
+            INSERT INTO classInfo1 values('컴퓨터구조론', '공학관201');
+            SELECT stuno, name, department, address, s.lecture, lcroom
+            FROM studInfo1 s, classInfo1 c
+            WHERE s.lecture = c.lecture;
+            SELECT * FROM classInfo1;
+            -- 수정
+            UPDATE classInfo1
+                SET lcroom = '공학관 103'
+                WHERE lecture = '데이터베이스';
+            SELECT stuno, name, department, address, s.lecture, lcroom
+            FROM studInfo1 s, classInfo1 c
+            WHERE s.lecture = c.lecture;
+            SELECT * FROM classInfo1;

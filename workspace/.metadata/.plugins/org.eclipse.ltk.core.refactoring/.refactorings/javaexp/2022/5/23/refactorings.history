@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;javaexp/database/z01startERD.exerd&apos; to &apos;z01_startERD.exerd&apos;" description="Rename resource &apos;z01startERD.exerd&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="database/z01startERD.exerd" name="z01_startERD.exerd" stamp="1653967263538" updateReferences="true"/>
+</session>
