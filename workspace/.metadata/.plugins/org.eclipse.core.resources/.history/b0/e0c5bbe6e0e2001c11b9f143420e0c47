@@ -5,12 +5,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+// DAO(database access object)
 public class A01_DAO {
 	// 1. 공통 필드 선언하기
 	private Connection con; // 연결객체
 	private Statement stmt; // 대화객체
-	private ResultSet rs; // data를 받는 결과 객체
+	private ResultSet rs; // data를 받는 결과 객체 select sql의 처리 결과로 활용
 
 	// 2. 공통 연결 메서드
 	public void setConn() {
@@ -25,10 +25,12 @@ public class A01_DAO {
 			System.out.println("접속성공!!");
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			// e.printStackTrace();
+			System.out.println("클래스 에러 : " + e.getMessage());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			// e.printStackTrace();
+			System.out.println("DB 처리 에러 : " + e.getMessage());
 		}
 	}
 
@@ -36,7 +38,7 @@ public class A01_DAO {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		A01_DAO dao = new A01_DAO();
+		A02_DAO dao = new A02_DAO();
 		dao.setConn();
 	}
 

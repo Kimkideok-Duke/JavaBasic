@@ -560,3 +560,302 @@ ALTER TABLE emp2021 RENAME COLUMN sal TO salary;
             FROM studInfo1 s, classInfo1 c
             WHERE s.lecture = c.lecture;
             SELECT * FROM classInfo1;
+           
+          	SELECT * FROM DEPT;
+
+
+
+-- 2022-06-03
+-- [1단계:개념] 1. database 서버 연동에 필요한 기본 정보를 java에서 설정하는 방법을 기술하세요.
+            -- 필요 접속 정보 : ip, port, sid, 계정, 비밀번호
+            -- Class.forName("oracle.jdbc.driver.OracleDriver");
+            -- String info = "jdbc:oracle:thin:@106.10.23.227:1521:xe";
+            -- con = DriverManager.getConnection(info, "scott", "tiger");
+
+-- [1단계:확인] 2. A01_Connection 객체로 연동처리하여, 연동된 내용을 출력하세요.
+            /*
+            package javaexp.z01_homework;
+
+            import java.beans.Statement;
+            import java.sql.*;
+            public class A01_Connection {
+                private Connection con;
+                private Statement stmt;
+                private ResultSet rs;
+
+                public void setConn() {
+                    try {
+                        Class.forName("oracle.jdbc.driver.OracleDriver");
+                        String info = "jdbc:oracle:thin:@106.10.23.227:1521:xe";
+                        con = DriverManager.getConnection(info, "scott", "tiger");
+                        System.out.println("접속성공!!");
+                    } catch (ClassNotFoundException e) {
+                        System.out.println("클래스 에러 : " + e.getMessage());
+                    } catch (SQLException e) {
+                        System.out.println("DB 처리 에러 : " + e.getMessage());
+                    }
+                }
+                
+                public static void main(String[] args) {
+                    A01_Connection con = new A01_Connection();
+                    con.setConn();
+                }
+
+            }
+            */
+            -- 출력 : 접속성공!!
+
+-- [1단계:개념] 3. DAO 처리에서 사용하는 필드 Connection, Statement, ResultSet 객체의
+--       역할과, 각 객체의 상호 생성 메서드를 기본예제를 통해서 설명하세요.
+            -- 연결객체 Connection : 접속 정보 + jdbc 드라이버
+            --     대확객체 Statement(sql) : sql - db서버에 이용하는 명령어
+            --                 select * from emp; (서버로부터 결과를 가져오는 명령어)
+            --                 insert into 테이블 values(서버에 명령으로 등록)
+            --                 update 수정, delete 삭제
+            --     결과객체 ResultSet(data) : 필요로 하는 정보(data)
+            --                 select 문을 수행하는 경우만 이 객체를 사용
+            --                 1차적으로 ResultSet로 가져오고, 2차적으로 선언한 기본유형 데이터 타입이나,
+            --                     문자열 데이터, VO 객체로 입력처리하여 활용한다.
+            --     자원해제 위에 나열된 DB서버 접속과 대화 및 결과를 받는 객체들의 자원들 해제
+            --             try{}catch, 각 객체의 메모리 자원을 해제
+
+-- [1단계:개념] 4. ResultSet 객체의 기능 메서드 next(), getXXX() 메서드에 대하여 기본예제와 함께 설명하세요.
+            -- next() 메소드를 통해 선택되는 행을 바꿀 수 있다. 그리고, 다음행이 내려갈 다음행이 있을 경우 TRUE를 반환하고, 없을 경우 FALSE를 반환한다.
+            -- get타입() 메소드를 통해 데이터를 불러올 수 있다.
+            -- while(rs.next()) {
+            --     System.out.print(cnt + "행" + rs.getInt("empno"));
+            --     System.out.print(rs.getString("ename") + "\t");
+            --     System.out.print(rs.getString("job") + "\t");
+            --     System.out.print(rs.getInt("mgr") + "\t");
+            --     System.out.print(rs.getDate("hiredate") + "\t");
+            --     System.out.print(rs.getDouble("sal") + "\t");
+            --     System.out.print(rs.getDouble("comm") + "\t");
+            --     System.out.print(rs.getInt("deptno") + "\n");
+            --     cnt++;
+            -- }
+
+-- [1단계:확인] 5. 아래의 여러형태의 sql을 처리하는 기능 메서드를 만드세요.
+--       1) select * from salgrade (출력만)
+            -- public void getsalgrade() {
+            --     String sql = "select * from salgrade";
+            --     try {
+            --         setConn();
+            --         stmt = con.createStatement();
+            --         rs = stmt.executeQuery(sql);
+            --         int cnt = 1;
+            --         while(rs.next()) {
+            --             System.out.print(cnt + "행" + rs.getInt("grade") + "\t");
+            --             System.out.print(rs.getString("losal") + "\t");
+            --             System.out.print(rs.getInt("hisal") + "\n");
+            --             cnt++;
+            --         }
+            --         rs.close();
+            --         stmt.close();
+            --         con.close();
+            --     } catch (SQLException e) {
+            --         e.printStackTrace();
+            --     } catch (Exception e) {
+            --         System.out.println("일반 예외 : " + e.getMessage());
+            --     } finally {
+            --         if(con!=null) {
+            --             try {
+            --                 con.close();
+            --             } catch (SQLException e) {
+            --                 e.printStackTrace();
+            --             }
+            --         }
+            --         if(stmt!=null) {
+            --             try {
+            --                 stmt.close();
+            --             } catch (SQLException e) {
+            --                 e.printStackTrace();
+            --             }
+            --         }
+            --         if(rs!=null) {
+            --             try {
+            --                 rs.close();
+            --             } catch (SQLException e) {
+            --                 e.printStackTrace();
+            --             }
+            --         }
+            --     }
+            -- }
+
+--       2) 부서별 최고급여자 (출력만)
+            -- public void getMaxsalDept() {
+            --     String sql = "SELECT ename, max(sal), deptno FROM emp GROUP BY DEPTNO";
+            --     try {
+            --         setConn();
+            --         stmt = con.createStatement();
+            --         rs = stmt.executeQuery(sql);
+            --         while(rs.next()) {
+            --             System.out.print(rs.getDouble("ename") + "\t");
+            --             System.out.print(rs.getDouble("max(sal)") + "\t");
+            --             System.out.print(rs.getDouble("deptno") + "\n");
+            --         }
+            --         rs.close();
+            --         stmt.close();
+            --         con.close();
+            --     } catch (SQLException e) {
+            --         e.printStackTrace();
+            --     } catch (Exception e) {
+            --         System.out.println("일반 예외 : " + e.getMessage());
+            --     } finally {
+            --         if(con!=null) {
+            --             try {
+            --                 con.close();
+            --             } catch (SQLException e) {
+            --                 e.printStackTrace();
+            --             }
+            --         }
+            --         if(stmt!=null) {
+            --             try {
+            --                 stmt.close();
+            --             } catch (SQLException e) {
+            --                 e.printStackTrace();
+            --             }
+            --         }
+            --         if(rs!=null) {
+            --             try {
+            --                 rs.close();
+            --             } catch (SQLException e) {
+            --                 e.printStackTrace();
+            --             }
+            --         }
+            --     }
+            -- }
+
+--       3) 부서번호가 20인 최고연봉 (리턴유형 double)
+            -- public double getMaxsalDept20() {
+            --     double max_sal = 0;
+            --     String sql = "SELECT max(sal) FROM emp where DEPTNO = 20";
+            --     try {
+            --         setConn();
+            --         stmt = con.createStatement();
+            --         rs = stmt.executeQuery(sql);
+            --         rs.next();
+            --         max_sal = rs.getDouble("max(sal)");
+            --         rs.close();
+            --         stmt.close();
+            --         con.close();
+            --     } catch (SQLException e) {
+            --         e.printStackTrace();
+            --     } catch (Exception e) {
+            --         System.out.println("일반 예외 : " + e.getMessage());
+            --     } finally {
+            --         if(con!=null) {
+            --             try {
+            --                 con.close();
+            --             } catch (SQLException e) {
+            --                 e.printStackTrace();
+            --             }
+            --         }
+            --         if(stmt!=null) {
+            --             try {
+            --                 stmt.close();
+            --             } catch (SQLException e) {
+            --                 e.printStackTrace();
+            --             }
+            --         }
+            --         if(rs!=null) {
+            --             try {
+            --                 rs.close();
+            --             } catch (SQLException e) {
+            --                 e.printStackTrace();
+            --             }
+            --         }
+            --     }
+            --     return max_sal;
+            -- }
+
+--       4) 사원명이 JONES인 사원정보(출력만)
+            -- public void getJONES() {
+            --     String sql = "SELECT * FROM emp where ename = 'JONES'";
+            --     try {
+            --         setConn();
+            --         stmt = con.createStatement();
+            --         rs = stmt.executeQuery(sql);
+            --         while(rs.next()) {
+            --             System.out.print(rs.getInt("empno"));
+            --             System.out.print(rs.getString("ename") + "\t");
+            --             System.out.print(rs.getString("job") + "\t");
+            --             System.out.print(rs.getInt("mgr") + "\t");
+            --             System.out.print(rs.getDate("hiredate") + "\t");
+            --             System.out.print(rs.getDouble("sal") + "\t");
+            --             System.out.print(rs.getDouble("comm") + "\t");
+            --             System.out.print(rs.getInt("deptno") + "\n");
+            --         }
+            --         rs.close();
+            --         stmt.close();
+            --         con.close();
+            --     } catch (SQLException e) {
+            --         e.printStackTrace();
+            --     } catch (Exception e) {
+            --         System.out.println("일반 예외 : " + e.getMessage());
+            --     } finally {
+            --         if(con!=null) {
+            --             try {
+            --                 con.close();
+            --             } catch (SQLException e) {
+            --                 e.printStackTrace();
+            --             }
+            --         }
+            --         if(stmt!=null) {
+            --             try {
+            --                 stmt.close();
+            --             } catch (SQLException e) {
+            --                 e.printStackTrace();
+            --             }
+            --         }
+            --         if(rs!=null) {
+            --             try {
+            --                 rs.close();
+            --             } catch (SQLException e) {
+            --                 e.printStackTrace();
+            --             }
+            --         }
+            --     }
+            -- }
+
+--       5) 분기별 최고 급여자(출력만)
+            -- public void getMaxsalQ() {
+            --     String sql = "SELECT max(sal) FROM emp GROUP BY to_char(hiredate, 'Q')";
+            --     try {
+            --         setConn();
+            --         stmt = con.createStatement();
+            --         rs = stmt.executeQuery(sql);
+            --         while(rs.next()) {
+            -- 				System.out.println(rs.getDouble("max(sal)"));
+            --         }
+            --         rs.close();
+            --         stmt.close();
+            --         con.close();
+            --     } catch (SQLException e) {
+            --         e.printStackTrace();
+            --     } catch (Exception e) {
+            --         System.out.println("일반 예외 : " + e.getMessage());
+            --     } finally {
+            --         if(con!=null) {
+            --             try {
+            --                 con.close();
+            --             } catch (SQLException e) {
+            --                 e.printStackTrace();
+            --             }
+            --         }
+            --         if(stmt!=null) {
+            --             try {
+            --                 stmt.close();
+            --             } catch (SQLException e) {
+            --                 e.printStackTrace();
+            --             }
+            --         }
+            --         if(rs!=null) {
+            --             try {
+            --                 rs.close();
+            --             } catch (SQLException e) {
+            --                 e.printStackTrace();
+            --             }
+            --         }
+            --     }
+            --     return max_sal;
+            -- }
