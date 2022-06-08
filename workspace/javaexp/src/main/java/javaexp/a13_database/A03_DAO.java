@@ -92,12 +92,126 @@ public class A03_DAO {
 	}
 
 
-
+// 부서번호별 최고 연봉
+	public double getMaxSal(int deptno) {
+		double maxSal = 0.0;
+		try {
+			setConn();
+			stmt = con.createStatement();
+			String sql = "SELECT max(sal) msal\n"
+					+ "FROM emp\n"
+					+ "where DEPTNO = "+deptno;
+			rs = stmt.executeQuery(sql);
+			rs.next();
+			maxSal = rs.getDouble("msal");
+			rs.close();
+			stmt.close();
+			con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			// e.printStackTrace();
+			System.out.println("DB처리 : " + e.getMessage());
+		} catch (Exception e) {
+			System.out.println("일반 예외 : " + e.getMessage());
+		} finally {
+			if(con!=null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(stmt!=null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(rs!=null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		return maxSal;
+	}
+	public void getMaxSalEmp() {
+		try {
+			setConn();
+			String sql = "SELECT to_char(hiredate,'Q') qua, e.*\n"
+					+ "FROM emp e\n"
+					+ "WHERE ( to_char(hiredate,'Q'), sal) IN (\n"
+					+ "    SELECT to_char(hiredate, 'Q') qua, max(sal) msal\n"
+					+ "    FROM emp\n"
+					+ "    GROUP BY to_char(hiredate,'Q')\n"
+					+ ")\n"
+					+ "ORDER BY qua";
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				System.out.print(rs.getString("qua") + "\t");
+				System.out.print(rs.getInt("empno") + "\t");
+				System.out.print(rs.getString("ename") + "\t");
+				System.out.print(rs.getString("job") + "\t");
+				System.out.print(rs.getInt("mgr") + "\t");
+				System.out.print(rs.getDate("hiredate") + "\t");
+				System.out.print(rs.getDouble("sal") + "\t");
+				System.out.print(rs.getDouble("comm") + "\t");
+				System.out.print(rs.getInt("deptno") + "\n");
+			}
+			rs.close();
+			stmt.close();
+			con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			// e.printStackTrace();
+			System.out.println("DB처리 : " + e.getMessage());
+		} catch (Exception e) {
+			System.out.println("일반 예외 : " + e.getMessage());
+		} finally {
+			if(con!=null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(stmt!=null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(rs!=null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		
+	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		A03_DAO dao = new A03_DAO();
 		// dao.empList();
-		dao.deptList();
+		// dao.deptList();
+		System.out.println("10부서의 최고연봉 : " + dao.getMaxSal(10));
+		System.out.println("20부서의 최고연봉 : " + dao.getMaxSal(20));
+		System.out.println("30부서의 최고연봉 : " + dao.getMaxSal(30));
+		System.out.println("40부서의 최고연봉 : " + dao.getMaxSal(40));
+		dao.getMaxSalEmp();
 	}
 
 }

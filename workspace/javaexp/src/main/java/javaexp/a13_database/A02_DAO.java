@@ -1,11 +1,8 @@
 package javaexp.a13_database;
 
-import java.beans.Statement;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 // DAO(database access object)
+// 전화기와 동일 : 연결/대화/결과를 통해 받은 데이터/종료 - 자원해제, 예외처리
 public class A02_DAO {
 	// 1. 공통 필드 선언하기
 	private Connection con; // 연결객체
@@ -149,9 +146,15 @@ public class A02_DAO {
 		}
 		return cnt;
 	}
-
-
-
+/*
+-- String sql = "select count(*) cnt from emp where deptno="+deptno;
+select count(*) cnt from emp where deptno = 10;
+SELECT * FROM emp WHERE deptno = 10;
+-- String sql = "select count(*) cnt from emp where job= '"+job+"' ";
+-- job = '"+job+"' " : 변동되는 문자열 job에 다른 sql 결과를 얻기 위해서 이런형식이 필요하다.
+select count(*) cnt from emp where job = 'CLERK';
+select * from emp where job = 'CLERK';
+*/
 	// 단일 row sql 처리
 	public int getEmpCnt(int deptno) {
 		int cnt = 0;

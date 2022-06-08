@@ -724,7 +724,9 @@ ALTER TABLE emp2021 RENAME COLUMN sal TO salary;
             --         }
             --     }
             -- }
-
+SELECT max(sal)
+FROM emp
+where DEPTNO = 20;
 --       3) 부서번호가 20인 최고연봉 (리턴유형 double)
             -- public double getMaxsalDept20() {
             --     double max_sal = 0;
