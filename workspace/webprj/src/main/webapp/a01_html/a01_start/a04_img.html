@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+    <!--
+    # 이미지 호출 방법
+    1. 상대적 주소
+        1) 현재 파일과 같은 폴더는 바로 접근을 할 수 있다.
+        
+        2) 상위폴더 접근 : 
+            ../img2.jpeg
+        3) 하위폴더 접근
+            img/img3.jpeg
+    2. 절대적 주소
+        웹서버를 실행시켰을 때, default 폴더 기준으로 접근
+        https://localhost:7080/webprj
+        \webprj\src\main\webapp
+
+    3. 이미지 속성값
+        src:이미지 파일 url
+        alt:문자열 - 이미지가 안 보일 때
+        width : 폭
+        height : 높이
+    -->
+    <h2>상대적 주소로 접근한 경우</h2>
+    <img src="img1.png">
+    <img src="../img2.png">
+    <img src="img/img3.jpeg">
+    <h3>절대적 주소로 접근</h3>
+    <h3>현재 server를 기준</h3>
+    <img src="/webprj/a01_html/a01_start/img1.png">
+    <!-- 프로젝트명/폴더명/해당이미지 -->
+    <img src="/webprj/a01_html/img2.png">
+    <img src="/webprj/a01_html/a01_start/img/img3.jpeg">
+    <h3>외부 server를 기준</h3>
+    <!-- 인터넷이 될 때, 가능 -->
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVcGEWTjyLyT5IeF5yi875O0bbu-tPjRpeuQ&usqp=CAU">
+</body>
+</html>

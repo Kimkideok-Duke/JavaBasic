@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+</body>
+</html>
+
+
+<!-- 
+    2022-06-09
+[1단계:개념] 1. 테이블의 padding 옵션은 어떤 역할을 하는지와 4가지 방향으로 설정하는 옵션을 기술하세요.
+셀 패딩은 셀 가장자리와 셀 내용 사이의 공간입니다.
+th, td {
+  padding-top: 10px;
+  padding-bottom: 20px;
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+[1단계:개념] 2. rowspan과 colspan의 차이를  3X3 테이블의 예제를 통해 기술하세요
+rowspan은 행병합
+<table style="width:100%">
+  <tr>
+    <th style="width:33%">Name</th>
+    <td style="width:33%">Jill</td>
+    <td style="width:33%"></td>
+  </tr>
+  <tr>
+    <th rowspan="2">Phone</th>
+    <td>555-1234</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>555-8745</td>
+    <td></td>
+  </tr>
+</table>
+
+colspan은 열병합
+<table style="width:100%">
+  <tr>
+    <th colspan="2">Name</th>
+    <th>Age</th>
+  </tr>
+  <tr>
+    <td style="width:33%">Jill</td>
+    <td style="width:33%">Smith</td>
+    <td style="width:33%">43</td>
+  </tr>
+  <tr>
+    <td>Eve</td>
+    <td>Jackson</td>
+    <td>57</td>
+  </tr>
+</table>
+
+[1단계:개념] 3. 테이블에서 반복적인 행이나 열단위 배경색상이나 글자 색상을 처리할 때, 옵션을 예제를 통해서 기술하세요.
+행단위
+tr:nth-child(odd) { // (odd) 대신 을 사용하면 (even)2,4,6 등 대신 1,3,5 행 등에서 스타일 지정이 발생
+  background-color: #D6EEEE;
+}
+
+열단위
+td:nth-child(even), th:nth-child(even) {
+  background-color: #D6EEEE;
+}
+
+[1단계:개념] 4. 테이블의 td의 방향별로 border의 색상을 다르게 할 때, 처리하는 옵션을 기술하세요.
+th:nth-child(even),td:nth-child(even) {
+  border-style:solid;
+  border-color: #96D4D4;
+}
+
+[1단계:개념] 5. 테이블의 행단위로 배경색상이 커서를 위치시켰을 때, 변경되는 옵션을 기술하세요.
+tr:hover {background-color: #D6EEEE;}
+
+[1단계:개념] 6. 목록을 나타낼 때, 사용하는 ul/ol의 차이와 속성들을 기본 예제를 통하여 기술하세요.
+<ul>
+  <li>Coffee</li>
+  <li>Tea</li>
+  <li>Milk</li>
+</ul>
+결과
+* Coffee
+* Tea
+* Milk
+
+<ol>
+  <li>Coffee</li>
+  <li>Tea</li>
+  <li>Milk</li>
+</ol>
+결과
+1. Coffee
+2. Tea
+3. Milk
+
+[1단계:개념] 7. 요소들 가운데 block/inlne 속성이 있는 요소들이 있다. 특징을 기본 예제를 통해서 기술하세요.
+block 요소는 항상 새 줄에서 시작하고 브라우저는 자동으로 요소 앞뒤에 약간의 공백(여백)을 추가.
+block 요소는 항상 사용 가능한 전체 너비를 차지(가능한 한 왼쪽과 오른쪽으로 늘어남).
+<p>Hello World</p>
+<div>Hello World</div>
+결과 
+Hello World
+Hello World
+
+inline 요소는 새 줄에서 시작하지 않음.
+inline 요소는 필요한 만큼만 너비를 차지.
+<p>This is an inline span <span style="border: 1px solid black">Hello World</span> element inside a paragraph.</p>
+결과 
+This is an inline span Hello World element inside a paragraph.
+
+[1단계:확인] 8. 클래스, 태그, id로 특정 요소에 글자크기를 변경한 css 선언을 하여, 출력되게 처리하세요. 
+<html>
+<head>
+<style>
+/* Style the element with the id "myHeader" */
+#myHeader {
+  background-color: lightblue;
+  color: black;
+  padding: 40px;
+  text-align: center;
+}
+
+/* Style all elements with the class name "city" */
+.city {
+  background-color: tomato;
+  color: white;
+  padding: 10px;
+} 
+</style>
+</head>
+<body>
+
+<h2>Difference Between Class and ID</h2>
+<p>A class name can be used by multiple HTML elements, while an id name must only be used by one HTML element within the page:</p>
+
+<h1 id="myHeader">My Cities</h1>
+
+<h2 class="city">London</h2>
+<p style="color:red;">London is the capital of England.</p>
+
+<h2 class="city">Paris</h2>
+<h3 style="color:green;">Paris is the capital of France.</p>
+
+<h2 class="city">Tokyo</h2>
+<p>Tokyo is the capital of Japan.</p>
+
+</body>
+</html>
+
+[1단계:개념] 9. iframe의 기본 속성을 예제를 통해서 설명하세요. 
+HTML <iframe>태그는 인라인 프레임을 지정합니다.
+<iframe src="url" title="description"></iframe>
+height및 width속성을 사용하여 iframe의 크기를 지정합니다.
+<iframe src="demo_iframe.htm" height="200" width="300" title="Iframe Example"></iframe>
+속성을 추가 style하고 CSS height및 width 속성을 사용할 수 있습니다.
+<iframe src="demo_iframe.htm" style="height:200px;width:300px;" title="Iframe Example"></iframe>
+테두리를 제거하려면 속성을 추가하고 styleCSS border속성을 사용하세요
+<iframe src="demo_iframe.htm" style="border:none;" title="Iframe Example"></iframe>
+CSS를 사용하면 iframe 테두리의 크기, 스타일 및 색상을 변경할 수도 있습니다.
+<iframe src="demo_iframe.htm" style="border:2px solid red;" title="Iframe Example"></iframe>
+iframe은 링크의 대상 프레임으로 사용할 수 있습니다.
+<iframe src="demo_iframe.htm" name="iframe_a" title="Iframe Example"></iframe>
+<p><a href="https://www.w3schools.com" target="iframe_a">W3Schools.com</a></p>
+
+[1단계:확인] 10. 웹화면상 물건가격, 물건명, 물건갯수를 입력하는 폼화면을 구현하세요.
+<form>
+  <label for="price">물건가격:</label><br>
+  <input type="text" id="price" name="물건가격" value=""><br>
+  <label for="pname">물건명:</label><br>
+  <input type="text" id="pname" name="물건명" value=""><br>
+  <label for="numbers">물건갯수:</label><br>
+  <input type="text" id="numbers" name="물건갯수" value=""><br>
+</form>
+
+[1단계:개념] 11. checkbox와 radio의 차이점을 기본 예제를 통하여 기술하세요.
+radio는 다수의 선택란중에 하나만 선택가능
+<form>
+  <input type="radio" id="html" name="fav_language" value="HTML">
+  <label for="html">HTML</label><br>
+  <input type="radio" id="css" name="fav_language" value="CSS">
+  <label for="css">CSS</label><br>
+  <input type="radio" id="javascript" name="fav_language" value="JavaScript">
+  <label for="javascript">JavaScript</label>
+</form>
+checkbox는 다수의 선택란중에 0혹은 다수를 선택가능
+<form>
+  <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+  <label for="vehicle1"> I have a bike</label><br>
+  <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
+  <label for="vehicle2"> I have a car</label><br>
+  <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+  <label for="vehicle3"> I have a boat</label>
+</form>
+
+-->

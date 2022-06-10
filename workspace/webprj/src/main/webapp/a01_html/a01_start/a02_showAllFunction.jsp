@@ -11,6 +11,8 @@
     <script type="text/javascript">
         function call(obj){
             alert("안녕하세요");
+            // DOM으로 해당 배경색상이 변경
+            obj.style.backgroundColor="navy";
         }
     </script>
 </head>

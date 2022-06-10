@@ -1,0 +1,14 @@
+# DB 연동된 테이블 리스트 구현하기
+1. java
+2. jsp에서 html코드와 java의 분리
+    1) <% %> : html에서 java 코드가 처리된 부분 : script
+    2) <%= %> : html에서 java 코드로 출력할 부분 : expression
+3. jsp에서 import
+    1) 사용할 클래스를 객체로 활용할 때, 선언..
+4. 사원정보 테이블 리스트 하기
+    1) 사용할 테이블 양식가져오기 - w3school에서 copy
+        row단위로 색상,
+        hover처리
+    2) vo(emp), dao
+    3) jsp : import cjfl
+    4) jsp : 객체 생성, <% %>,<%= %>에 출력.
