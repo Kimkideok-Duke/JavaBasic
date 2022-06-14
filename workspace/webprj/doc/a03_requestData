@@ -1,0 +1,30 @@
+# 요청데이터처리
+1. 클라이언트(브라우저)에서 서버(WAS-톰캣안에 java단)프로그램에 요청하는 처리를 말한다.
+2. 요청은 클라이언트단 화면이나 querystring(url), 내부 요청으로 브라우저(클라이언트)단에서
+    할 수 있는데, 요청값을 받는 프로그램을 반드시 backend프로그램(java)만 할 수 있다.
+3. 요청값 핵심개념
+    query string
+    요청할 페이지? key=value&key=value
+    요청할 페이지? 요청키1=요청값2&요청키2=요청값2
+    1) get 방식으로 url통해서 요청값을 넘기는 방식
+        요청할 페이지?key=value&key=value
+        
+4. 서버에서 받는 처리.
+    1) java jsp
+        String value = request.getParaeter("요청key");
+        // 요청키로 받은 데이터는 value 변수안에 요청값으로 받는다.
+    2) el : ${param.요청key}
+    3) usebean을 이용해서 객체로 받기
+    4) controller에서 Class로 받기
+
+5. 다양한 사용자 인터페이스를 활용하여 요청key 요청값을 받기
+    <form action="요청페이지">
+        <input name="요청key" value="요청값">
+        모양은 type="text|password|radio|checkbox|number|date......."
+        <select name="요청key">
+            <option>요청값
+            <option>요청값
+            <option>요청값
+        <textarea>....
+
+6. 
