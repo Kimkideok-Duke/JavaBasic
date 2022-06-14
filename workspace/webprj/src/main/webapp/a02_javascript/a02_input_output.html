@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+/*
+# js의 입력/출력
+1. 입력
+    1) prompt("메시지", "디폴트입력값") 함수
+        - 사용자로부터 문자열을 입력받아 리턴
+    2) confirm("메시지") 함수
+        - 확인/취소로 부터 true/false(boolean)을 가져온다.
+2. 출력
+    1) 특정 DOM 객체 지정 기본적인 내용 출력 : .innerText="데이터"
+        - 단일 : document.querySelector("h1").innerText=
+        - 배열 : 
+                var h2Arry = document.querySelectorAll("h2");
+                h2Arry[0].innerText="데이터1"
+                h2Arry[1].innerText="데이터2"
+                h2Arry[2].innerText="데이터3"
+    2) html 코드 렌더링 출력
+        - 위 단일/배열 DOM 객체에서 .innerHTML="<h3>안녕</h3>"
+            형식으로 html 태그 코드를 추가하여 처리한다.
+*/
+</script>
+</head>
+<body>
+	<h2></h2>
+    <h3></h3>
+    <h3></h3>
+    <h3></h3>
+</body>
+<script type="text/javascript">
+// var ret = promtp("이름을 입력하세요","홍길동")
+// 1. document.querySelector("h2")
+//      1) 위에 h2태그를 객체로 인식(DOM-document object model)
+// 2. .innerText : 화면의 내용을 처리하는 속성
+// document.querySelector("h2").innerText="입력된 이름:"+ret
+// alert("입력된 이름:"+ret);
+// ex)
+var name = prompt("물건명을 입력하세요","")
+var price = prompt("가격을 입력하세요","")
+var cnt = prompt("갯수를 입력하세요","")
+// document.querySelector("h3") : 단일 DOM 객체
+// document.querySelectorAll("h3") : 여러개 DOM 객체
+var h3Arry = document.querySelectorAll("h3")
+h3Arry[0].innerText="물건명:" + name;
+h3Arry[1].innerText="가격:" + price;
+h3Arry[2].innerText="갯수:" + cnt;
+
+// document.querySelector("h3").innerText="물건명:"+ret1+" 가격:"+ret2+" 갯수:"+ret3
+</script>
+</html>

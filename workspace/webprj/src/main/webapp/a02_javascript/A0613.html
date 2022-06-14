@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+//     2022-06-13
+// [1단계:개념] 1. 자바스크립트의 처리형식(내부,외부,url)의 기본예제를 통해 호출하는 형식을 기술하세요.
+
+
+// [1단계:개념] 4. DOM객체 호출 방법 중, 단일 태그, 다중의 태그를 호출하는 방식의 차이를 예제를 통하여 기술하세요.
+            // - 단일 : document.querySelector("h1").innerText=
+            // - 배열 : var h2Arry = document.querySelectorAll("h2");
+            //         h2Arry[0].innerText="데이터1"
+            //         h2Arry[1].innerText="데이터2"
+            //         h2Arry[2].innerText="데이터3"
+
+// [1단계:개념] 5. DOM기능 속성가운데 innerText, innerHTML의 차이를 기술하세요.
+            // 1) 특정 DOM 객체 지정 기본적인 내용 출력 : .innerText="데이터"
+            // 2) html 코드 렌더링 출력
+            //     - 위 단일/배열 DOM 객체에서 .innerHTML="<h3>안녕</h3>"
+            //         형식으로 html 태그 코드를 추가하여 처리한다.
+
+// [1단계:확인] 9. 클릭시 마다, 번호가 올라가는 함수 호출 기능을 위 지역/전역변수로 처리하세요.  
+//                 카운트업(클릭)
+//                 1...
+var globalVar = 0;
+function plus1(){
+    var localVar = 0;
+    localVar++;
+    globalVar++;
+    document.querySelector("h4").innerText = "지역 : " + localVar + ", 전역 : " + globalVar
+}
+// [1단계:개념] 10. <input name="num01"/>의 DOM객체를 접근하는 형식과 여기에 있는 value값을 가져오는 방법을 기술하세요.
+            // [속성=속성값]
+            // .value : 해당 input에 입력된 데이터를 가져온다.
+
+
+// [1단계:개념] 12. jsp의 구성요소에 대하여 기술하세요.
+            // # jsp 페이지의 구성요소
+            // 1. 디렉티브(directive)
+            // 2. 스크립트(jsp에서 자바코드) : scriptlet(<% %>),
+            //     expression<%=%>), declaration
+            // 3. 표현언어(expression language)
+            // 4. 기본 객체(implicit Object)
+            // 5. 정적인 데이터
+            // 6. 표준 액션 태그
+            // 7. 커스텀 태그(custom tag)와 표준 태그 라이브러리(jstl)
+
+// [1단계:확인] 13. jsp의 scriptlet과 expression을 활용하여 구구단의 2단~9단까지 테이블 td안에 넣어 출력하세요.(이중 for문 활용)
+            // <style>
+            // table, th, td {
+            //   border:1px solid black;
+            //   border-collapse: collapse;
+            // }
+            // </style>
+            // 	<%
+            // 	for(dan=2;dan<=9;dan++){
+            //     %>
+            //         <table style="width:100%">
+            //         <tr style="width:50%">
+            //         <td><%=dan%>단</td> 
+            //     <%
+            //         for(mul=1;mul<=9;mul++){
+            // 	%>
+            // 		<td><%=dan %>X<%=mul %>=<%=dan*mul %></td>
+            // 	<%
+            //         }
+            //     %>
+            //     </tr>
+            //     </table>
+            //     <%
+            //     }
+            //     %>
+</script>
+</head>
+<body>
+<!-- 
+[1단계:확인] 2. 외부파일 z02_sample.js에 함수를 정의하고, 현재파일에 h2를 클릭시, 해당 함수를 호출처리하는 코드를 만드세요. 
+-->
+    <h2 onclick="call()">외부 선언 js 호출</h2>
+    <h3></h3>
+    <h3></h3>
+    <h4 onclick="plus1()">1씩 증가</h4>
+
+<!-- // [1단계:확인] 11. 아이디:[   ][확인] 확인을 클릭했을 때, 입력한 id를 alert()으로 출력되게 하세요. -->
+    아이디:<input type="text" name="id" value=""/>
+    <input type="button" value="확인" onclick="alert(document.querySelector('name=id'))"/>
+
+</body>
+<script type="text/javascript">
+// [1단계:확인] 3. prompt를 활용하여 아이디와 패스워드를 입력하여 출력하세요.
+            // var id = prompt("아이디를 입력하세요","")
+            // var passwd = prompt("비밀번호를 입력하세요","")
+            // var h3Arry = document.querySelectorAll("h3")
+            // h3Arry[0].innerText="아이디:" + id;
+            // h3Arry[1].innerText="비밀번호:" + passwd;
+
+// [1단계:확인] 6. prompt 창을 통해서 입력받은 국어, 영어, 수학 점수를 입력받아 합산과 평균을 처리하세요.
+            // var kor = prompt("국어 점수를 입력하세요","")
+            // var eng = prompt("영어 점수를 입력하세요","")
+            // var math = prompt("수학 점수를 입력하세요","")
+            // var sum = Number(kor)+Number(eng)+Number(math)
+            // var avg = (sum/3);
+            // var h3Arry = document.querySelectorAll("h3")
+            // h3Arry[0].innerText="합산 : " + sum;
+            // h3Arry[1].innerText="평균 : " + avg;
+
+// [1단계:개념] 7. js의 데이터 유형 5가지를 예제를 통하여 설명하세요
+            // var num01 = 25                      // number : 숫자형(정수형)
+            // var num02 = 25.72                   // number : 숫자형(실수형)
+            // var isPass = num01>=50              // boolean : 논리형
+            // var str = "홍길동"                    // string : 문자열형
+            // var plus = function(num01, num02){  // function : 함수형
+            //     return num01+num02;
+            // }
+            // var obj = {name:"홍길동", age:25}     //object : 객체형 (배열 포함)
+            // var h2Arry = document.querySelectorAll("h2")
+            // h2Arry[0].innerText = typeof(num01) + ":" + num01; // 
+            // h2Arry[1].innerText = typeof(num02) + ":" + num02;
+            // h2Arry[2].innerText = typeof(isPass) + ":" + isPass;
+            // h2Arry[3].innerText = typeof(str) + ":" + str;
+            // h2Arry[4].innerText = typeof(plus) + ":" + plus(30,40);
+            // h2Arry[5].innerText = typeof(obj) + ":" + obj.name+","+obj.age;
+
+// [1단계:개념] 8. js에서의 함수에서 지역변수와 전역변수를 구분하여 코드로 설명하세요.
+            // 지역변수 : 함수 기준으로 함수 내에 선언된 변수
+            // 전역변수 : 함수 기준으로 함수 외부에 선언된 변수
+
+            // var globalVar = 30; // 전역변수
+            // var var01 = 0;
+            // function fun01(var01){ // 매개변수는 지역변수
+            //     var localVar = 50; // 지역변수
+            //     this.var01 = var01; // 지역변수와 전역변수를 구분할 때, this.를 사용한다.
+            // }
+</script>
+</html>

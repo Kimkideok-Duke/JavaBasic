@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+    <h2>구구단</h2>
+    입력한 단수:<input type="text" name="grade" onclick="gugu()" value="2"/><br>
+    <input type="button" value="구구단 출력" onclick="gugu()">
+    <table border>
+        <tr><td>@@ X @@ = @@</td></tr>
+        <tr><td>@@ X @@ = @@</td></tr>
+        <tr><td>@@ X @@ = @@</td></tr>
+
+    </table>
+</body>
+    <script type="text/javascript">
+        function gugu(){
+            // [속성=속성값]
+            // .value : 해당 input에 입력된 데이터를 가져온다.
+            var grade = document.querySelector("[name=grade]").value
+            alert("출력할 단수:"+grade);
+            var addHTML = "" // for문 밖에서 html 문자열을 만들기 위해 선언
+            for(cnt=1;cnt<=9;cnt++){
+                console.log(grade+" * " + cnt + " = " + (grade*cnt))
+                addHTML += "<tr><td>" + grade + " * " + cnt + " = " + (grade*cnt) + "</td></tr>"
+            }
+            console.log(addHTML)
+            document.querySelector("table").innerHTML = addHTML
+        }
+    </script>
+</html>

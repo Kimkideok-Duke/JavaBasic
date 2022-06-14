@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+var sum=0
+function tot(sum){
+    // 매개변수로 받은 지역변수를 전역변수에 할당 처리
+    this.sum += sum;
+    console.log(this.sum+":" + sum) // 브라우저의 console에 출력처리
+    document.querySelector("h5").innerText = "총계" + this.sum
+}
+</script>
+</head>
+<body>
+    <h4 onclick="tot(1500)">연산(+1500)</h4>
+    <h5></h5>
+    <h2></h2>
+    <h2></h2>
+    <h2></h2>
+    <h2></h2>
+    <h2></h2>
+    <h2></h2>
+</body>
+<script>
+/*
+# 자바스크립트 언어에서 다루는 데이터 유형 : typeof() 함수를 통해서 확인 가능
+1. number : 숫자형
+2. boolean : 논리형
+3. string : 문자열형
+4. function : 함수형
+5. object : 객체형 (배열 포함)
+*/
+var num01 = 25
+var num02 = 25.72
+var isPass = num01>=50
+var str = "홍길동"
+var plus = function(num01, num02){
+    return num01+num02;
+}
+var obj = {name:"홍길동", age:25} // json(javascript object notation)
+
+var h2Arry = document.querySelectorAll("h2")
+h2Arry[0].innerText = typeof(num01) + ":" + num01;
+h2Arry[1].innerText = typeof(num02) + ":" + num02;
+h2Arry[2].innerText = typeof(isPass) + ":" + isPass;
+h2Arry[3].innerText = typeof(str) + ":" + str;
+h2Arry[4].innerText = typeof(plus) + ":" + plus(30,40);
+h2Arry[5].innerText = typeof(obj) + ":" + obj.name+","+obj.age;
+/*
+# 변수 선언방식
+1. js는 변수에 데이터를 할당할 때, 데이터유형이 결정되어 진다.
+    var 변수명;
+    변수명 = 할당할 데이터;
+    var 변수명 = 할당 데이터
+2. 지역변수와 전역변수
+    함수 기준으로 함수 내에 선언된 변수
+    함수 기준으로 함수 외부에 선언된 변수
+
+    var globalVar = 30; // 전역변수
+    var var01 = 0;
+    function fun01(var01){ // 매개변수는 지역변수
+        var localVar = 50; // 지역변수
+        this.var01 = var01; // 지역변수와 전역변수를 구분할 때, this.를 사용한다.
+    }
+*/
+
+</script>
+</html>
