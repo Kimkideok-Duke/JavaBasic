@@ -45,7 +45,7 @@
 # 스크립트릿
 1. 지비코드를 실행할 때 사용되는 코드 블럭
 --%>
-<%
+<%-- <%
     String name = "홍길동";
     int age = 25;
     String loc = "서울 방배동";
@@ -53,7 +53,7 @@
 <%
     String pname = "연필";
     int cnt = 10;
-    int price = 200;
+    int price = 200; --%>
 %>
 <%
     int dan = 0;
@@ -81,8 +81,8 @@
     <%-- 
     ex)
     --%>
-<%-- 
-    <h2>물건명 : <%=pname %></h2>
+
+    <%-- <h2>물건명 : <%=pname %></h2>
     <h2>갯수 : <%=cnt %></h2>
 	<h2>가격 : <%=price %></h2>
 	<%
@@ -91,9 +91,11 @@
 		<h3>물건명<%=pname %>를 <%=cnt %> 개 구매한 가격은 <%=cnt*price %></h3>
 	<%
     }
-    %> 
---%>
-<style>
+    %>  --%>
+
+
+
+<%-- <style>
 table, th, td {
   border:1px solid black;
   border-collapse: collapse;
@@ -116,6 +118,39 @@ table, th, td {
     </table>
     <%
     }
-    %>
+    %> --%>
+<h2>1단계</h2>
+<table border>
+    <tr>
+        <%for(int grade=2;grade<=9;grade++){ %>
+        <th><%=grade%>단</th>
+        <%}%>
+    </tr>
+</table>
+<h2>2단계</h2>
+<table border>
+    <%for(int cnt=1;cnt<=9;cnt++){%>
+    <tr>
+        <%for(int grade=2;grade<=9;grade++){ %>
+        <th><%=grade%>X<%=cnt%>=<%=grade*cnt%></th>
+        <%}%>
+    </tr>
+    <%}%>
+</table>
+</table>
+<h2>3단계</h2>
+<table border>
+    <%for(int cnt=0;cnt<=9;cnt++){%> <%-- 단을 표기하기 위하여 0 --%>
+    <tr>
+        <%for(int grade=2;grade<=9;grade++){ %>
+        <%if(cnt==0){%>
+            <th><%=grade%>단</th>
+        <%}else{%>
+            <td><%=grade%>X<%=cnt%>=<%=grade*cnt%></td>
+        <%}%>
+        <%}%>
+    </tr>
+    <%}%>
+</table>
 </body>
 </html>

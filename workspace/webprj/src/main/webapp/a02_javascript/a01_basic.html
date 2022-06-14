@@ -54,7 +54,7 @@
 
 3. 브라우저 제어(DOM)
 	a href="javascript:call(this)"
-	
+
 	1) 브라우저 윈도우 크기 및 모양 제어
 	2) 새 윈도우 열기/닫기
 	3) 다른 웹 사이트 접속
@@ -68,6 +68,15 @@
 2. script /script 태그에 작성
 3. 자바스크립트 파일에 작성
 4. url 부분에 작성
+# 자바스크립트 코드 실행에 따른 코드 위치
+1. 자바스크립트도 위에서 아래로 코딩 처리가 수행된다.
+2. script 선언
+	1) 어디에나 가능하다
+	head, body, 가장 밑부분
+	2) 메모리 로딩을 인식한 객체의 속성을 변경할 수 있다.
+		- h2 태그 선언
+		- 위 태그를 DOM으로 객체 호출 가능
+	3) 선언된 함수는 호출하는 순간 처리되기에 객체 선언이 가능하다.
 */
 	function chFun(h2Obj){
 		h2Obj.innerText="반갑습니다.(글자변경)"
@@ -76,13 +85,23 @@
 	function chColor(obj){
 		obj.style.color="green";
 	}
+	function call2(){
+		var h5Obj = document.querySelector("h5");
+		h5Obj.style.backgroundColor="blue";
+		h5Obj.style.color="yellow";
+	}
 </script>
-<script type="text/javascript" src="'z01_sample.js"></script>
+<script type="text/javascript" src="z01_sample.js"></script>
 </head>
 <body>
+	<h4 onclick="call2()">상위에 선언된 함수 호출</h4>
 	<h2 onclick="this.innerText='한라인명령' ">안녕하세요</h2>
+	<script>
+		document.querySelector("h2").style.backgroundColor="yellow"
+	</script>
 	<h2 onclick="chFun(this)">안녕하세요</h2>
 	<h3 onclick="call()">외부 선언 js 호출</h3>
 	<a href="javascript:chColor(this)">자바스크립트 실행</a>
+	<h5>색상이 변할까?</h5>
 </body>
 </html>

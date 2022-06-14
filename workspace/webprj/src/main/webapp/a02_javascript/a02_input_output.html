@@ -13,15 +13,21 @@
         - 확인/취소로 부터 true/false(boolean)을 가져온다.
 2. 출력
     1) 특정 DOM 객체 지정 기본적인 내용 출력 : .innerText="데이터"
-        - 단일 : document.querySelector("h1").innerText=
+        - 단일 : document.querySelector("h1").innerText
+            여러개 있더라도 처음 나오는것 하나만 적용
         - 배열 : 
                 var h2Arry = document.querySelectorAll("h2");
                 h2Arry[0].innerText="데이터1"
+                위와 같이 하나만 있을 때는 배열 하나로 인식
+                    [] cf) 주의 js배열을 ["데이터", 데이터..]
+                            자바에서는 {}
+
                 h2Arry[1].innerText="데이터2"
                 h2Arry[2].innerText="데이터3"
     2) html 코드 렌더링 출력
         - 위 단일/배열 DOM 객체에서 .innerHTML="<h3>안녕</h3>"
             형식으로 html 태그 코드를 추가하여 처리한다.
+            갹채.innerText="<h2>안녕</h2>"
 */
 </script>
 </head>
