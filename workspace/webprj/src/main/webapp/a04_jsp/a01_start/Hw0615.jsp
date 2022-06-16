@@ -4,7 +4,6 @@
 <%!
 ArrayList<Integer> rlist_t = new ArrayList<Integer>();
 ArrayList<Integer> rlist_h = new ArrayList<Integer>();
-int cnt=0;
 %>
 <!DOCTYPE html>
 <html>
@@ -49,6 +48,7 @@ for(int i = 0; i<prices.length; i++){
 
 [1단계:확인] 3. 구구단을 외자? 라는 타이틀 화면으로 임의의 값이 [@@] X [@@@] ? [   ] [확인] 라는 화면이 로딩되고,
             답을 입력후, 확인 눌렀을 때, 요청된 페이지에 문제와 입력된 값을 출력, 맞으면 정답, 틀리면 오답을 출력되게 하세요. --%>
+<%--
 <h2>구구단을 외자?</h2>
 <% 
 int rand_t = (int)(Math.random()*99+1);
@@ -75,7 +75,59 @@ if(ans!=null) ansI = Integer.parseInt(ans);
     정답입니다
 <%}else {%>
     오답입니다.
-<%}%>
+<%}%>--%>
+<%
+// 초기화면을 위한 데이터(문제데이터)
+int gradeR = (int)(Math.random()*8+2);
+int cntR = (int)(Math.random()*9+1);
+// 요철값으로 입력된 데이터 처리
+int grade, cnt, reply; grade=cnt=reply=0;
+String gradeS = request.getParameter("grade");
+String cntS = request.getParameter("cnt");
+String replyS = request.getParameter("reply");
+// 입력후, 요청값이 있을 때, 숫자형으로 형변환 처리
+if(gradeS!=null) grade = Integer.parseInt(gradeS);
+if(cntS!=null) cnt = Integer.parseInt(cntS);
+if(replyS!=null) reply = Integer.parseInt(replyS);
+// 정답값 저장 초기 선언
+int cor = 0;
+// 정답/오답 표기 문자열
+String result = "오답";
+// 정답여부 처리
+// 요청값이 있을 때
+if(grade!=0){
+    // 임의로 낸 숫자를 곱하여 정답값 저장
+    cor = grade*cnt;
+    if(reply==cor){
+        result="정답";
+    }
+}
+%>
+<h2 align="center">구구단을 외자</h2>
+<form>
+<table align="center" border>
+    <tr>
+        <td><input type="text" name="grade" size="2" value="<%=gradeR%>"/></td>
+        <td>X</td>
+        <td><input type="text" name="cnt" size="2" value="<%=cntR%>"/></td>
+    </tr>
+    <tr>
+        <td colspan="3">
+            <input type="text" size="2" name="reply"/></td>
+    </tr>
+    <tr>
+        <td colspan="3">
+            <input type="submit" value="결과확인"/></td>
+    </tr>
+    <%if(grade!=0){ %>
+    <tr>
+        <td colspan="3">
+            <%=grade%> X <%=cnt%> = <%=reply%> (<%=result%>)
+        </td>
+    </tr>
+    <%}%>
+</table>
+</form>
 <%--
 [1단계:확인] 4. [   ][select +/-/*// ][   ] [결과확인] 결과확인을 통해 선택된 연산이 처리되게 하세요--%>
 <form>

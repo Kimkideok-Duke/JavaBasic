@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+/*
+# 함수
+1. 함수란
+    1) 목적을 가지고 작성된 코드 블록
+    2) 데이터를 전달받아 처리한 후 결과를 돌려주는 코드 블록
+2. 함수개념
+    1) 기본 구성
+        - 선언적 함수
+        function 함수명(매개변수1, 매개변수2...){
+            코드처리
+            return 리턴할 데이터;
+        }
+        - 변수형 함수(익명)
+        var 함수명 = function(매개변수1, 매개변수2...){
+            코드처리.
+            return 리턴할데이터
+        }
+    2) 함수호출
+        함수의 코드 실행요청
+        var h = 함수명(데이터1, 데이터2)
+*/
+        // 선언적 함수
+        function call(){
+            alert("함수호출");
+        }
+        function plus(num01, num02){
+            return num01+num02;
+        }
+        var sum = plus(25,30);
+        alert(sum);
+        // 변수형 함수(익명함수)
+        var multi = function(num01, num02){
+            return num01*num02;
+        }
+        var sum2 = multi(5,2);
+        alert(sum2);
+</script>
+</head>
+<body>
+    <h2 onclick="call()">함수호출</h2>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+/*
+# 서버로 전송하기 전, 유효성 check
+1. 서버로 전송되는 데이터를 사전에 프런트단에서 유효성을 check하여 처리하는 것을 말한다.
+2. 유효성 처리 내용
+    1) 공백 여부 확인
+    2) password/password확인
+        패스워드 : [    ]
+        패스워드 확인 : [   ]
+        두 내용이 동일할 때만, 입력이 가능하게 처리.
+    3) 글자수에 대한 제한 : 
+        id는 4~8, 8~16 사이에 입력
+    4) 보안강화 : 영어 대소문, 숫자, 특수문자
+        이메일이나 전화번호는 형식에 맞게 입력
+        ==> 정규식(정규표현식)처리. [a]w*]
+*/
+    function sendData(){
+        var id = document.querySelector("[name=id]")
+        if(id.value==""){
+            alert("아이디를 입력하세요!!")
+            id.focus(); // 해당 입력된 요소객체에 focus() 처리
+            return; // 전송을 중단 처리한다.
+        }else{
+            // 아이디를 입력했을 때, 글자 수 제한 처리
+            // .length ps) 주의 - java에서는 일반배열 배열.length-크기,
+            // js : 문자열이나 배열이나 동일하게 length 활용한다.
+            alert(id.value.length)
+            // if( !(id.value.length>=8 && id.value.length<=16) ){
+            if( id.value.length<8 || id.value.length>16 ){
+                alert("아이디는 8~16사이로 입력이 가능합니다.")
+                return; // 더이상 프로세스가 진행되지 않게 (submit되지 않게 처리)
+            }
+        }
+        var pswd = document.querySelector("[name=passwd]")
+        var pswdck = document.querySelector("[name=passwdck")
+        // ps) 주의 - java에서만 equals()를 통해 문자열을 비교하고,
+        //          script언어에서 == 비교연산자를 통해서 문자열을 비교한다.
+        if(pswd.value==""){
+            alert("비밀번호를 입력하세요!!")
+            pswd.focus();
+            return;
+        }
+        if(pswd.value!=pswdck.value){
+            alert("비밀번호 확인이 다릅니다!!")
+            pswdck.focus();
+            return;
+        }
+        var name = document.querySelector("[name=name]")
+        if(name.value==""){
+            alert("이름을 입력하세요!!")
+            name.focus();
+            return;
+        }else if(name.value.length<2 || name.value.length>8){
+            alert("이름은 2~8사이로 입력이 가능합니다. 현재 입력 : " + name.value.length)
+            return;
+        }
+        document.querySelector("form").submit();
+    }
+</script>
+</head>
+<body>
+    <h2>회원가입</h2>
+    <form action="a11_memberReg.jsp">
+        아이디:<input type="text" name="id"/><br>
+        <!-- 
+        패스워드/패스워드 확인 넣고,
+        1. 입력에 대한 유효성 check
+        2. 패스워드와 패스워드 확인이 동일한지 여부를 check하여
+            동일하지 않으면 전송중단, 동일하지 않다고 표기
+        -->
+        비밀번호:<input type="password" name="passwd"/><br>
+        비밀번호 확인:<input type="password" name="passwdck"/><br>
+        <!-- 
+        ex) 이름:[  ]
+        1. 이름은 반드시 입력
+        2. 이름은 2~8사이 입력가능하게 처리
+        -->
+        이름:<input type="text" name="name"/><br>
+
+        <input type="button" value="회원등록" onclick="sendData()"/>
+    </form>
+</body>
+</html>

@@ -14,17 +14,27 @@
         String value = request.getParaeter("요청key");
         String[] arrVal = request.getParaeter("요청key");
         // 요청키로 받은 데이터는 value 변수안에 요청값으로 받는다.
-    2) el : ${param.요청key}
+    2) el : ${param.요청key} ${paramValues.요청key}
     3) usebean을 이용해서 객체로 받기
-    4) controller에서 Class로 받기
+        Vo객체가 자동으로 
+            public void setId(String id){}
+            public void setPass(int pwd){}
+        ?id=himan&pass=7777
+    4) controller에서 Class로 받기(servlet)
+    5) 스프링에서 매개변수로 객체를 받아서 처리(useBean과 유사하게)
+        url: /login.do?id=himan&pass=7777
+        @RequestMapping("login.do")
+        public 
 
 5. 다양한 사용자 인터페이스를 활용하여 요청key 요청값을 받기
     <form action="요청페이지">
         <input name="요청key" value="요청값">
-        모양은 type="text|password|radio|checkbox|number|date......."
+        모양은 type="text|password|*radio|*checkbox|number|date......."
         <select name="요청key">
             <option>요청값
-            <option>요청값
+            <option value="요청값">레이블
+            <option value="1"> +    ?요청key=1
+
             <option>요청값
         <textarea>....
     1) form 하위의 객체들을 종류 html로 확인하기
@@ -35,9 +45,23 @@
             멀티 데이터 전송
         - 요청값을 받을 때, null에 대한 처리, 숫자형 데이터에 대한 처리 방법
             기본 처리방법
-            함수를 활용한 처리방법
-            
+            함수를 활용한 
+            String name = request.getParaeter("name");
+            if(name=null) name="";
+            String ageS = request.getParaeter("age");
+            int age = 0;
+            if(ageS!=null) age = Integer.parseInt(ages);
+            name ==> null ==> ""
     4) form 요청값 처리시, 서버에 넘어가기전 처리할 javascript 확인
+            서버에 전송되기 전에 입력데이터가 있는지 check해서 전송
+            ==> 서버에 대한 오류부담을 줄여준다.
+            var idObj = document.querySelector("[name=id]").value
+            if(idObjVal==""){
+                alert("아이디를 입력하세요");
+                return; // 입력이 안되었을 때, submit()처리 중단
+            }
+            // form 전체 데이터를 js(javascript)로 전송 처리
+            document.querySelector("name=frm01")
     5) form과 table등 화면 css가 적용된 여러가지 내용 확인해보기
     
 6. 
