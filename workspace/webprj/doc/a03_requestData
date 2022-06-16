@@ -12,6 +12,7 @@
 4. 서버에서 받는 처리.
     1) java jsp
         String value = request.getParaeter("요청key");
+        String[] arrVal = request.getParaeter("요청key");
         // 요청키로 받은 데이터는 value 변수안에 요청값으로 받는다.
     2) el : ${param.요청key}
     3) usebean을 이용해서 객체로 받기
@@ -26,5 +27,17 @@
             <option>요청값
             <option>요청값
         <textarea>....
-
+    1) form 하위의 객체들을 종류 html로 확인하기
+    2) form 하위 객체들을 처리하는 css 확인하기
+    3) form의 속성과 submit/reset 버튼의 기능, 각 요소 객체들이 요청값을 전송시 특징 확인하기
+        - 각 요소별로 특징
+            단일 데이터 전송
+            멀티 데이터 전송
+        - 요청값을 받을 때, null에 대한 처리, 숫자형 데이터에 대한 처리 방법
+            기본 처리방법
+            함수를 활용한 처리방법
+            
+    4) form 요청값 처리시, 서버에 넘어가기전 처리할 javascript 확인
+    5) form과 table등 화면 css가 적용된 여러가지 내용 확인해보기
+    
 6. 
