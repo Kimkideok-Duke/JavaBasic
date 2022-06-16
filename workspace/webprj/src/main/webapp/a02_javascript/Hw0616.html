@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+/* 2022-06-16
+
+
+
+ */
+</script>
+</head>
+<body>
+<script type="text/javascript">
+/*
+      [1단계:개념] 1. [js]문자열을 숫자형으로 바꾸는 함수들을 기술하고 차이점을 예시를 통해서 설명하세요
+                  parseInt()/parseFloat() : 숫자형 문자열을 숫자로 변환하는 형변환 함수
+                  Number() : 숫자형 문자열 숫자로 변경 - 실수/정수 상관없이 변경
+*/
+                  // var num1 = parseInt("3000원")
+                  // var num2 = Number("3000원")
+                  // alert("3000원 parseInt 결과 : "+num1, // 3000 추출
+                  //       "3000원 Number 결과 : "+num2) // 오류
+/*
+      [1단계:확인] 2. [js]물건의 가격[   ], 갯수[  ] [총계] 화면에서 총계를 클릭시,
+         가격과 갯수 입력 여부와 숫자형 데이터에 대한 유효성 check를 처리하고, 총계를 출력하세요.
+*/
+/*
+function buy(){
+      var price = document.querySelector("[name=price]")
+      var cnt = document.querySelector("[name=cnt]")
+      if(Number(price.value)==0){
+            alert("가격을 입력하세요")
+            price.focus();
+            return;
+      }else if(isNaN(price.value)){
+            alert("가격에 숫자를 입력하세요")
+            price.focus();
+            return;
+      }
+      if(Number(cnt.value)==0){
+            alert("갯수를 입력하세요")
+            cnt.focus();
+            return;
+      }else if(isNaN(cnt.value)){
+            alert("갯수에 숫자를 입력하세요")
+            cnt.focus();
+            return;
+      }
+      alert("총계 : "+eval(price.value+"*"+cnt.value))
+}
+*/
+</script>
+<!-- <h2>문제 2</h2>
+<form>
+      가격:<input type="text" name="price">
+      갯수:<input type="text" name="cnt">
+      <input type="submit" value="총계" onclick="buy()">
+</form> -->
+
+<script>
+      /*
+      [1단계:확인] 3. [js] textarea에 글을 입력하고 [등록]을 클릭시, 글자수가 지정한 글자수(15)초과이면
+            @@/15 글자수와 함께 빨간색으로 변경, 유효한 글자수이면(1~15) 파랑색으로 표기처리하세요.
+      */
+     /*
+      function textarea(){
+            var string = document.querySelector("[name=string]")
+            if(string.value.length=0 || string.value.length>16){
+                  document.getElementById("area").style.color = "red";
+            }else{
+                  document.getElementById("area").style.color = "blue";
+            }
+      }*/
+</script>
+<!-- <h2>문제 3</h2>
+<form>
+      <textarea id="area" style="color: black;" cols="50" rows="10" name="string"></textarea>
+      <input type="button" value="등록" onclick="textarea()">
+</form> -->
+<script>
+/*
+[1단계:확인] 4. [js/jsp] 로그인 화면을 만들고, id/pass에 대한 공백유효성을 js로 처리,
+      jsp로 다음페이지에서 받아 himan/7777일 때만 로그인성공 표시, 그외는 로그인 실패 표기하세요.
+*/
+/*
+function login() {
+      var id = document.querySelector("[name=id]");
+      var passwd = document.querySelector("[name=passwd]");
+      if(id.value==""){
+            alert("아이디를 입력하세요!!")
+            id.focus();
+            return;
+      }
+      if(passwd.value==""){
+            alert("비밀번호를 입력하세요!!")
+            passwd.focus();
+            return;
+      }
+      document.querySelector("form").submit();
+}*/
+</script>
+<!-- <h2>문제 4</h2>
+<form action="Hw0616_receive.jsp">
+      아이디:<input type="text" name="id"/><br>
+      비밀번호:<input type="password" name="passwd"/><br>
+      <input type="button" value="로그인" onclick="login()"/>
+</form> -->
+</body>
+</html>
