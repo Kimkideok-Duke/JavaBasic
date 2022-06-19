@@ -84,11 +84,12 @@ function buy(){
 [1단계:확인] 4. [js/jsp] 로그인 화면을 만들고, id/pass에 대한 공백유효성을 js로 처리,
       jsp로 다음페이지에서 받아 himan/7777일 때만 로그인성공 표시, 그외는 로그인 실패 표기하세요.
 */
-/*
+
 function login() {
       var id = document.querySelector("[name=id]");
       var passwd = document.querySelector("[name=passwd]");
-      if(id.value==""){
+      // trim() : 공백을 없에주는 역할
+      if(id.value.trim()==""){
             alert("아이디를 입력하세요!!")
             id.focus();
             return;
@@ -99,13 +100,13 @@ function login() {
             return;
       }
       document.querySelector("form").submit();
-}*/
+}
 </script>
-<!-- <h2>문제 4</h2>
+<h2>문제 4</h2>
 <form action="Hw0616_receive.jsp">
       아이디:<input type="text" name="id"/><br>
       비밀번호:<input type="password" name="passwd"/><br>
       <input type="button" value="로그인" onclick="login()"/>
-</form> -->
+</form>
 </body>
 </html>

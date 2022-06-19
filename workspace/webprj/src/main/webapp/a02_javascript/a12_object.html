@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+</head>
+<body>
+    <h2>클릭!!(object property)</h2>
+    <div>
+    </div>
+</body>
+<script>
+    /*
+    # 자바스크립트 객체 구성
+    1. 여러개의 프로퍼티와 메소드로 구성
+        1) 프로퍼티 : 객체의 고유한 속성(변수)
+        2) 메소드 : 함수
+    */
+    var obj01 = {name:"홍길동", agee:25,
+                    show:function(){
+                        console.log(this.name);
+                        console.log(this.age);
+                        console.log(this.show);
+                    },
+                    showDom:function(){
+                        var divObj = document.querySelector("div");
+                        divObj.innerHtml += "<h2>이름:"+this.name+",나이는:"+this.age+"</h2>"
+                    }
+                }
+    obj01.show()
+    function call(){
+        // alert("호출");
+        obj01.showDom();
+    }
+</script>
+
+</html>
