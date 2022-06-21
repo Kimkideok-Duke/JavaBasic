@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+    // js 오브젝트 안에 함수(메서드에) 설명
+    // 1. object : 속성(저장), 메서드(기능)
+    var p01 = {name:"홍길동", age:25,
+                show:function(){
+                    alert("이름:"+this.name+",나이:"+this.age) // 이 객체가 가지고 있는 name, age 속성 출력
+                }}
+    console.log(p01.name)
+    console.log(p01.age)
+    console.log(p01.show) // 선언된 내용 출력
+    // p01.show() // 객체의 기능 메서드 수행
+    // 서버에 전송하기 전, 유효성 check
+    // 브라우저에서 요청값을 전달 하기전, 브라우저에 요청값 유효성을 check해서 서버로 전달.
+    /*
+    # 유효성 check
+    1. 기본형식
+        <input type="submit" ==> <input type="button" onclick="sendServer()"
+        function sendServer(){
+            // 1. 각 입력 객체의 value을 통한 유효성 체크
+                    var idVal = document.querySelector("[name=id]").value;
+
+            // 2. 유효성애 문제가 있을 때는 alert("유효성 위반 내용") :메시지, return; 리턴값 처리
+            //  - 더이상 함수의 프로세스가 진행되지 않음
+                    if(idVal==""){
+                        alert("아이디를 입력하세요")
+                        return;
+                    } 
+            // 3. form 객체를 선언하고, 품격체,submit() : 폼단위로 전체 전송
+                    document.querySelector("form").submit();
+        }
+    */
+    function login(){
+        var idVal = document.querySelector("[name=id").value;
+        var passVal = document.querySelector("[name=pass").value;
+        if(idVal == ""){
+            alert("아이디를 입력하세요")
+            rturn;
+        }
+        if(passVal == ""){
+            alert("패스워드를 입력하세요")
+            return;
+        }
+        document.querySelector("form").submit();
+        // 기타 key를 입력시 key이벤트처리는 이벤트 파트에서 진행
+    }
+</script>
+</head>
+<body>
+    <h2>로그인</h2>
+    <form>
+        아이디:<input type="text" name="id"/><br>
+        패스워드:<input type="password" name="pass"/><br>
+        <input type="button" value="로그인" onclick="login()"/><br>
+    </form>
+</body>
+</html>

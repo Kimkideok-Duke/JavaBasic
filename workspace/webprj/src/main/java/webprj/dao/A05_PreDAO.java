@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import javaexp.z03_vo.Dept;
-import javaexp.z03_vo.Emp;
+import webprj.z01_vo.Dept;
+import webprj.z01_vo.Emp;
 // DAO(database access object)
 // 전화기와 동일 : 연결/대화/결과를 통해 받은 데이터/종료 - 자원해제, 예외처리
 public class A05_PreDAO {
@@ -396,6 +396,66 @@ select * from emp where job = 'CLERK';
 		}
 		return empList;
 	}
+
+	public ArrayList<Emp> getEmpList2(Map<String, String> map) {
+		ArrayList<Emp> empList = new ArrayList<Emp>();
+		try {
+			setConn();
+			String sql = "SELECT empno, ename, job, mgr, sal, deptno\n" +
+				"FROM emp\n" +
+				"WHERE ename LIKE '%'|| ? ||'%'\n "
+				+ "AND job LIKE '%'|| ? || '%' ";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, map.get("ename"));
+			pstmt.setString(2, map.get("job"));
+			rs = pstmt.executeQuery();
+			// 하나의 데이터 결과 처리이기에 바로 처리
+			// [핵심코드]
+			rs.next();
+			while(rs.next()) {
+				empList.add(new Emp(
+							rs.getString("ename"),
+							rs.getString("job") )
+				);
+			}
+			// 자원해제
+			rs.close();
+			pstmt.close();
+			con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println("일반 예외 : " + e.getMessage());
+		} finally {
+			if(rs!=null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(pstmt!=null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(con!=null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		return empList;
+	}
+
 	// 단일 row sql 처리
 	public void insertEmp(Emp ins) {
 		try {

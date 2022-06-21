@@ -6,12 +6,27 @@
 
 </head>
 <body>
-    <h2>클릭!!(object property)</h2>
+    <h2 onclick="call()">클릭!!(object property)</h2>
     <div>
     </div>
 </body>
 <script>
     /*
+    # js에서 객체
+    1. 종류
+        json형 객체 : {속성:속성값...}
+        생성자(함수형) 객체
+            function Person(name, age){
+                this.name = name;
+                this.age = age;
+            }
+            var p01 = new Person("홍길동", 25)
+        class형 객체
+            class Person{
+
+            }
+        Dom 객체
+            var h10bj = document.querySelector("h1")
     # 자바스크립트 객체 구성
     1. 여러개의 프로퍼티와 메소드로 구성
         1) 프로퍼티 : 객체의 고유한 속성(변수)

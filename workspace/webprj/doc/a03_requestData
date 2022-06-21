@@ -8,6 +8,10 @@
     요청할 페이지? 요청키1=요청값2&요청키2=요청값2
     1) get 방식으로 url통해서 요청값을 넘기는 방식
         요청할 페이지?key=value&key=value
+    2) post 방식으로 url(X), 내부에 요청헤드로 key1=value&key2=value
+        따로 전달해서 처리된다.
+        상단에 한글 encoding 부분 설정 필요
+        request.setCharacterEncoding("utf-8")
         
 4. 서버에서 받는 처리.
     1) java jsp

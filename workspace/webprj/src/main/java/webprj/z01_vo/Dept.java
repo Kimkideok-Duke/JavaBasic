@@ -8,6 +8,12 @@ public class Dept {
     public Dept() {
     }
 
+    public Dept(int deptno, String dname) {
+        super();
+        this.deptno = deptno;
+        this.dname = dname;
+    }
+
     public Dept(int deptno, String dname, String loc) {
         super();
         this.deptno = deptno;

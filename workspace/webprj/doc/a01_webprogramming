@@ -32,13 +32,28 @@
     3) html/css를 함수를 통해서 동적인 병경 : javascript
     4) jsp : 위에 있는 html/css/javascript를 java코드와 함께 서버에서
         만들어서 client(브라우저)에 보내주는 역할을 한다.
+    # 실제 각 프로그램 처리순서
+    1) [was-서버단]jsp ==> java(servlet) ==> html/css/js 만들어 클라이언트에 전달
+    2) [클라이언트단]
+            html/css ==> 화면 구현
+            html(태그) ==> DOM ==> js 처리(동적인 처리)
 
 # 웹프로그램의 자원에 대한 접근
 1. 상대주소 절대주소에 대한 이해
     1) 상대경로/절대경로
     2) 절대 주소 설정으로 모든 자원에 대한 접근 처리
+        webapp하위를 기준 경로로 설정되고, 이것을 서버로 시작되었을 때.
+        http://localhost:7080/프로젝트명/
     3) 공통 자원 접근 설정
-        js/css/javascript
+        js/css/javascript/img
+        webapp/com 폴더로
+        webapp/img 폴더로
+        다른소스를 접근할 때,
+        String path = request.getContextPath()
+        <%=path%> : 모든 프로그램에서 webapp하위에 접근할 수 있는 경로로 지정하기에
+        <a href="<%=path%>/img/img01.jpg">
+        <link href="<%=path%>/com/com01.css">
+        <script src="<%=path%>/com/com.js">
 
 2. link 처리에 대한 내용
     1) 절대주소/상대주소로 페이지 이동하기
@@ -165,5 +180,33 @@
     사용할 서버에 실행 - 연결된 ip로 svn, 웹서버 DB 서버 처리가 가능하다.
     
 2) svn 설정
+    서버 : visual svn server 구글에 검색해서 설치 (server가 있는 pc)
+    https://ip/svn/저장소
+    https://desktop-bpp6jf4/svn/webprj01 prj_user01/1111
+
 3) 웹서버 설정
 4) DB서버설정
+
+# 웹화면에서 Data처리하기
+1. 개발 순서
+    1) 어떤 기능과 화면을 가지고 처리를 할 건지를 요구사항 정의를 통해 정의하낟.
+    2) 화면 설계
+    3) 데이터 처리 sql 활용
+        - 테이블 구성
+        - sql 작성
+    4) DAO 처리
+        - 사용하게될 sql의 결과 처리할 VO클래스 만들기
+        - DAO 생성
+            - 공통기능 메서드 연결객체
+            - 기능 메서드 - 처리할 기능
+                - return, 매개변수 처리
+                - 연결/대화객체/결과객체를 만들고, 예외 처리를 하고 이를 바탕으로 처리를 한다.
+    5) 화면 구성(jsp)
+        - 기본 html/css 구성
+        - js 필요 내용 구성 (DOM객체 활용)
+        - java 프로그램 처리
+            - import
+            - 스크립트 처리하기
+                - 스크립트릿, 익스프레션 구성
+                - 조건/반복문을 활용해서 해당 내용 처리
+        - 기능 테스트 확인
