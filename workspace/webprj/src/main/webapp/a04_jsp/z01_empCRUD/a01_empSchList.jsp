@@ -3,6 +3,11 @@
     import="webprj.dao.A05_PreDAO"
     import="webprj.z01_vo.Emp"
     %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+</head>
 <style>
 input[type=text], select {
   width: 100%;
@@ -13,9 +18,18 @@ input[type=text], select {
   border-radius: 4px;
   box-sizing: border-box;
 }
-
+#regBtn{
+  width: 50%;
+  background-color: blue;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
 input[type=submit] {
-  width: 100%;
+  width: 50%;
   background-color: #4CAF50;
   color: white;
   padding: 14px 20px;
@@ -53,8 +67,44 @@ div {
   color: white;
 }
 </style>
+<script>
+  function goInsertPage(){
+      location.href="a02_empInsert.jsp";
+  }
+</script>
+<%
+String ename = request.getParameter("ename");
+String job = request.getParameter("job");
+if(ename==null) ename = "";
+if(job==null) job = "";
+%>
+<%-- 
+# 사원 정보 리스트/등록/수정/삭제 처리하기
+1. 기본 화면 구성
+    1) 테이블
+    2) form 구성
+    3) css 적용
+2. DAO 호출
+3. 기본 출력
+4. 요청값에 의한 검색 처리
+--%>
+<body>
+  <h2>사원 정보</h2>
+  <form method="post">
+      사원명:<input type="text" name="ename" value="<%=ename%>"/><br>
+      직책명:<input type="text" name="job" value="<%=job%>"/><br>
+      <input type="button" id=regBtn value="등록" onclick="goInsertPage()"/>
+      <input type="submit" value="검색"/>
+  </form>
 <%
 A05_PreDAO dao = new A05_PreDAO();
+/*
+# 요청값에 의한 검색 처리
+1. form에 있는 요청값을 받기
+2. 조건문에 의해 null에 대한 처리
+3. DAO에 VO 객체 넘겨주기
+*/
+
 /*
 for(Emp e:dao.getEmpList2(new Emp("",""))){
     e.getEmpno();
@@ -66,34 +116,10 @@ for(Emp e:dao.getEmpList2(new Emp("",""))){
 }
 */
 %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<%-- 
-# 사원 정보 리스트/등록/수정/삭제 처리하기
-1. 기본 화면 구성
-    1) 테이블
-    2) form 구성
-    3) css 적용
-2. DAO 호출
-3. 기본 출력
-4. 요청값에 의한 검색 처리
---%>
-
-<body>
-    <h2>사원 정보</h2>
-    <form method="post">
-        사원명:<input type="text" name="ename" value=""/><br>
-        직책명:<input type="text" name="job" value=""/><br>
-        <input type="submit" value="검색"/>
-    </form>
     <table id="customers">
         <tr><th>사원번호</th><th>사원명</th><th>직책</th><th>급여</th><th>부서번호</th></tr>
-        <% for(Emp e:dao.getEmpList2(new Emp("",""))){%>
-        <tr><th>e.getEmpno()</th><th>e.getEname()</th><th>e.getJob()</th><th>e.getSal()</th><th>e.getDeptno()</th></tr>
+        <% for(Emp e:dao.getEmpList2("","")){%>
+        <tr><td><%=e.getEmpno()%></td><td><%=e.getEname()%></td><td><%=e.getJob()%></td><td><%=e.getSal()%></td><td><%=e.getDeptno()%></td></tr>
         <%}%>
     </table>
 </body>

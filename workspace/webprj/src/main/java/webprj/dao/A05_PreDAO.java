@@ -6,8 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import webprj.z01_vo.Dept;
-import webprj.z01_vo.Emp;
+import webprj.z01_vo.*;
 // DAO(database access object)
 // 전화기와 동일 : 연결/대화/결과를 통해 받은 데이터/종료 - 자원해제, 예외처리
 public class A05_PreDAO {
@@ -111,12 +110,68 @@ public class A05_PreDAO {
 						+ "from dept \n"
 						+ "where dname like '%'|| ? ||'%' \n"
 						+ "and loc like '%'|| ? ||'%'";
-
+			System.out.println(sql);
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, dname);
 			pstmt.setString(2, loc);
 			rs = pstmt.executeQuery();
 			rs.next();
+			while(rs.next()) {
+				deptList.add(new Dept(
+								rs.getInt("deptno"),
+								rs.getString("dname"),
+								rs.getString("loc") )
+								);
+			}
+			rs.close();
+			pstmt.close();
+			con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println("일반 예외 : " + e.getMessage());
+		} finally {
+			if(rs!=null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(pstmt!=null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(con!=null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		return deptList;
+	}
+	public ArrayList<Dept> getDeptList2(String dname, String loc) {
+		ArrayList<Dept> deptList = new ArrayList<Dept>();
+		try {
+			setConn();
+			String sql = "select * \n"
+						+ "from dept011 \n"
+						+ "where dname like '%'|| ? ||'%' \n"
+						+ "and loc like '%'|| ? ||'%'";
+			System.out.println(sql);
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, dname);
+			pstmt.setString(2, loc);
+			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				deptList.add(new Dept(
 								rs.getInt("deptno"),
@@ -340,10 +395,17 @@ select * from emp where job = 'CLERK';
 				"FROM emp\n" +
 				"WHERE ename LIKE '%'|| ? ||'%'\n "
 				+ "AND job LIKE '%'|| ? || '%' ";
+			// 1. 에러대비 : sql
+			System.out.println(sql);
 			pstmt = con.prepareStatement(sql);
+			// 2. ?와 mapping 되는 데이터 갯수, type(유형), null
 			pstmt.setString(1, map.get("ename"));
 			pstmt.setString(2, map.get("job"));
 			rs = pstmt.executeQuery();
+			// 1. 에러대비 : sql System.out.println(sql) 반드시
+			// 2. ?와 mapping 되는 데이터 갯수, type(유형), null
+			// 3. rs.getInt("empno") : select은 선택 컬럼명과 타입
+
 			// 하나의 데이터 결과 처리이기에 바로 처리
 			// [핵심코드]
 			rs.next();
@@ -397,25 +459,32 @@ select * from emp where job = 'CLERK';
 		return empList;
 	}
 
-	public ArrayList<Emp> getEmpList2(Map<String, String> map) {
+	public ArrayList<Emp> getEmpList2(String ename, String job) {
 		ArrayList<Emp> empList = new ArrayList<Emp>();
 		try {
 			setConn();
-			String sql = "SELECT empno, ename, job, mgr, sal, deptno\n" +
-				"FROM emp\n" +
+			String sql = "SELECT *\n" +
+				"FROM emp011\n" +
 				"WHERE ename LIKE '%'|| ? ||'%'\n "
 				+ "AND job LIKE '%'|| ? || '%' ";
+		System.out.println(sql);
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, map.get("ename"));
-			pstmt.setString(2, map.get("job"));
+			pstmt.setString(1, ename);
+			pstmt.setString(2, job);
 			rs = pstmt.executeQuery();
 			// 하나의 데이터 결과 처리이기에 바로 처리
 			// [핵심코드]
 			rs.next();
 			while(rs.next()) {
 				empList.add(new Emp(
+							rs.getInt("empno"),
 							rs.getString("ename"),
-							rs.getString("job") )
+							rs.getString("job"),
+							rs.getInt("mgr"),
+							rs.getDate("hiredate"),
+							rs.getDouble("sal"),
+							rs.getDouble("comm"),
+							rs.getInt("deptno"))
 				);
 			}
 			// 자원해제
@@ -592,6 +661,104 @@ select * from emp where job = 'CLERK';
 			}
 		}
 	}
+
+	public void insertDept(Dept ins) {
+		try {
+			setConn();
+			con.setAutoCommit(false);
+			String sql = "INSERT INTO DEPT011 values(?,?,?) ";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(0, ins.getDeptno());
+			pstmt.setString(1, ins.getDname());
+			pstmt.setString(2, ins.getLoc());
+			pstmt.executeUpdate();
+			con.commit();
+			pstmt.close();
+			con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("DB 에러 : " + e.getMessage());
+			// commit 전에 예외가 발생하면 rollback 처리
+		} catch (Exception e) {
+			System.out.println("일반 예외 : " + e.getMessage());
+		} finally {
+			if(pstmt!=null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(con!=null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	public ArrayList<Member011> getMemList(String id, String pass) {
+		ArrayList<Member011> memList = new ArrayList<Member011>();
+		try {
+			setConn();
+			String sql = "select * \n"
+						+ "from member011 \n"
+						+ "where id like '%'|| ? ||'%' \n"
+						+ "and pass like '%'|| ? ||'%'";
+			System.out.println(sql);
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, pass);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				memList.add(new Member011(
+								rs.getString("id"),
+								rs.getString("pass"),
+								rs.getString("name"), 
+								rs.getInt("point"),
+								rs.getString("auth") )
+								);
+			}
+			rs.close();
+			pstmt.close();
+			con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println("일반 예외 : " + e.getMessage());
+		} finally {
+			if(rs!=null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(pstmt!=null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(con!=null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		return memList;
+	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		A05_PreDAO dao = new A05_PreDAO();
@@ -599,6 +766,12 @@ select * from emp where job = 'CLERK';
 		public Emp()
 		*/
 		// dao.getDeptList("", "");
+		// ArrayList<Dept> deptpList = dao.getDeptList2("", "");
+		// for(Dept d:deptpList) {
+		// 	System.out.print(d.getDname() + "\t");
+		// 	System.out.print(d.getLoc() + "\t");
+		// 	System.out.print(d.getDeptno() + "\n");
+		// }
 //		dao.insertEmp(new Emp(1003, "이영철", "과장", 7780, "2022-06-01", 3500, 100, 10));
 //		dao.showEmp();
 //		dao.updateEmp(new Emp(1003, "오영철", "과장", 7780, "2022-07-01", 4500, 50, 30));
@@ -630,6 +803,14 @@ select * from emp where job = 'CLERK';
 			System.out.print(e.getDeptno() + "\n");
 		}
 		*/
+		ArrayList<Member011> MemList = dao.getMemList("", "");
+		for(Member011 m:MemList) {
+			System.out.print(m.getId() + "\t");
+			System.out.print(m.getPass() + "\t");
+			System.out.print(m.getName() + "\t");
+			System.out.print(m.getPoint() + "\t");
+			System.out.print(m.getAuth() + "\n");
+		}
 	}
 
 }
