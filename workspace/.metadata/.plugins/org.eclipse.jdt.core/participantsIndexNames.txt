@@ -7,6 +7,8 @@ INDEX VERSION 1.131
 /javaexp/src/main/java
 /Users/kideokkim/a01_javaexp/workspace/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/2691026311.index
 /webprj/src/main/java
+/Users/kideokkim/a01_javaexp/workspace/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/1330644442.index
+/webprj/src/main/java
 /Users/kideokkim/a01_javaexp/workspace/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/2356568279.index
 /webprj/src/main/java
 /Users/kideokkim/a01_javaexp/workspace/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/2876230449.index

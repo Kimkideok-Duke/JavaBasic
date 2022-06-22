@@ -49,7 +49,23 @@ String path = request.getContextPath();
   log("deptno:"+deptno);
   log("dname:"+dname);
   log("loc:"+loc);
+
+  String isIns = "N";
+  if(deptnoS!=null && !deptnoS.trim().equals("")){
+    A05_PreDAO dao = new A05_PreDAO();
+    dao.insertDept(new Dept(deptno, dname, loc));
+    isIns = "Y";
+  }
 %>
+<script>
+  var isIns = "<%=isIns%>";
+  if(isIns == "Y"){
+    if(confirm("등록성공!!\n조회화면으로 이동하시겠습니까?")){
+      location.href="a01_deptSchList.jsp"
+    }
+  }
+</script>
+
 <h2>부서등록</h2>
 <div class="container">
   <form>

@@ -116,11 +116,19 @@ for(Emp e:dao.getEmpList2(new Emp("",""))){
 }
 */
 %>
-    <table id="customers">
-        <tr><th>사원번호</th><th>사원명</th><th>직책</th><th>급여</th><th>부서번호</th></tr>
-        <% for(Emp e:dao.getEmpList2("","")){%>
-        <tr><td><%=e.getEmpno()%></td><td><%=e.getEname()%></td><td><%=e.getJob()%></td><td><%=e.getSal()%></td><td><%=e.getDeptno()%></td></tr>
-        <%}%>
-    </table>
+  <script>
+    function goDetail(empno){
+      alert(empno+"상세화면 이동");
+      location.href="a03_empDetail.jsp?empno="+empno;
+    }
+  </script>
+  <table id="customers">
+      <tr><th>사원번호</th><th>사원명</th><th>직책</th><th>급여</th><th>부서번호</th></tr>
+      <% for(Emp e:dao.getEmpList2(new Emp("",""))){%>
+      <tr ondblclick="goDetail(<%=e.getEmpno()%>)">
+        <td><%=e.getEmpno()%></td><td><%=e.getEname()%></td><td><%=e.getJob()%></td><td><%=e.getSal()%></td><td><%=e.getDeptno()%></td>
+      </tr>
+      <%}%>
+  </table>
 </body>
 </html>

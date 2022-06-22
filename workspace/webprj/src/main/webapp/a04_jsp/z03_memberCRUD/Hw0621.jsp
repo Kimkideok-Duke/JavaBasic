@@ -94,6 +94,11 @@ String path = request.getContextPath();
 			}
 		}
 		return memList;
+
+    js유효성 처리
+    - 필수항목 : 아이디/패스워드
+    - 패스워드와 패스워드 확인 동일
+    - 포인트는 숫자형
 	}--%>
 
 <!DOCTYPE html>
@@ -109,17 +114,70 @@ String path = request.getContextPath();
 	/*
 	
 	*/
+  function insertMem(){
+    var idObj = document.querySelector("#id")
+    var passObj = document.querySelector("[name=pass]")
+    var passCfmObj = document.querySelector("#passCfm")
+    var pointObj = document.querySelector("#point")
+    if(confirm("회원정보를 등록하시겠습니까?")){
+      if(idObj.value.trim()==""){
+        alert("아이디를 입력하세요");
+        idObj.focus();
+        return;
+      }
+      if(passObj.value.trim()==""){
+        alert("비밀번호를 입력하세요");
+        passObj.focus();
+        return;
+      }
+      if(passObj.value!=passCfmObj){
+        alert("비밀번호와 비밀번호 확인이 동일하지 않습니다.");
+        passObj.value = "";
+        passCfmObj.value = "";
+        passObj.focus();
+        return;
+      }
+      // isNaN : 숫자형이 아니면 true
+      // pointObj.value 공백이면
+      // isNaN(pointObj.value)를 통해서 0으로 처리되기에 
+      // 숫자형 check에 공백 check도 포함되어야 한다.
+      if(pointObj.value.trim()=="" || isNaN(pointObj.value)){
+        alert("포인트에 숫자를 입력하세요");
+        pointObj.focus();
+        return;
+      }
+      document.querySelector("form").submit();
+    }
+  }
 </script>
 </head>
 <body>
 <%
 	String id = request.getParameter("id");
 	String pass = request.getParameter("pass");
+	String name = request.getParameter("name");
+	String pointS = request.getParameter("point");
+  int point = 0;
+	String auth = request.getParameter("auth");
+  // 하나의 페이지이지만(물리적)
+  // 프로그래밍(논리적) 2개의 페이지 : action 속성이 다른 페이지를 호출하지 않을 때
+  // 1번째 초기에 로딩한 페이지
+  // 2번째 데이터를 입력한 후에 로딩된 페이지
   if(id==null) id = "";
   if(pass==null) pass = "";
+  if(name==null) name = "";
+  if(pointS!=null) point = Integer.parseInt(pointS);
+  if(auth==null) auth = "";
+  // DAO에 등록 객체로 생성
+  if(id!=null && !id.trim().equals("")){
+    // log("");
+    System.out.println("등록처리:" + id);
+    // 초기 화면이 아닌 데이터가 입력이 있을 때 : 데이터 있어야지 등록 처리
+    new Member011(id, pass, name, point, auth);
+  }
 %>
 
-
+<h2>회원등록</h2>
 <div class="container">
   <form>
   <div class="row">
@@ -135,11 +193,43 @@ String path = request.getContextPath();
       <label for="pass">비밀번호</label>
     </div>
     <div class="col-75">
-      <input type="password" id="pass" name="id" placeholder="pass 입력" value="">
+      <input type="password" id="pass" name="pass" placeholder="비밀번호 입력" value="">
     </div>
   </div>
   <div class="row">
-    <input type="submit" value="검색">
+    <div class="col-25">
+      <label for="passCfm">비밀번호 확인</label>
+    </div>
+    <div class="col-75">
+      <input type="text" id="passCfm" name="passCfm" placeholder="비밀번호확인 입력" value="">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-25">
+      <label for="name">이름</label>
+    </div>
+    <div class="col-75">
+      <input type="text" id="name" name="name" placeholder="이름 입력" value="">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-25">
+      <label for="point">포인트</label>
+    </div>
+    <div class="col-75">
+      <input type="text" id="point" name="point" placeholder="포인트 입력" value="">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-25">
+      <label for="auth">권한</label>
+    </div>
+    <div class="col-75">
+      <input type="text" id="auth" name="auth" placeholder="권한 입력" value="">
+    </div>
+  </div>
+  <div class="row">
+    <input type="button" onclick="insertMem()" value="등록">
   </div>
   </form>
 </div>
@@ -150,7 +240,7 @@ A05_PreDAO dao = new A05_PreDAO();
 
 <table>
         <tr><th>아이디</th><th>비밀번호</th><th>이름</th><th>포인트</th><th>권한</th></tr>
-        <% for(Member011 m:dao.getMemList("", "")){%>
+        <% for(Member011 m:dao.getMemList(new Member011(id,pass))){%>
         <tr><td><%=m.getId()%></td><td><%=m.getPass()%></td><td><%=m.getName()%></td><td><%=m.getPoint()%></td><td><%=m.getAuth()%></td></tr>
         <%}%>
 </table>

@@ -87,3 +87,86 @@ log("sal:"+sal);
 log("comm:"+comm);
 log("deptno:"+deptno);
 %>
+
+5. 등록처리 DAO 호출 및 완료
+    1) sql ==> VO ==> 기능메서드
+    2) jsp
+        요청값을 기능메서드에 매개변수 Emp 객체로 넘기기 위해서
+        new Emp(요청값..... )
+        순서와 타입을 정확하게 확인
+        - 조건 : 데이터가 입력되었을 때,
+            String isIns = "N";
+            if(empnoS!=null && empnoS.trim()equals("")){
+                dao.insertEmp(new Emp(#####));
+                isIns = "Y";
+            }
+        - confirm 등록 되었음을 표시,
+            계속 등록할지? 등록된 전체 조회화면으로 갈지를 설정
+            자바 ==> javascript
+            var isIns = "<%=isIns%>";
+            if(isIns=="Y"){
+                // confirm() : true/false
+                if(confirm("등록 성공\n조회 화면으로 이동하시겠습니까?")){
+                    location.href="a01_empSchList.jsp";
+                }
+            }
+# 사원상세화면(수정/삭제할 수 있는 화면)
+1. 업무 처리 순서
+    row단위로 클릭시, row에 있는 key empno를 기준으로 데이터를 검색해서
+    상세화면이 로딩되어 저장된 데이터를 출력
+    데이터를 변경 후, 수정 버튼 클릭시, 수정이 처리되고,
+    삭제버튼 클릭시, row단위로 삭제가 되고 화면이동이 처리된다.
+2. 상세화면 로딩
+    1) dao 기능 메서든 만들기
+        sql : select * from emp where empno = @@@
+        Emp 객체를 가져온다.
+    2) 상세화면 전환 사용 인터페이스 정의
+        테이블 리스트에서 특정한 row를 더블클릭시, key를 가져와서
+        상세화면으로 이동 처리
+        tr onclick="goDetail(1000)"
+        function goDetail(empno){
+            location.href="a03_empDetail.jsp?empno="+empno;
+        }
+        - 상세화면 구성 : 요청값을 key를 받을 수 있게..
+    3) a03_empDetail.jsp(상세화면)
+        String empnos = request.getParameter("empno");
+        int empno = 0;
+        if(empnos!=null&&!empnos.trim().equals("")){
+            empno = Integer.parseInt(empno);
+        }
+    4) 상세화면 form 화면 구성
+    5) DAO에서 만든 기능 메서드를 통해서 받은 Emp객체를 getXXX()
+        value="<%emp.getEmpno()%>"
+3. 수정 처리
+    1) 수정 처리하는 dao 기능 메서드
+    2) 수정 버튼 클릭시, form는 내용 전송 및 요청값 받기.
+        수정 버튼 ==> 수정 DAO 처리
+        삭제 버튼 ==> 삭제 DAO 처리
+        <input type="hidden" name="proc"/>
+        var proc = document.querySelector("[name=proc]");
+        procObj.value="upt";
+        procObj.value="del";
+        ?proc=upt
+        ?proc=del
+        String proc = request.getParameter("proc");
+        if(proc.equals("upt")){
+            // 수정 처리 dao
+        }
+        if(proc.equals("del")){
+            // 삭제 처리 dao
+        }
+    3) 요청값 처리하기
+        요청값 ==> Emp upt = new Emp(....)
+    4) 요청값이 proc가 있고 upt일 때
+        dao.uptEmp(upt);
+        다시 수정 후 조회된 데이터 가져오기.
+        emp = dao.getEmpDetail(empno);
+    5) js
+        var proc = "<%=proc%>";
+        if(proc!=""){
+            if(proc=="upt"){
+                if(confirm("수정되었습니다\n리스트화면이동?")){
+                    location.href="";
+                }
+            }
+        }

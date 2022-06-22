@@ -465,7 +465,7 @@ select * from emp where job = 'CLERK';
 				"FROM emp011\n" +
 				"WHERE ename LIKE '%'|| ? ||'%'\n "
 				+ "AND job LIKE '%'|| ? || '%' ";
-		System.out.println(sql);
+			System.out.println(sql);
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, sch.getEname());
 			pstmt.setString(2, sch.getJob());
@@ -659,15 +659,76 @@ select * from emp where job = 'CLERK';
 		}
 	}
 
+	public Emp getEmpDetail(int empno) {
+		Emp emp = null;
+		try {
+			setConn();
+			String sql = "SELECT empno, ename, job, mgr,"
+					+ "to_char(hiredate, 'YYYY-MM-DD') hiredate_s,"
+					+ "sal, comm, deptno \n"
+					+ "FROM EMP011\n"
+					+ "WHERE empno = ?";
+			System.out.println(sql);
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, empno);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				emp = new Emp(
+							rs.getInt("empno"),
+							rs.getString("ename"),
+							rs.getString("job"),
+							rs.getInt("mgr"),
+							rs.getString("hiredate_s"),
+							rs.getDouble("sal"),
+							rs.getDouble("comm"),
+							rs.getInt("deptno"));
+
+
+							System.out.println(rs.getDouble("sal")); 
+							System.out.println(rs.getDouble("comm")); 
+							System.out.println(rs.getInt("deptno")); 
+			}
+			
+			// 자원해제
+			rs.close();
+			pstmt.close();
+			con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("DB 에러 : " + e.getMessage());
+			// commit 전에 예외가 발생하면 rollback 처리
+		} catch (Exception e) {
+			System.out.println("일반 예외 : " + e.getMessage());
+		} finally {
+			if(pstmt!=null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(con!=null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		return emp;
+	}
+
 	public void insertDept(Dept ins) {
 		try {
 			setConn();
 			con.setAutoCommit(false);
 			String sql = "INSERT INTO DEPT011 values(?,?,?) ";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(0, ins.getDeptno());
-			pstmt.setString(1, ins.getDname());
-			pstmt.setString(2, ins.getLoc());
+			pstmt.setInt(1, ins.getDeptno());
+			pstmt.setString(2, ins.getDname());
+			pstmt.setString(3, ins.getLoc());
 			pstmt.executeUpdate();
 			con.commit();
 			pstmt.close();
@@ -698,7 +759,56 @@ select * from emp where job = 'CLERK';
 		}
 	}
 
-	public ArrayList<Member011> getMemList(String id, String pass) {
+	public Dept getDeptDetail(int deptno) {
+		Dept dept = null;
+		try {
+			setConn();
+			String sql = "SELECT deptno, dname, loc\n"
+					+ "FROM dept011\n"
+					+ "WHERE deptno = ?";
+			System.out.println(sql);
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, deptno);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				dept = new Dept(
+							rs.getInt("deptno"),
+							rs.getString("dname"),
+							rs.getString("loc")
+						);
+			}
+			// 자원해제
+			rs.close();
+			pstmt.close();
+			con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("DB 에러 : " + e.getMessage());
+			// commit 전에 예외가 발생하면 rollback 처리
+		} catch (Exception e) {
+			System.out.println("일반 예외 : " + e.getMessage());
+		} finally {
+			if(pstmt!=null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(con!=null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		return dept;
+	}
+
+	public ArrayList<Member011> getMemList(Member011 sch) {
 		ArrayList<Member011> memList = new ArrayList<Member011>();
 		try {
 			setConn();
@@ -708,8 +818,8 @@ select * from emp where job = 'CLERK';
 						+ "and pass like '%'|| ? ||'%'";
 			System.out.println(sql);
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, id);
-			pstmt.setString(2, pass);
+			pstmt.setString(1, sch.getId());
+			pstmt.setString(2, sch.getPass());
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				memList.add(new Member011(
@@ -756,6 +866,48 @@ select * from emp where job = 'CLERK';
 		}
 		return memList;
 	}
+
+	public void insertMember(Member011 ins) {
+		try {
+			setConn();
+			con.setAutoCommit(false);
+			String sql = "INSERT INTO Member011 values(?,?,?,?,?) ";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, ins.getId());
+			pstmt.setString(2, ins.getPass());
+			pstmt.setString(3, ins.getName());
+			pstmt.setInt(4, ins.getPoint());
+			pstmt.setString(5, ins.getAuth());
+			pstmt.executeUpdate();
+			con.commit();
+			pstmt.close();
+			con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("DB 에러 : " + e.getMessage());
+			// commit 전에 예외가 발생하면 rollback 처리
+		} catch (Exception e) {
+			System.out.println("일반 예외 : " + e.getMessage());
+		} finally {
+			if(pstmt!=null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(con!=null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		A05_PreDAO dao = new A05_PreDAO();
@@ -800,14 +952,14 @@ select * from emp where job = 'CLERK';
 			System.out.print(e.getDeptno() + "\n");
 		}
 		*/
-		ArrayList<Member011> MemList = dao.getMemList("", "");
-		for(Member011 m:MemList) {
-			System.out.print(m.getId() + "\t");
-			System.out.print(m.getPass() + "\t");
-			System.out.print(m.getName() + "\t");
-			System.out.print(m.getPoint() + "\t");
-			System.out.print(m.getAuth() + "\n");
-		}
+		// ArrayList<Member011> MemList = dao.getMemList("", "");
+		// for(Member011 m:MemList) {
+		// 	System.out.print(m.getId() + "\t");
+		// 	System.out.print(m.getPass() + "\t");
+		// 	System.out.print(m.getName() + "\t");
+		// 	System.out.print(m.getPoint() + "\t");
+		// 	System.out.print(m.getAuth() + "\n");
+		// }
 	}
 
 }

@@ -20,7 +20,7 @@ input[type=text], select {
   box-sizing: border-box;
 }
 #regBtn{
-  width: 50%;
+  width: 100%;
   background-color: blue;
   color: white;
   padding: 14px 20px;
@@ -107,11 +107,18 @@ String loc = request.getParameter("loc"); if(loc==null) loc = "";
 <%
 A05_PreDAO dao = new A05_PreDAO();
 %>
-
+<script>
+  function goDetail(deptno){
+    alert(deptno+"상세화면 이동");
+    location.href="a03_deptDetail.jsp?deptno="+deptno;
+  }
+</script>
 <table id="customers">
         <tr><th>부서번호</th><th>부서명</th><th>부서위치</th></tr>
-        <% for(Dept d:dao.getDeptList2(new Dept("",""))){%>
-        <tr><td><%=d.getDeptno()%></td><td><%=d.getDname()%></td><td><%=d.getLoc()%></td></tr>
+        <% for(Dept d:dao.getDeptList2(new Dept(dname,loc))){%>
+        <tr ondblclick="goDetail(<%=d.getDeptno()%>)">
+          <td><%=d.getDeptno()%></td><td><%=d.getDname()%></td><td><%=d.getLoc()%></td>
+        </tr>
         <%}%>
 </table>
 </body>

@@ -22,6 +22,7 @@ String path = request.getContextPath();
     if(confirm("사원 정보를 등록하시겠습니까?")){
       var empnoObj = document.querySelector("#empno");
       var enameObj = document.querySelector("#ename");
+      var mgrObj = document.querySelector("#mgr");
       var hiredateSObj = document.querySelector("#hiredateS");
       if(empnoObj.value==""){
           alert("사원번호를 입력하세요");
@@ -32,6 +33,11 @@ String path = request.getContextPath();
           alert("사원명을 입력하세요");
           enameObj.focus();
           return;
+      }
+      if(mgrObj.value.trim()=="" || isNaN(mgrObj.value)){
+        alert("관리자번호를 숫자로 입력하세요");
+        mgrSObj.focus();
+        return;
       }
       if(hiredateSObj.value==""){
           alert("입사일을 입력하세요");
@@ -76,9 +82,35 @@ String path = request.getContextPath();
   log("sal:"+sal);
   log("comm:"+comm);
   log("deptno:"+deptno);
+  // 등록 처리를 위한 조건
+  String isIns = "N";
+  if(empnoS!=null && !empnoS.trim().equals("")){
+    // 등록할 Emp() 생성..
+    // Emp(int empno, String ename, String job, int mgr, 
+    // String hiredate_s, double sal, double comm, int deptno)
+    A05_PreDAO dao = new A05_PreDAO();
+    dao.insertEmp(new Emp(empno, ename, job, mgr, hiredateS, sal, comm, deptno));
+    isIns = "Y";
+  }
 %>
+<script>
+  var isIns = "<%=isIns%>";
+  if(isIns == "Y"){
+    if(confirm("등록성공!!\n조회화면으로 이동하시겠습니까?")){
+      location.href="a01_empSchList.jsp"
+    }
+  }
+</script>
 <div class="container">
   <form>
+  <div class="row">
+    <div class="col-25">
+      <label for="empno">사원번호</label>
+    </div>
+    <div class="col-75">
+      <input type="text" id="empno" name="empno" placeholder="사원번호 입력..">
+    </div>
+  </div>
   <div class="row">
     <div class="col-25">
       <label for="ename">사원명</label>
