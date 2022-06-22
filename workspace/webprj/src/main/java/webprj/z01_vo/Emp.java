@@ -16,10 +16,12 @@ public class Emp {
 	public Emp() {
 		// TODO Auto-generated constructor stub
 	}
+	// where 조건문에 검색하기 위한 생성
 	public Emp(String ename, String job) {
 		this.ename = ename;
 		this.job = job;
 	}
+	// insert 구문에 데이터를 입력하는 객체 생성
 	public Emp(int empno, String ename, String job, int mgr, String hiredate_s, double sal, double comm, int deptno) {
 		this.empno = empno;
 		this.ename = ename;
@@ -30,6 +32,7 @@ public class Emp {
 		this.comm = comm;
 		this.deptno = deptno;
 	}
+	// select의 데이터를 가져오기 위한 생성
 	public Emp(int empno, String ename, String job, int mgr, Date hiredate, double sal, double comm, int deptno) {
 		super();
 		this.empno = empno;

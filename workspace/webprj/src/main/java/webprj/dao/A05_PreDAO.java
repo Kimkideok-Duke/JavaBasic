@@ -115,7 +115,6 @@ public class A05_PreDAO {
 			pstmt.setString(1, dname);
 			pstmt.setString(2, loc);
 			rs = pstmt.executeQuery();
-			rs.next();
 			while(rs.next()) {
 				deptList.add(new Dept(
 								rs.getInt("deptno"),
@@ -159,7 +158,7 @@ public class A05_PreDAO {
 		}
 		return deptList;
 	}
-	public ArrayList<Dept> getDeptList2(String dname, String loc) {
+	public ArrayList<Dept> getDeptList2(Dept sch) {
 		ArrayList<Dept> deptList = new ArrayList<Dept>();
 		try {
 			setConn();
@@ -169,8 +168,8 @@ public class A05_PreDAO {
 						+ "and loc like '%'|| ? ||'%'";
 			System.out.println(sql);
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, dname);
-			pstmt.setString(2, loc);
+			pstmt.setString(1, sch.getDname());
+			pstmt.setString(2, sch.getLoc());
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				deptList.add(new Dept(
@@ -408,7 +407,6 @@ select * from emp where job = 'CLERK';
 
 			// 하나의 데이터 결과 처리이기에 바로 처리
 			// [핵심코드]
-			rs.next();
 			while(rs.next()) {
 				empList.add(new Emp(
 							rs.getInt("empno"),
@@ -459,7 +457,7 @@ select * from emp where job = 'CLERK';
 		return empList;
 	}
 
-	public ArrayList<Emp> getEmpList2(String ename, String job) {
+	public ArrayList<Emp> getEmpList2(Emp sch) {
 		ArrayList<Emp> empList = new ArrayList<Emp>();
 		try {
 			setConn();
@@ -469,12 +467,11 @@ select * from emp where job = 'CLERK';
 				+ "AND job LIKE '%'|| ? || '%' ";
 		System.out.println(sql);
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, ename);
-			pstmt.setString(2, job);
+			pstmt.setString(1, sch.getEname());
+			pstmt.setString(2, sch.getJob());
 			rs = pstmt.executeQuery();
 			// 하나의 데이터 결과 처리이기에 바로 처리
 			// [핵심코드]
-			rs.next();
 			while(rs.next()) {
 				empList.add(new Emp(
 							rs.getInt("empno"),
@@ -772,7 +769,7 @@ select * from emp where job = 'CLERK';
 		// 	System.out.print(d.getLoc() + "\t");
 		// 	System.out.print(d.getDeptno() + "\n");
 		// }
-//		dao.insertEmp(new Emp(1003, "이영철", "과장", 7780, "2022-06-01", 3500, 100, 10));
+		dao.insertEmp(new Emp(2000, "신영철", "부장", 2022, "2022-06-20", 7000, 100, 10));
 //		dao.showEmp();
 //		dao.updateEmp(new Emp(1003, "오영철", "과장", 7780, "2022-07-01", 4500, 50, 30));
 //		dao.deleteEmp(7499);

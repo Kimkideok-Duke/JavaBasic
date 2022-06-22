@@ -104,22 +104,13 @@ String loc = request.getParameter("loc"); if(loc==null) loc = "";
   </div>
   </form>
 </div>
-
-<%-- <h2>사원 정보</h2>
-<form method="post">
-    부서명:<input type="text" name="dname" value="<%=dname%>"/><br>
-    부서위치:<input type="text" name="loc" value="<%=loc%>"/><br>
-    <input type="button" id=regBtn value="등록" onclick="goInsertPage()"/>
-    <input type="submit" value="검색"/>
-</form> --%>
-
 <%
 A05_PreDAO dao = new A05_PreDAO();
 %>
 
 <table id="customers">
         <tr><th>부서번호</th><th>부서명</th><th>부서위치</th></tr>
-        <% for(Dept d:dao.getDeptList2(dname, loc)){%>
+        <% for(Dept d:dao.getDeptList2(new Dept("",""))){%>
         <tr><td><%=d.getDeptno()%></td><td><%=d.getDname()%></td><td><%=d.getLoc()%></td></tr>
         <%}%>
 </table>
