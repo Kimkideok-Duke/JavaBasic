@@ -908,6 +908,56 @@ select * from emp where job = 'CLERK';
 		}
 	}
 
+	public Product001 getProductDetail(int pno) {
+		Product001 pd = null;
+		try {
+			setConn();
+			String sql = "SELECT *\n"
+					+ "FROM product001\n"
+					+ "WHERE pno = ?";
+			System.out.println(sql);
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, pno);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				pd = new Product001(
+							rs.getInt("pno"),
+							rs.getString("pname"),
+							rs.getInt("price"),
+							rs.getInt("rcnt")
+						);
+			}
+			// 자원해제
+			rs.close();
+			pstmt.close();
+			con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("DB 에러 : " + e.getMessage());
+			// commit 전에 예외가 발생하면 rollback 처리
+		} catch (Exception e) {
+			System.out.println("일반 예외 : " + e.getMessage());
+		} finally {
+			if(pstmt!=null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(con!=null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		return pd;
+	}
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		A05_PreDAO dao = new A05_PreDAO();

@@ -13,7 +13,7 @@
                 계속 등록
                 list 화면으로 이동 처리
 2. 메인화면에 등록화면 이동처리js
-    0) a02_empInsert.jsp 페이 타이틀(사원등록)
+    0) a02_empInsert.jsp 페이지 타이틀(사원등록)
     1) 기능함수 선언
         function goInsertPage(){
             location.href="a02_empInsert.jsp";
