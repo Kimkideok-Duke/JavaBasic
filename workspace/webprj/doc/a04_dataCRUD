@@ -170,3 +170,136 @@ log("deptno:"+deptno);
                 }
             }
         }
+
+4. 삭제 처리
+    1) dao
+        delete * from emp01 where empno=?
+    2) 삭제버튼 클릭시
+        function delEmp(){
+            var procObj = document.querySelector("[name=proc]");
+            procObj.value="del";
+        }
+    3) 요청값 처리
+        if(proc.equals("del")){
+            dao.deleEmp(empno);
+        }
+    4) script 단처리
+        if(proc=="del"){
+            alert("삭제되었습니다\n조회화면으로 이동하겠습니다.");
+            location.href="a01_empSchList.jsp"
+        }
+5. 등록처리 요청값 호출
+
+# 사원정보리스트 등록 수정 삭제
+1. 기초 개념 이해
+    1) 서버단 프로그램, 클라이언트 프로그램의 역할과 진행 순서에 대한 
+            브라우저 ==> 서버
+        - 클라이언트 프로그램 : HTML태그, CSS, JS
+            화면을 구성하고, 동적인 이벤트를 처리할 때 사용된다.
+        - 서버단 프로그램 : jsp : html안에 여러 로직으로 java코드가 들어가 있고,
+            java 코드에서 DB연결된 코드를 전달하여 최종 html을 만든다.
+    2) 클라이언트단 프로그램 주요 핵심 코드
+        - 이벤트 onclick="함수", ondblclick, onkeyup
+        - 핸들러 함수
+        - 요소 객체에 대한 접근
+            document.querySelector("선택자")
+            document.querySelectorAll("선택자")
+            선택자 : #아이디명, .클래스명, 태그명, [속성=속성값]
+            속성 :  기본 태그의 속성. h1.align="center"
+            속성 : css 속성 h1.style.backgroundColor = "yellow";
+            속성 : value text1[0] server
+            화면 출력 : innerHTML, innerTest;
+                h1.innerHTML="<h1>랜더링 할 문장열ㅑ</h1>"
+                h1.innerText = "문자열 출력"
+        - 이동처리 : location.href="이동할페이지"
+    
+    3) 서버단 프로그램 주요 핵심 코드
+        String req = request.getParameter("요청키");
+        if(req==null) req="";
+        if(req!=null && !req.trim().equals(""));
+            empno = Integer.parseInt(req);
+        empList = dao.getEmpList(emp);
+        <%for%>
+    4) 서버단 ==> client
+        var isIns = "<%=isIns%>";
+        if(isIns=="ins"){
+            if(confirm("등록완료")){
+
+            }
+        }
+    #DAO 프로그램
+    1. sql : select empno, ename, job, mgr, hiredate, sal, comm, 
+            from emp011
+            where ename like '%'||?||'%'
+            and job like '%'||?||'%'
+    2. vo : *, ? 에 할당할 데이터를 속성으로 해서 vo클래스를
+        class Emp{
+            private int empno;
+            private String ename;
+            private String job;
+            ...
+        }
+    3. 리턴값 유형 결저ㅇ, 매개변수로 들어갈 객체 결정
+        public ArrayList<Emp> getList(Emp sch)
+        public Emp getDetail(int empno)
+        public void insertEmp(Emp ins)
+
+    4. pstmt.setXXXX(1, @@@);
+    5. select 컬럼명 경우, Result rs
+        .next()
+        .getXXXX("컬럼명")
+2. 사원 정보 처리 프로세스
+    a01_empSchList.jsp(사원정보 메인조회 프로그램)
+        검색 사원명[    ] 직책명[   ] [검색]
+        데이터 리스트
+        리스트 중 하나 클릭시 ==> 사원 상세 화면으로 empno요청값 전달
+        등록 버튼 클릭시 ==> 사원 정보 등록
+    a02_empInsert.jsp(사원정보 등록)
+        form형식으로 데이터 전송하게 처리
+        submit 했을 DAO를 호출해서 입력 ==> 리스트 화면 확인
+    a03_empDetail.jsp(사원정보 상세)
+        empno를 요청값으로 가져와서 
+        dao를 통해서 1개 row데이터 vo 객체로 가져와서
+        value에 할당 처리한 상황에서
+        수정 버튼시, 수정 프로세스 check <input type="hidden" name="proc"
+            value="upt" ==> 요청값 전달  수정 dao 기능 메서드 처리
+        삭제버튼시, 삭제 프로세스 check
+            처리 삭제 기능 메서드 호출.
+        script를 통해서 수정/삭제 표시.
+    메인 리소스 조회 ==> 등록 처리
+                 ==> 상세 화면 ==> 수정
+                             ==> 삭제
+3. 프로그램 수행 순서
+    리스트 메인 : url로 호출시, 서버에 있는 a01_empSchList.jsp
+        를 호출, dao단에 있는 데이터 가져와서 기본 list출력 처리
+        조건 입력시, 조회버튼 클릭시, 요청값으로 조회 데이터(ename, job) 전달하고,
+        ename, job ==> Emp(ename,job) dao의 검색메서드의 매개변수를 넣어
+        ArrayList<Emp> 데이터를 가져와서 반복문을 통해서 출력..
+        등록 버튼 클릭,location.href="등록화면"을 통해서 등록화면 호출
+            등록화면에서 입력하고 등록 버튼 클릭시, 요청값을 전달하고, 요청값을
+            Emp로 데이터를 할당해서 등록 dao기능 메서드 호출로 dao.insertEmp(emp);
+            로 데이터 등록 처리, script 등록 처리 완성 여부 출력
+        리스트 중 특정 데이터 클릭시, 상세 페이지에 요청값과 함께 전달.
+            dao에서 상세데이터 로딩 메서드를 통해서 row단위 VO 객체 emp를 가져와서
+            화면에 value에 할당하여 출력한다. value="<%=emp.getEname()%>"
+            데이터 form요소 객체서 변경하고, 하단에 수정버튼 클릭시, 요청값으로 proc와
+            함께 데이터를 다시 전송해서 등록할 VO를 만들어 등록 메서드의 매개변수로
+            전달하고, 등록처리, script로 등록 처리 출력
+            삭제버튼 클릭시, proc 삭제 del을 처리하고, empno를 전송하여
+            요청값을 del과 empno를 받아서 삭제 dao 기능메서드 호출하여 삭제 처리
+            script 처리(삭제되었습니다)
+
+4. 개발 순서
+    1) 요구사항 정의서
+    2) 화면 설계서
+    3) db처리 내용, erd, sql작성
+    4) 리턴값, select 값을 처리할 VO 객체 작성
+    5) dao 작성
+        리턴값(객체), 매개변수
+        객체에 할당 처리는 resultSet의 기능 메서드로 할당.
+    6) html/css기본 화면
+    7) js구성(ㅓ네) - 위 프로그램 호출 순서에 맞게 js와 jsp를 처리한다.
+        유효성 처리
+    8) 요청값 처리
+    9) dao를 호출하여 처리
+    10) 마지막 js 프로세스 완료 처리를 출력..

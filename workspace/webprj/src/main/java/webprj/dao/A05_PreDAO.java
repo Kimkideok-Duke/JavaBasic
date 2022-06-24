@@ -462,13 +462,23 @@ select * from emp where job = 'CLERK';
 		try {
 			setConn();
 			String sql = "SELECT *\n" +
-				"FROM emp011\n" +
-				"WHERE ename LIKE '%'|| ? ||'%'\n "
-				+ "AND job LIKE '%'|| ? || '%' ";
+						"FROM emp011\n"
+						+ "WHERE 1=1";
+			// ename,job 이 null로된 데이터가 검색이 안되는 것을 방지해준다.
+						if(!sch.getEname().trim().equals("")){
+							sql += "AND ename LIKE '%'|| ? ||'%'\n";
+						}
+						if(!sch.getJob().trim().equals("")){
+							sql +="AND job LIKE '%'|| ? ||'%'";
+						}
 			System.out.println(sql);
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, sch.getEname());
-			pstmt.setString(2, sch.getJob());
+			if(!sch.getEname().trim().equals("")){
+				pstmt.setString(1, sch.getEname());
+			}
+			if(!sch.getJob().trim().equals("")){
+				pstmt.setString(2, sch.getJob());
+			}
 			rs = pstmt.executeQuery();
 			// 하나의 데이터 결과 처리이기에 바로 처리
 			// [핵심코드]
@@ -583,14 +593,14 @@ select * from emp where job = 'CLERK';
 					+ "WHERE empno = ?";
 			pstmt = con.prepareStatement(sql);
 			
-			pstmt.setInt(1, ins.getEmpno());
-			pstmt.setString(2, ins.getEname());
-			pstmt.setString(3, ins.getJob());
-			pstmt.setInt(4, ins.getMgr());
-			pstmt.setString(5, ins.getHiredate_s());
-			pstmt.setDouble(6, ins.getSal());
-			pstmt.setDouble(7, ins.getComm());
-			pstmt.setInt(8, ins.getDeptno());
+			pstmt.setString(1, ins.getEname());
+			pstmt.setString(2, ins.getJob());
+			pstmt.setInt(3, ins.getMgr());
+			pstmt.setString(4, ins.getHiredate_s());
+			pstmt.setDouble(5, ins.getSal());
+			pstmt.setDouble(6, ins.getComm());
+			pstmt.setInt(7, ins.getDeptno());
+			pstmt.setInt(8, ins.getEmpno());
 			pstmt.executeUpdate();
 			con.commit();
 			pstmt.close();
@@ -660,7 +670,7 @@ select * from emp where job = 'CLERK';
 	}
 
 	public Emp getEmpDetail(int empno) {
-		Emp emp = null;
+		Emp emp = new Emp();
 		try {
 			setConn();
 			String sql = "SELECT empno, ename, job, mgr,"
@@ -759,8 +769,51 @@ select * from emp where job = 'CLERK';
 		}
 	}
 
+	public void updateDept(Dept ins) {
+		try {
+			setConn();
+			con.setAutoCommit(false);
+			String sql = "UPDATE DEPT011\n"
+					+ "    SET dname = ?,\n"
+					+ "        loc = ?,\n"
+					+ "WHERE deptno = ?";
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, ins.getDname());
+			pstmt.setString(2, ins.getLoc());
+			pstmt.setInt(3, ins.getDeptno());
+			pstmt.executeUpdate();
+			con.commit();
+			pstmt.close();
+			con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("DB 에러 : " + e.getMessage());
+			// commit 전에 예외가 발생하면 rollback 처리
+		} catch (Exception e) {
+			System.out.println("일반 예외 : " + e.getMessage());
+		} finally {
+			if(pstmt!=null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(con!=null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
 	public Dept getDeptDetail(int deptno) {
-		Dept dept = null;
+		Dept dept = new Dept();
 		try {
 			setConn();
 			String sql = "SELECT deptno, dname, loc\n"
@@ -909,7 +962,7 @@ select * from emp where job = 'CLERK';
 	}
 
 	public Product001 getProductDetail(int pno) {
-		Product001 pd = null;
+		Product001 pd = new Product001();
 		try {
 			setConn();
 			String sql = "SELECT *\n"
@@ -979,6 +1032,7 @@ select * from emp where job = 'CLERK';
 		// System.out.println("사원 정보의 갯수 : " + dao.getEmpCnt());
 		// System.out.println("사원 정보의 갯수(부서) : " + dao.getEmpCnt(10));
 		// System.out.println("사원 정보의 갯수(직책) : " + dao.getEmpCnt("SALESMAN"));
+		/*
 		Map<String, String> sch = new HashMap<String, String>();
 		sch.put("ename", "A");
 		sch.put("job", "");
@@ -989,8 +1043,9 @@ select * from emp where job = 'CLERK';
 			System.out.print(e.getHiredate()+"\t"); System.out.print(e.getComm()+"\t");
 			System.out.print(e.getDeptno()+"\n");
 		}
-		/*
-		ArrayList<Emp> empList = dao.getEmpList("B");
+		*/
+		
+		ArrayList<Emp> empList = dao.getEmpList2(new Emp("", ""));
 		for(Emp e:empList) {
 			System.out.print(e.getEmpno() + "\t");
 			System.out.print(e.getEname() + "\t");
@@ -1001,7 +1056,7 @@ select * from emp where job = 'CLERK';
 			System.out.print(e.getComm() + "\t");
 			System.out.print(e.getDeptno() + "\n");
 		}
-		*/
+		
 		// ArrayList<Member011> MemList = dao.getMemList("", "");
 		// for(Member011 m:MemList) {
 		// 	System.out.print(m.getId() + "\t");

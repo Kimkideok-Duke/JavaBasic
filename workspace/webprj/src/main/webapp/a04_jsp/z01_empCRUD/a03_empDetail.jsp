@@ -22,18 +22,64 @@ String path = request.getContextPath();
 </head>
 <body>
 <%
-	String empnoS = request.getParameter("empno");
+  String proc = request.getParameter("proc");
+  if(proc==null) proc="";
+  int empno = 0; 
+  String empnoS = request.getParameter("empno");
+
   // a03_empDetail.jsp?empno=1000
   Emp emp = new Emp();
   if(empnoS!=null&&!empnoS.trim().equals("")){
-    int empno = Integer.parseInt(empnoS);
+    empno = Integer.parseInt(empnoS);
     A05_PreDAO dao = new A05_PreDAO();
+    System.out.println(proc);
+    // 수정처리
+    if(proc.equals("upt")){
+      int mgr, deptno;
+      double sal, comm;
+      sal = comm = mgr = deptno = 0;
+      String mgrS = request.getParameter("mgr");
+      if(mgrS!=null) mgr = Integer.parseInt(mgrS);
+      String deptnoS = request.getParameter("deptno");
+      if(deptnoS!=null) deptno = Integer.parseInt(deptnoS);
+      String salS = request.getParameter("sal");
+      if(salS!=null) sal = Double.parseDouble(salS);
+      String commS = request.getParameter("comm");
+      if(commS!=null) comm = Double.parseDouble(commS);
+
+      String ename = request.getParameter("ename");
+      if(ename==null) ename = "";
+      String job = request.getParameter("job");
+      if(job==null) job = "";
+      String hiredateS = request.getParameter("hiredateS");
+      if(hiredateS==null) hiredateS = "";
+      // 수정 처리를 위한 객체 매개변수 전달
+      emp = new Emp(empno, ename, job, mgr, hiredateS, sal, comm, deptno);
+      dao.updateEmp(emp);
+    }
+    if(proc.equals("del")){
+      dao.deleteEmp(empno);
+    }
     emp = dao.getEmpDetail(empno);
-    System.out.println(emp.getHiredate_s());
-    System.out.println(emp.getComm());
-    System.out.println(emp.getDeptno());
   }
+
+
 %>
+<script>
+  var proc = "<%=proc%>";
+  if(proc!=""){
+    if(proc=="upt"){
+      if(confirm("수정처리가 되었습니다\n메인화면으로 이동하시겠습니까?")){
+        location.href="a01_empSchList.jsp";
+      }
+    }
+    if(proc=="del"){
+      if(confirm("삭제 되었습니다\n메인화면으로 이동")){
+        location.href="a01_empSchList.jsp";
+      }
+    }
+  }
+</script>
 <h2>사원상세정보(<%=empnoS%>)</h2>
 <div class="container">
   <form>
@@ -116,10 +162,17 @@ String path = request.getContextPath();
       document.querySelector("form").submit();
     }
   }
+  function delEmp(){
+    if(confirm("삭제하시겠습니까?")){
+      document.querySelector("[name=proc]").value="del";
+      document.querySelector("form").submit();
+    }
+  }
+  function gomain(){
+    location.href="a01_empSchList.jsp"
+  }
 </script>
 <%
-  String proc = request.getParameter("proc");
-  System.out.println("현재 proc:"+proc);
 
 %>
 </table>

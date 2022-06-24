@@ -13,3 +13,7 @@ SELECT * FROM MEMBER011;
 INSERT INTO MEMBER011 values('asd', 'asd', '김길동', 3000, '관리자');
 
 SELECT * FROM PRODUCT001 p;
+
+SELECT *
+FROM emp011
+WHERE 1=1;

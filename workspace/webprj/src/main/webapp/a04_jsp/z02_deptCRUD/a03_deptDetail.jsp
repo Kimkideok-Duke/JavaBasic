@@ -24,15 +24,38 @@ String path = request.getContextPath();
 </head>
 <body>
 <%
+  String proc = request.getParameter("proc");
+  if(proc==null) proc="";
+  if(proc!=null){
+    System.out.println("현재 proc:"+proc);
+  }
 	String deptnoS = request.getParameter("deptno");
+
   Dept dept = new Dept();
   if(deptnoS!=null&&!deptnoS.trim().equals("")){
     int deptno = Integer.parseInt(deptnoS);
     A05_PreDAO dao = new A05_PreDAO();
+    if(proc.equals("upt")){
+      String dname = request.getParameter("dname");
+      if(dname==null) dname = "";
+      String loc = request.getParameter("loc");
+      if(loc==null) loc = "";
+      dept = new Dept(deptno, dname, loc);
+      dao.updateDept(dept);
+    }
     dept = dao.getDeptDetail(deptno);
   }
 %>
-
+<script>
+  var proc = "<%=proc%>";
+  if(proc!=""){
+    if(proc=="upt"){
+      if(confirm("수정처리가 되었습니다\n메인화면으로 이동하시겠습니까?")){
+        location.href="a01_deptSchList.jsp";
+      }
+    }
+  }
+</script>
 
 
 <div class="container">
@@ -76,10 +99,18 @@ String path = request.getContextPath();
       document.querySelector("form").submit();
     }
   }
+  function delDept(){
+    if(confirm("삭제하시겠습니까?")){
+      document.querySelector("[name=proc]").value="del";
+      document.querySelector("form").submit();
+    }
+  }
+  function gomain(){
+    location.href="a01_empSchList.jsp"
+  }
 </script>
 <%
-  String proc = request.getParameter("proc");
-  System.out.println("현재 proc:"+proc);
+  
 
 %>
 </body>
