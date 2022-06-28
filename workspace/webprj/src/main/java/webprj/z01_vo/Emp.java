@@ -13,6 +13,8 @@ public class Emp {
     private double sal;
     private double comm;
 	private int deptno;
+	private boolean pass;
+	
 	public Emp() {
 		// TODO Auto-generated constructor stub
 	}
@@ -98,5 +100,10 @@ public class Emp {
 	public void setHiredate_s(String hiredate_s) {
 		this.hiredate_s = hiredate_s;
 	}
-	
+	public boolean isPass(){
+		return pass;
+	}
+	public void setPass(boolean pass){
+		this.pass = pass;
+	}
 }

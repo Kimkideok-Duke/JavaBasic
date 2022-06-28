@@ -107,7 +107,7 @@ public class A05_PreDAO {
 		try {
 			setConn();
 			String sql = "select * \n"
-						+ "from dept \n"
+						+ "from dept011 \n"
 						+ "where dname like '%'|| ? ||'%' \n"
 						+ "and loc like '%'|| ? ||'%'";
 			System.out.println(sql);
@@ -465,19 +465,20 @@ select * from emp where job = 'CLERK';
 						"FROM emp011\n"
 						+ "WHERE 1=1";
 			// ename,job 이 null로된 데이터가 검색이 안되는 것을 방지해준다.
-						if(!sch.getEname().trim().equals("")){
+						if(sch.getEname()!=null){
 							sql += "AND ename LIKE '%'|| ? ||'%'\n";
 						}
-						if(!sch.getJob().trim().equals("")){
+						if(sch.getJob()!=null){
 							sql +="AND job LIKE '%'|| ? ||'%'";
 						}
 			System.out.println(sql);
 			pstmt = con.prepareStatement(sql);
-			if(!sch.getEname().trim().equals("")){
-				pstmt.setString(1, sch.getEname());
+			int cnt = 1;
+			if(sch.getEname()!=null){
+				pstmt.setString(cnt++, sch.getEname());
 			}
-			if(!sch.getJob().trim().equals("")){
-				pstmt.setString(2, sch.getJob());
+			if(sch.getJob()!=null){
+				pstmt.setString(cnt++, sch.getJob());
 			}
 			rs = pstmt.executeQuery();
 			// 하나의 데이터 결과 처리이기에 바로 처리

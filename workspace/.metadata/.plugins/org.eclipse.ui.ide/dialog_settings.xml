@@ -12,4 +12,10 @@
 		<item key="ResourceViewer.STORE_SORT_TYPE" value="1"/>
 		<item key="ResourceWorkingSetFilter.STORE_WORKING_SET" value="Aggregate for window 1650852577875"/>
 	</section>
+	<section name="CleanDialogSettings">
+		<item key="TOGGLE_SELECTED" value="false"/>
+		<item key="DIALOG_WIDTH" value="540"/>
+		<item key="DIALOG_HEIGHT" value="367"/>
+		<item key="DIALOG_FONT_NAME" value="1|.AppleSystemUIFont|11.0|0|COCOA|1|.AppleSystemUIFont"/>
+	</section>
 </section>
