@@ -18,10 +18,10 @@ public class Member011 {
 		this.point = point;
 		this.auth = auth;
 	}
-	public Member011(String id, String pass) {
+	public Member011(String name, String auth) {
 		super();
-		this.id = id;
-		this.pass = pass;
+		this.name = name;
+		this.auth = auth;
 	}
 	public String getId() {
 		return id;

@@ -81,15 +81,14 @@
       [ @@  ] X [ @@  ] = [   ] [확인]--%>
 <body>
 
-<c:set var="rand1" value="<%=(int)(Math.random()*9+1)%>" scope="request"/>
-<c:set var="rand2" value="<%=(int)(Math.random()*9+1)%>" scope="request"/>
-<c:if test="${param.ans==(rand1*rand2)}">
+
+<%-- <c:if test="${param.ans==(rand1*rand2)}">
     <h2>정답</h2>
 </c:if>
 <c:if test="${param.ans!=(rand1*rand2)}">
     <h2>오답</h2>
 </c:if>
-<h2>${rand1} x ${rand2} = </h2>
+<h2>${rand1} x ${rand2} = </h2> --%>
 
 <div class="container">
   <form >
@@ -97,10 +96,12 @@
     <div class="col-25">
       <label for="ans">구구단</label>
     </div>
+    <c:set var="rand1" value="<%=(int)(Math.random()*9+1)%>" scope="request"/>
+    <c:set var="rand2" value="<%=(int)(Math.random()*9+1)%>" scope="request"/>
     <div class="col-75">
-
-      <input type="text" id="ans" name="ans" placeholder="정답입력.."
-         value="">
+      <input type="text" id="rand1" name="rand1" size="1" value="${rand1}">X
+      <input type="text" id="rand2" name="rand2" size="1" value="${rand2}">=
+      <input type="text" id="ans" name="ans" size="1" value="">
     </div>
   </div>
   <div class="row">
@@ -108,30 +109,52 @@
   </div>
   </form>
 </div>
+  <script>
+    var rand1 = "${param.rand1}"
+    var rand2 = "${param.rand2}"
+    var ans = "${param.ans}"
+    if(grade!=""){
+      var corNum = rand1*rand2;
+      if(corNum == innum){
+        alert("정답:"+rand1+"X"+rand2+"="+ans);
+      }else{
+        alert("오답("+rand1+"X"+rand2+"="+ans+")\n 정답은 "+corNum);
+      }
+    }
+  </script>
+
 
 
 <%-- [1단계:확인] 5. 회원정보리스트 dao기능 메서드를 추가하고, jstl을 통해서 검색 출력하세요.  --%>
 <jsp:useBean id="dao" class="webprj.dao.A05_PreDAO"/>
-<jsp:useBean id="sch" class="webprj.z01_vo.Member011"/>
+<jsp:useBean id="sch" class="webprj.z01_vo.Member011" scope="request"/>
 <jsp:setProperty property="*" name="sch"/>
 <div class="container">
   <form >
   <div class="row">
     <div class="col-25">
-      <label for="id">아이디</label>
+      <label for="name">이름</label>
     </div>
     <div class="col-75">
-      <input type="text" id="id" name="id" placeholder="아이디입력.."
-         value="${sch.id}">
+      <input type="text" id="name" name="name" placeholder="이름입력.."
+         value="${sch.name}">
     </div>
   </div>
   <div class="row">
     <div class="col-25">
-      <label for="pass">비밀번호</label>
+      <label for="auth">권한</label>
     </div>
     <div class="col-75">
-      <input type="text" id="pass" name="pass" placeholder="비밀번호입력.."
-         value="${sch.pass}">
+      <select name="auth">
+        <option value="">전체</option>
+        <option>일반사용자</option>
+        <option>관리자</option>
+        <option>방문객</option>
+      </select>
+      <script>
+        $("[name=auth]").val("${mem.auth}");
+        // $("선택자").val("값할당")
+      </script>
     </div>
   </div>
   <div class="row">

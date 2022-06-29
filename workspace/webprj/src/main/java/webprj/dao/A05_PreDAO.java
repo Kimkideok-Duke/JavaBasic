@@ -868,12 +868,18 @@ select * from emp where job = 'CLERK';
 			setConn();
 			String sql = "select * \n"
 						+ "from member011 \n"
-						+ "where id like '%'|| ? ||'%' \n"
-						+ "and pass like '%'|| ? ||'%'";
+						+ "WHERE 1=1 \n";
+						if(sch.getName()!=null)
+							sql+= "where name like '%'|| ? ||'%' \n";
+						if(sch.getAuth()!=null && !sch.getAuth().equals(""))
+							sql+= "and auth like '%'|| ? ||'%'";
 			System.out.println(sql);
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, sch.getId());
-			pstmt.setString(2, sch.getPass());
+			int cnt=1;
+			if(sch.getName()!=null)
+				pstmt.setString(cnt++, sch.getName());
+			if(sch.getAuth()!=null && !sch.getAuth().equals(""))
+				pstmt.setString(cnt++, sch.getAuth());
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				memList.add(new Member011(
