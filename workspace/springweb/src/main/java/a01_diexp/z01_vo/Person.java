@@ -8,6 +8,12 @@ public class Person {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	public Person(String name, int age, String loc) {
+		super();
+		this.name = name;
+		this.age = age;
+		this.loc = loc;
+	}
 	public String getName() {
 		return name;
 	}
