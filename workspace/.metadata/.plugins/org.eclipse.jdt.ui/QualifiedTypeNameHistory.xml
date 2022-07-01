@@ -5,4 +5,14 @@
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="webprj.z01_vo.Emp"/>
     <fullyQualifiedTypeName name="javax.servlet.RequestDispatcher"/>
+    <fullyQualifiedTypeName name="org.springframework.stereotype.Controller"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestMapping"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestParam"/>
+    <fullyQualifiedTypeName name="org.springframework.ui.Model"/>
+    <fullyQualifiedTypeName name="springweb.z01_vo.Product"/>
+    <fullyQualifiedTypeName name="springweb.z01_vo.Dept"/>
+    <fullyQualifiedTypeName name="springweb.z01_vo.Member011"/>
+    <fullyQualifiedTypeName name="springweb.z01_vo.Product001"/>
+    <fullyQualifiedTypeName name="springweb.z01_vo.Emp"/>
+    <fullyQualifiedTypeName name="springweb.y01_dao.A05_PreDAO"/>
 </qualifiedTypeNameHistroy>
