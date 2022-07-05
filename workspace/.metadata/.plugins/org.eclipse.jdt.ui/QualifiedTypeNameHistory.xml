@@ -15,4 +15,7 @@
     <fullyQualifiedTypeName name="springweb.z01_vo.Product001"/>
     <fullyQualifiedTypeName name="springweb.z01_vo.Emp"/>
     <fullyQualifiedTypeName name="springweb.y01_dao.A05_PreDAO"/>
+    <fullyQualifiedTypeName name="org.springframework.context.support.AbstractApplicationContext"/>
+    <fullyQualifiedTypeName name="org.springframework.context.support.GenericXmlApplicationContext"/>
+    <fullyQualifiedTypeName name="a01_diexp.z01_vo.Person"/>
 </qualifiedTypeNameHistroy>

@@ -17,7 +17,7 @@
 			// 처리할 controller 내용.
 
 			return "WEB-INF\view\a01_startView.jsp";
-			// view단 호출
+			// view단 호출(forward 방식)
 		}
 
 # 요청값과 모델 데이터 처리
@@ -31,6 +31,17 @@
 			System.out.print("이름 : "+name)
 			System.out.print("나이 : "+age)
 		}
+	# 주의 !!
+	- 요청값을 받지 못하게 처리되는 경우 : 404에러
+		get방식으로 요청값 없이 위 메서드 호출하면 에러 발생
+		/call01.do
+		==> 요청값이 있으면 요청값을 받아서 처리하고, 없으면 일단 default로 처리하는 방법
+		public String call01(@RequestMapping(("name"), defaultValue ="") String name,
+							@RequestMapping(("age"), defaultValue="0") int age,
+	- 단, default값을 설정하더라도 숫자형 데이터는 숫자형으로 형변환 될 문자열을 query string 으로
+		선언하지 않으면 404에러 발생
+		/call01.do?name=홍길동&age=이십오(X)
+	
 2. 요청값을 객체로 매개변수 받아서 처리
 	1) url : empList.do?ename=홍길동&job=사원
 	2) 위의 요청값을 받기 위해서 매개변수로 설정된 클래스안에 다음과 같은 메서드가 property로

@@ -12,6 +12,18 @@
     5) 초기 화면 로딩을 위한 controller/view/model 처리
     6) 기본적인 front-end단 모듈 설정(bootstrap/jquery)
 3. 스프링의 MVC 기본 처리 순서
+	1) controller 선언
+        @Controller : 클래스명 위에 선언
+    2) url에서 기능메서드별로 접근할 수 있는 메서드 선언
+        // http://localhost:7080/springweb/call01.do
+        @RequestMapping("call01.do")
+        public String call01(){
+            return "view단 경로 및 파일 설정";
+        }
+    3) 요청값 처리
+    4) 리턴형식으로 view단 호출.. forward 형식
+        - forward : request, response
+        - redirect : 페이지를 호출할 때, 모델값 전달 못 함
 
 4. 스프링 컨테이너 이해를 위한 DI(제어역전)
 
