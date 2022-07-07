@@ -64,3 +64,53 @@
     3) byName : type이 있고, 기능 메서드 명이 객체의 참조명과 같은 때 처리된다.
     4) constructor : 의존성 자동 주입이 생성자의 매개변수의 type으로 결정된다.
     5) autodetect : 자동으로 생성자나 기능 property로 설정이 된다.
+# 컨테이너의 자동 객체 로딩
+1. 컨테이너 선언에 있어서 특정 패키지를 지정하여, 해당 범위에 있는 클래스를 특정한 패턴에 의해서 객체로 로딩하게 처리할 수 있다.
+2. 처리 순서
+    1) 패키지 단위 로딩하고자 하는 클래스 선언
+    2) 컨테이너(@@.xml)에서 특정 패키지를 지정하여 포함된 클래스를 filtering
+        방식을 선언하여 객체 선택 처리
+    3) 속성값
+        base-package : 대상 패키지 선언
+        context:include-filter : filter 기준을 설정하는 내용(포함)
+        context:exclude-filter : filter 기준으로 배제하는 내용
+        type : filter 대상에 대한 type 지정 ex) annotation, regex
+        expression : 실제 쓰이는 대상이 되는 클래스 선언
+3. 호출 처리
+    1) 각 클래스에 @Component를 선언하면 클래스명의 첫번째 문자는 소문자로 하여 id/name으로 인식하여 처리가 된다.
+    2) 위 식별자는 @Component("식별자명")으로 변경하여 처리할 수 있다.
+        일반적으로 패키지가 다르지만 동일한 클래스 명으로 하나의 컨테이너에 식별자가 충돌이 나는 경우
+        이렇게 명시적으로 식별자명을 바꾸어서 처리가 가능하다.
+4. 소스상 자동 autowiring 처리
+    1) 위와 같이 Component가 선언되어 있을 때, 여러가지 특정한 코드를 통해 필드나
+        기능 메서드의 상단에 @Autowired라는 키워드를 통해서 객체간의 자동으로 메모리가 할당하게 할 수 있다.
+    2) 컨테이너에서 autowire 옵션으로 위에 선언된 여러가지 옵션을 선언할 필요없이,
+        바로 추가되는 클래스에서 선언하여 객체를 자동으로 할당되게 한다.
+    3) 실무적으로 MVC패턴에서 Controller는 Service객체를 Service객체는 Dao객체를 필드로 선언하면서 
+        @Autowired 옵션으로 new XXXX() 없이 객체가 컨테이너에 로딩된 메모리를 사용할 수 있게 해준다.
+
+# 공통 정보 처리 파일 설정
+1. 개발에 있어서 공통으로 적용될 정보는 특정한 DB나 파일로 설정해서 처리하면,
+    이 공통 적용 DB나 파일만 변경되면 모든 소스에 검색해서 변경하지 않더라도 한번에 변경이 가능하다.
+    ex) 로컬 서버 정보(DB서버, WAS서버 등, 파일서버, 메일서버 등)dptj
+        개발 서버/데스트 서버/운영 서버 등으로 변경시.
+2. 설정 순서
+    1) 특정 경로에 파일로 설정 파일 생성 및 정보 기록
+        - 일반적으로 classpath로 잡힌 java 폴드 하위에 경로와 파일에 정리한다.
+    2) 컨테이너에서 해당 경로의 파일을 지정.
+        <context:property-placeholder location="classpath:/폴더명/파일명">
+        파일내용
+        jsbc.driver=jdbc.odbc.driver.driverName
+        oracle.account=scott
+        oracle.pass=7777
+        fileupload=c:/gogo/fileupload/
+
+    3) 컨테이너에서 해당 객체의 설정값 지정
+        ${key} : 위 파일에 지정된 key
+        ex) ${jdbc.driver}
+    4) 각 소스 파일에서 해당 설정값 지정 및 호출
+        @Value("")
+        private String info01;
+
+        ex) @Value("${fileupload}")
+            private String reposit; // 공통 설치 파일에 지정된 경로가 문자열로 할당

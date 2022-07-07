@@ -27,7 +27,8 @@
 					"@dbeaver-connection-type@": "BASIC",
 					"@dbeaver-sid-service@": "SERVICE"
 				},
-				"auth-model": "oracle_native"
+				"auth-model": "oracle_native",
+				"handlers": {}
 			}
 		},
 		"oracle_thin-1817fad60b5-527c4454ade4c354": {
@@ -56,8 +57,7 @@
 					"@dbeaver-meta-use-alternative-table-query@": "false",
 					"oracle.meta-search-in-synonyms": "false"
 				},
-				"auth-model": "oracle_native",
-				"handlers": {}
+				"auth-model": "oracle_native"
 			}
 		}
 	},
