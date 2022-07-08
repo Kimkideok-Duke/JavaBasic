@@ -1,0 +1,104 @@
+# mybatis
+1. 스프링에서 database base 연동하는 xml기반 framework
+2. 기본 환경 구성
+	1) 컨테이너 설정
+		- 데이터베이스 연결에 필요한 공통 설정 정보 파일 선언
+		- 공통 mybatis 설정 파일 선언 : 개발자가 sql, 입력/리턴
+		- dao 인터페이스 폴드 선언 : 지정한 인터페이스 dao를 통해서 mybatis는 mapper.xml에서
+			실제 객체를 만들어 주기에 반드시 선언하여야 한다.
+	2) 공통 mybatis 설정 파일
+		- mapper 설정 파일 선언
+		- vo 등록
+		
+3. 개발 순서
+	1) sql 작성 ex) select * from dept
+				   where ename like '%'||''||'%'
+				   and loc like '%'||''||'%'
+	2) vo 작성
+		위에 sql을 통해 처리할 select 부분의 데이터와 ==> return으로 사용할 VO객체
+			where 조건에 입력할 데이터를 vo로 작성한다. ==> 매개변수에 사용할 VO객체
+	3) interface 선언
+		위 sql과 vo를 기준으로 리턴유형과 매개변수 유형이 결정되면 해당 메서드 정의
+		public interface DeptDao{
+			public List<Dept> getDeptList(Dept sch);
+		}
+	4) 공통 mybatis xml에 vo 할당.
+		리턴값과 매개변수로 사용하게 될 패키지명과 함께하는 vo객체를 간단한 alias로 선안 
+	5) mapper.xml 선언
+		DeptDao dao = new DeptDaoImpl();와 같이 다형성에 의해 상속받는 실제
+		객체를 만들어 주는데, 이 실제 객체를 만들 때, interface와 연동 규칙을 정해서 선언한다.
+		namespace : 인터페이스의 패키지명.인터페이스명
+		각 sql문을 포함하고 있는 mybatis의 태그의 id는 메서드 명과 연동 ex) id="getDeptList"
+		리턴 유형은 resultType="dept" : 공통 mybatis xml에서 선언한 alias 이름으로 선언
+		매개변수 유형은 parameterType="dept" 공통 mybatis xml에서 선언한 alias 이름으로 선언
+		select * from dept
+		where dname like '%'||#{dname}||'%' vo에 선언한 get property 	getDname()
+		and loc like '%'||#{loc}||'%' vo에 선언한 get property 		getLoc()
+# mybatis 데이터 처리 프로세스
+1. sql 작성
+	select ename, job, empno
+	from emp
+2. vo 만들기
+	class Emp2{
+		private String ename;
+		private String job;
+		private int empno;
+		// 생성자/set/get메서드.
+	}
+3. dao interface 선언
+	interface ExpDao{
+		public List<Emp2> emplist();
+	}
+
+4. 공통 설정 파일 mybatis.Spring.xml
+	1) vo를 alias로 등록
+	2) mapper 등록
+
+5. mapper 안에 sql 처리
+	<select id="emplist" resultType="emp2"
+		select ename, job, empno
+		from emp
+
+# dao 작성 연습
+0. dao와 mapper 연동 선언하기
+	ex) 인터페이스 DaoExp01 선언, DaoExp01Mapper.xml
+
+
+1. 리턴 유형
+	sql의 결과에 따른 리턴유형 선언과 여기에 맞는 mapper.xml의 선언
+	1) 단일 데이터
+		select count(*)
+		from emp;
+		인터페이스 메서드.
+		public int getEmpCount();
+		XXXMapper
+		<select id="getEmpCount" resultType="int">
+			select count(*)
+			from emp
+		</select>
+		주의 ;(세미콜론)에러가 너무 믾습니다.
+	2) 단일 객체
+		- sql
+		SELECT dname, ename, sal, loc : 맞는 VO 생성
+		FROM emp e, dept d
+		WHERE e.deptno = d.DEPTNO 
+		AND empno = 7369;
+		// ==> dname, ename, sal, loc vo 조회되는 단일 vo 생성
+
+		- vo
+		class DeptEmp01
+			private String dname;
+			private String ename;
+			private double sal;
+			private String loc;
+		- 공통 mybatis.Spring.xml에 VO 등록
+			DeptEmp01
+		- 인터페이스 생성
+			public DeptEmp01 getDeptEmp();
+		- mapper 처리
+			<select id="getDeptEmp" resultType="deptemp01">
+				SELECT dname, ename, sal, loc : 맞는 VO 생성
+				FROM emp e, dept d
+				WHERE e.deptno = d.DEPTNO 
+				AND empno = 7369
+	3) 다중 리스트형 객체

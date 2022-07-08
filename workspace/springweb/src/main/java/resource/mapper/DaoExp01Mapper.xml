@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+  <mapper namespace="springweb.a02_mvc.a03_dao.DaoExp01">
+  	<select id="getEmpCount" resultType="int">
+  		SELECT count(*) 
+  		FROM emp
+  	</select>
+  	<select id="getSal" resultType="double">
+  		SELECT sal
+  		FROM emp
+  		WHERE empno=7369
+  	</select>
+  	<select id="getSalSum" resultType="double">
+  		SELECT sum(sal)
+  		FROM emp
+		WHERE deptno=10
+  	</select>
+  	<select id="getJob" resultType="String">
+  		SELECT job
+  		FROM emp
+		WHERE empno=7499
+  	</select>
+  	<select id="hasemp" resultType="boolean">
+  		SELECT count(*)
+  		FROM emp
+		WHERE empno=7369
+  	</select>
+  	<!-- 
+  	public deptemp01 getDeptEmp();
+  	deptemp01와 mapping 되어 있는 VO클래스에
+  	public void setDname(String dname);
+  	public void setEname(String ename);
+  	public void setSal(double sal);
+  	public void setLoc(String loc);
+ 	-->
+ 	<select id="getDeptEmp" resultType="deptemp01">
+ 		SELECT dname, ename, sal, loc
+ 		FROM emp e, dept d
+ 		WHERE e.deptno = d.deptno
+ 		AND empno=7369
+ 	</select>
+  	<!-- 
+  	resultType의 가능한 변수 유형
+  		int, double, string,
+  		boolean(DB - 0,1) -->
+  </mapper>
