@@ -14,6 +14,7 @@ public class Emp {
     private double comm;
 	private int deptno;
 	private boolean pass;
+	private char hiredate_q;
 	
 	public Emp() {
 		// TODO Auto-generated constructor stub
@@ -45,6 +46,13 @@ public class Emp {
 		this.sal = sal;
 		this.comm = comm;
 		this.deptno = deptno;
+	}
+	public Emp(int empno, String ename, Date hiredate, char hiredate_q) {
+		super();
+		this.empno = empno;
+		this.ename = ename;
+		this.hiredate = hiredate;
+		this.hiredate_q = hiredate_q;
 	}
 	public int getEmpno() {
 		return empno;
@@ -105,5 +113,11 @@ public class Emp {
 	}
 	public void setPass(boolean pass){
 		this.pass = pass;
+	}
+	public char getHiredate_q() {
+		return hiredate_q;
+	}
+	public void setHiredate_q(char hiredate_q) {
+		this.hiredate_q = hiredate_q;
 	}
 }

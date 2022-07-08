@@ -101,4 +101,70 @@
 				FROM emp e, dept d
 				WHERE e.deptno = d.DEPTNO 
 				AND empno = 7369
+		// ex)
+				SELECT *
+				FROM SALGRADE
+				WHERE grade = 4
 	3) 다중 리스트형 객체
+		- 하나의 열의 데이터 : 배열, list
+			List<String>
+			List<Integer>
+			Double[]
+		- 객체의 List 데이터
+			List<Emp>
+			List<Dept>
+			SELECT ENAME 
+		sql	
+			FROM emp;
+			SELECT EMPNO 
+			FROM emp
+			WHERE DEPTNO = 10;
+			SELECT sal
+			FROM emp
+			WHERE job='SALESMAN';
+		interface
+			public List<String> getEnames();
+			public List<Integer> getEmpnos();
+			public Double[] getSalaries();
+		mapper
+			<select id="getEnames" resultType="string">
+			<select id="getEmpnos" resultType="int">
+			<select id="getSalaries" resultType="double">
+		service(테스트용)
+			dao2.getEnames().size()		dao2.getEnames().get(0)
+			dao2.getEmpnos().size()		dao2.getEmpnos().get(1)
+			dao2.getSalaries().length	dao2.getSalaries()[2]
+		// ex)
+			SELECT job
+			FROM EMP
+			WHERE DEPTNO=10
+		인터페이스
+		public List<String> getJobs();
+		XXMapper.xml
+		<select id="getJobs" resultType="string">
+			SELECT job
+			FROM EMP
+			WHERE DEPTNO=10
+		service(테스트용)
+			dao2.getJobs().size+":"+dao2.getJobs().get(0)
+	다중열과 다중의 처리(테이블 형식 테이터)
+		ex) 부서번호가 30인 사원의 정보를 출력하세요.
+		1) sql
+			select *
+			from emp
+			where deptno=30
+		2) vo
+			class Emp
+		3) public List<Emp> getEmpList30();
+		4) <select id="getEmpList30" resultType="emp">
+			select *
+			from emp
+			where deptno=30
+		5) service 확인
+			dao2.getEmpList30().size()
+
+2. 매개변수 유형
+	1) 단일
+	2) 객체형
+	3) Map
+3. 리턴유형/매개변수 복합형

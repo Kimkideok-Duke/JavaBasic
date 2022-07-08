@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+  <mapper namespace="springweb.a02_mvc.a03_dao.DaoHw0708">
+  	<select id="getLatestHired" resultType="Date">
+  		SELECT max(hiredate)
+		FROM emp
+  	</select>
+  	<select id="HighestSalinDept" resultType="Emp">
+  		SELECT *
+      FROM EMP
+      WHERE SAL IN(
+         SELECT max(sal)
+         FROM emp
+         WHERE DEPTNO=30
+      )
+  	</select>
+  	<select id="getEnameSalRange" resultType="String">
+  		SELECT ename
+      FROM emp
+      WHERE sal>=1000 AND sal<=3000
+  	</select>
+  	<select id="getEmpListHiredFirstQuater" resultType="Emp">
+  		SELECT empno, ename, TO_CHAR(hiredate,'Q'), hiredate
+      FROM emp
+      WHERE TO_CHAR(HIREDATE, 'Q')='1'
+  	</select>
+  	<select id="AvgSalbyDept" resultType="Emp">
+  		SELECT job, ROUND(AVG(sal)) 
+      FROM EMP
+      GROUP BY JOB
+  	</select>
+  </mapper>

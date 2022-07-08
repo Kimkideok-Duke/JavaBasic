@@ -41,6 +41,42 @@
  		WHERE e.deptno = d.deptno
  		AND empno=7369
  	</select>
+ 	<!-- 
+ 	SELECT ENAME 
+	FROM emp;
+	SELECT EMPNO 
+	FROM emp
+	WHERE DEPTNO = 10;
+	SELECT sal
+	FROM emp
+	WHERE job='SALESMAN';
+	-->
+ 	<select id="getEnames" resultType="string">
+	 	SELECT ENAME 
+		FROM emp
+ 	</select>
+ 	<select id="getEmpnos" resultType="int">
+ 		SELECT EMPNO 
+		FROM emp
+		WHERE DEPTNO = 10
+ 	</select>
+ 	<select id="getSalaries" resultType="double">
+ 		SELECT sal
+		FROM emp
+		WHERE job='SALESMAN'
+ 	</select>
+ 	
+ 	<select id="getJobs" resultType="string">
+ 		SELECT job
+		FROM EMP
+		WHERE DEPTNO=10
+ 	</select>
+ 	
+ 	<select id="getEmpList30" resultType="emp">
+			select *
+			from emp
+			where deptno=30
+	</select>
   	<!-- 
   	resultType의 가능한 변수 유형
   		int, double, string,

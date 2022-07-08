@@ -15,9 +15,7 @@
     <fullyQualifiedTypeName name="a01_diexp.z01_vo.Person"/>
     <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Value"/>
     <fullyQualifiedTypeName name="org.springframework.stereotype.Component"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="springweb.z01_vo.Emp"/>
-    <fullyQualifiedTypeName name="org.springframework.stereotype.Repository"/>
     <fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
     <fullyQualifiedTypeName name="springweb.a02_mvc.a03_dao.EmpDao"/>
     <fullyQualifiedTypeName name="org.springframework.stereotype.Controller"/>
@@ -25,5 +23,12 @@
     <fullyQualifiedTypeName name="springweb.a02_mvc.a02_service.EmpService"/>
     <fullyQualifiedTypeName name="org.springframework.ui.Model"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestMapping"/>
+    <fullyQualifiedTypeName name="springweb.a02_mvc.a04_vo.Dept"/>
+    <fullyQualifiedTypeName name="springweb.a02_mvc.a03_dao.DaoExp01"/>
+    <fullyQualifiedTypeName name="springweb.a02_mvc.a04_vo.DeptEmp01"/>
+    <fullyQualifiedTypeName name="org.springframework.stereotype.Repository"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="springweb.a02_mvc.a03_dao.DaoSalgrade"/>
+    <fullyQualifiedTypeName name="springweb.a02_mvc.a04_vo.Salgrade"/>
     <fullyQualifiedTypeName name="springweb.a02_mvc.a04_vo.Emp"/>
 </qualifiedTypeNameHistroy>
