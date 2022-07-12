@@ -105,4 +105,26 @@
 		WHERE 1=1
 		AND job LIKE '%'||#{job}||'%'
 	</select>
+	
+	
+	<!-- Hw0712 -->
+	<select id="getEmpEmpno" resultType="emp" parameterType="int">
+		SELECT empno, ename, job, sal, deptno
+		FROM emp
+		WHERE 1=1
+		AND empno LIKE '%'||#{empno}||'%'
+	</select>
+	<select id="getAvgSal" resultType="emp" parameterType="string">
+		SELECT job, round(avg(sal)) sal
+		FROM emp
+		WHERE job = #{job}
+		GROUP BY job
+	</select>
+	<select id="getMaxDeptno" resultType="emp" parameterType="int">
+		SELECT deptno, max(sal) sal
+		FROM emp
+		WHERE deptno = #{deptno}
+		GROUP BY deptno
+	</select>
+
   </mapper>

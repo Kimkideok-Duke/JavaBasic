@@ -32,5 +32,9 @@ public interface DaoExp01 {
 	public void insertSalgrade(Salgrade ins);
 	
 	public List<Emp> getEmpJob(String job);
-
+	
+//	Hw0712
+	public List<Emp> getEmpEmpno(int empno);
+	public List<Emp> getAvgSal(String job);
+	public List<Emp> getMaxDeptno(int deptno);
 }

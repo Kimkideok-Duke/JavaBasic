@@ -27,4 +27,30 @@ public class EmpController {
 		d.addAttribute("elist", service.getEmpJob(job));
 		return "WEB-INF/views/a02_mvc/a02_jobSearch.jsp";
 	}
+	
+//	Hw0712
+	// http://localhost:5080/springweb/getEmpEmpno.do
+	@RequestMapping("getEmpEmpno.do")
+	public String getEmpEmpno(
+			@RequestParam(value="empno", defaultValue="7") int empno,
+			Model d) {
+		d.addAttribute("elist", service.getEmpEmpno(empno));
+		return "WEB-INF/views/a02_mvc/Hw0712_empnoList.jsp";
+	}
+	// http://localhost:5080/springweb/getAvgSal.do
+	@RequestMapping("getAvgSal.do")
+	public String getAvgSal(
+			@RequestParam(value="job", defaultValue="") String job,
+			Model d) {
+		d.addAttribute("elist", service.getAvgSal(job));
+		return "WEB-INF/views/a02_mvc/Hw0712_getAvgSalJob.jsp";
+	}
+	// http://localhost:5080/springweb/getMaxDeptno.do
+	@RequestMapping("getMaxDeptno.do")
+	public String getMaxDeptno(
+			@RequestParam(value="deptno", defaultValue="0") int deptno,
+			Model d) {
+		d.addAttribute("elist", service.getMaxDeptno(deptno));
+		return "WEB-INF/views/a02_mvc/Hw0712_getMaxDeptno.jsp";
+	}
 }

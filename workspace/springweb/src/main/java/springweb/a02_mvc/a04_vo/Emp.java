@@ -60,6 +60,17 @@ public class Emp {
 		this.job = job;
 		this.sal = sal;
 	}
+	
+	public Emp(double sal, int deptno) {
+		super();
+		this.sal = sal;
+		this.deptno = deptno;
+	}
+	public Emp(String job, double sal) {
+		super();
+		this.job = job;
+		this.sal = sal;
+	}
 	public int getEmpno() {
 		return empno;
 	}

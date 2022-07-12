@@ -71,4 +71,14 @@ public class EmpService {
 	public List<Emp> getEmpJob(String job){
 		return dao2.getEmpJob(job);
 	}
+//	Hw0712
+	public List<Emp> getEmpEmpno(int empno){
+		return dao2.getEmpEmpno(empno);
+	}
+	public List<Emp> getAvgSal(String job) {
+		return dao2.getAvgSal(job);
+	}
+	public List<Emp> getMaxDeptno(int deptno) {
+		return dao2.getMaxDeptno(deptno);
+	}
 }
