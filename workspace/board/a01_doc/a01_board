@@ -1,0 +1,239 @@
+# 기본 스프링 환경 설정.
+
+# 메인리스트 화면 처리 1단계(기본 조회)
+0. 초기화면 구현
+	- form 요청값 : subject, writer
+	- list 화면 구성 : no, subject, writer, regdte,readcnt
+		번호, 제목, 작성자, 등록일, 조회수
+1. DB 구성
+	번호, 답글번호(답글처리/상세화면), 제목, 내용(상세화면 필요), 작성자, 조회수, 등록일, 수정일(상세)
+	create table board011(
+		no number primary key,
+		refno number,
+		subject varchar2(200),
+		content varchar2(2000),
+		writer varchar2(100),
+		readcnt number,
+		regdte date,
+		uptdte date
+	);
+	create sequence board011_seq
+		start with 1
+		minvalue 1
+		maxvalue 999999
+		increment by 1;
+	# sample 데이터 등록
+	insert into board011 values(board011_seq.nextval, 0, '첫번째글', '내용', '홍길동',
+		0, sysdate, sysdate);
+2. sql 작성
+	1) select *
+	   from board011
+	   order by regdte desc;
+	   
+3. VO 작성
+	1) 리스트 하는 VO
+		class Board{
+			private int no;
+			private int refno;
+			private String subject;
+			private String content;
+			private String writer;
+			private int readcnt;
+			private Date regdte;
+			private Date uptdte;
+			// 기본 생성자
+			// 전체 데이터 입력 생성자
+
+		}
+	2) 검색하는 VO(추후 추가-페이지 처리시)
+
+4. db 처리
+	1) sql 작성
+		SELECT *
+		FROM board011
+		WHERE 1=1
+		AND subject LIKE '%'||#{subject}||'%'
+		AND writer LIKE '%'||#{writer}||'%'
+		ORDER BY regdte DESC
+	2) vo
+
+	3) dao 메서드 명
+		public List<Board> boardList(Board sch)
+	4) 공통 mybatis 처리
+		board vo 등록 : board.vo.Board
+		<typeAlias alias="board" type="board.vo.Board"/>
+
+	5) mapper 처리
+		<select id="boardList" resultType="board" parameterType="">
+			SELECT *
+			FROM board011
+			WHERE 1=1
+			<if test="subject!=null">
+			AND subject LIKE '%'||#{subject}||'%'
+			</if>
+			<if test="writer!=null">
+			AND writer LIKE '%'||#{writer}||'%'
+			</if>
+			ORDER BY regdte DESC
+		</select>
+	# mapper 위 sql기준으로 mapper까지 등록 완료
+5. service(BoardService.java)
+	1) dao에 요청값 전달과 데이터 가져오기
+	- autowire 설정
+	@Autowired(reqiure=false)
+	private BoardDao dao;
+	public List<Board> boardList(Board sch){
+		return dao.boardList(sch); // Controller에서 넘겨온 Board을 통해서
+			// 요청값을 전달하고, 그 결과로 List<Board>를 받아서 다시 controller에 전달
+	}
+6. controller(BoardController.java) 모델 데이터 설정
+	@Autowired(reqiure=false)
+	private BoardService service;
+
+	public String boardList(Board sch, Model d){
+		// sch로 서비스에 요청값을 넘김과 동시에
+		// 최종 결과 List<Board> 객체를 blist라는 이름으로 view단에 모델명으로 넘긴다.
+		d.addAttribute("blist", service.boardList(sch));
+	}
+7. controller 요청값/모델 데이터 mapping 처리
+8. 전체 화면 테스트
+
+# 화면단 처리와 모델 데이터
+1. 화면 출력 내용(view)
+	1) 화면에 구성 처리(css, html, js)
+		front 화면의 구성을 만들기
+	2) 요청값에 대한 처리
+		query string : 요청key=요청value : 서버(controller)에 보낼 데이터
+		<form action="서버url" method="get/post">
+			<input name="요청key" value="요청value"
+			<input type="submit"
+
+	3) 모델데이터를 화면에 출력
+2. 위 화면 출력(view)에서 controller에 영향을 미치고, 영향받는 내용
+	특정한 controller단의 연동하는 메서드를 호출하는 방식
+	0) url mapping : /boardList.do
+		@RequestMapping("boardList.do")
+		public String boardList(Model d) {
+	1) 요청값 처리 : ? 요청key=요청value
+		ex) ?subject=첫번째글&writer=홍길동
+		public String boardList(@RequestParam("요청key") String name)
+		public String boardList(
+			@RequestParam("subject") String subject,
+			@RequestParam("writer") String writer
+		){
+			subject, writer : 클라이언트에서 전달할 요청값을 변수로 사용가능
+		}
+		public String boardList(Board sch){
+			// ?subject=첫번째글&writer=홍길동을 받으려면 Board 어떤 메서드가 선언?
+			// public void setSubject(String subject)
+			// public void setWriter(String writer)
+			// ?no=&price=이천원 ==> ?no=0&price=2000
+			// public void setNo(int no) // int no = null
+			// public void setPrice(int price) // int price = "이천원"
+		}
+
+	2) 모델데이터 처리
+
+3. controller ==> service --> dao
+	BoardController BoardService BoardDao (mybatis) mapper
+	요청 subject, writer							 parameterType="board"
+		Board ==> Board ==> Board					#{subject} getSubject()
+
+	mybatis에서 dao 	==> 	service 	===> 	controller		==>		view 모델 데이터 처리
+	dao상속받은				   서비스에서 받은    	   서비스에 온 데이터를
+	데이터있는 객체			   알고리즘, DB외에도   	view단에 전달할 내용 있으면
+	List<Board>	  		 모델처리를 위한 연동처리	 	 Model을 통해서
+	인터페이스							  			모델 key, 모델 데이터
+	BoardDao dao 
+	= 마이바티즈.boardList(sch);
+	마이바티즈에서 만들어준 실제 객체
+
+
+4. controller에서 모델 데이터를 화면에 보내기
+
+5. 화면에서 받아온 모델 데이터 처리하기
+
+
+
+
+# 메인리스트 화면 처리 2단계(계층형sql)
+
+# 메인리스트 화면 처리 3단계(페이징처리)
+
+# 게시판 등록 처리
+1. 기본 프로세스 정의(요청사항)
+	리스트화면에서 등록 버튼을 클릭시, 등록 화면으로 이동한다.
+	등록화면에서 글제목, 내용, 작성자를 입력을 하고, 등록버튼 클릭시, 등록처리가 진행된다.
+		메인화면이동 버튼 클릭시, 조회 메인화면으로 이동 처리된다.
+	등록이 되면 등록 성공과 함께 계속 등록하시겠습니까? 선택해서 확인을 누르면 등록이 되고,
+	취소를 누르면 메인화면으로 이동된다.
+2. DB 처리
+	1) sql 작성
+		insert into board values(board_seq.nextval, '첫번째글', '내용', '홍길동',
+						 0, sysdate, sysdate)
+		insert into board values(board_seq.nextval, #{subject}, #{content}, #{writer},
+						 0, sysdate, sysdate)
+	2) VO 확인
+	3) dao
+		public void insertBoard(Board ins);
+	4) mapper
+		<insert id="insertBoard" parameterType="board">
+			insert into board values(board_seq.nextval, #{subject}, #{content}, #{writer},
+						 0, sysdate, sysdate)
+		</insert>
+	5) service
+		public void insertBoard(Board ins){
+			service.insertBoard(ins);
+		}
+3. service단 호출
+4. controller
+	1) 등록 폼 초기화면 구성
+		@RequestMapping("boardInsertForm.do")
+		public String boardInsertForm(){
+			return "WEB-INF/views/a02_boardInsert.jsp";
+		}
+		@RequestMapping("boardInsert.do")
+		public String boardInsert(Board ins, Model d){
+			service.insertBoard(ins);
+			d.addAttribute("isInsert","Y");
+
+			return "WEB-INF/views/a02_boardInsert.jsp";
+		}
+	2) 등록 처리 프로세스
+5. view단 구성
+	1) 리스트 화면에서 등록화면으로 변경 처리
+		<input type="button" value="등록화면" onclick="goInsert()"/>
+		js) 
+		function goInsert(){
+			location.href="${path}/boardInsertForm.do"
+		}
+	2) 등록 폼 화면 구성 (a02_boardInsert.jsp)
+		boardInsert.do?subject=첫째글
+
+		<form action="${path}/boardInsert.do" method="post">
+			제목 : <input name="subject" value=""/>
+			내용 : <textarea name="content" >
+			작성자 : <input name="writer" value=""/>
+		js : 유효성 check(필수항목 처리)
+			<input type="button" value="등록" onclick="insertProc()"/>
+			function insertProc(){
+				if(confirm("등록하시겠습니까?")){
+					var subjectVal = $("[name=subject]").val();
+					if(subjectVal == ""){
+						alert("제목을 등록허세요");
+						$("[name=subject]").focus();
+						return; // 프로세스를 중단 처리
+					}
+					document.querySelector("form").submit();
+				}
+			}
+	3) view단(a02_boardInsert.jsp)
+		등록후 처리 내용 (js)
+		등록이 완료되었습니다. 계속 등록하시겠습니까?
+		var isInsert = "${isInsert}"
+		if(isInsert=="Y"){
+			if(!confirm("등록 성공했습니다\n계속등록하시겠습니까?")){
+				// 취소 입력시 조회화면 이동
+				location.href="${path/boardList.do"
+			}
+		}

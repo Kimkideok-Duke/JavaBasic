@@ -54,6 +54,12 @@ public class Emp {
 		this.hiredate = hiredate;
 		this.hiredate_q = hiredate_q;
 	}
+	public Emp(String ename, String job, double sal) {
+		super();
+		this.ename = ename;
+		this.job = job;
+		this.sal = sal;
+	}
 	public int getEmpno() {
 		return empno;
 	}

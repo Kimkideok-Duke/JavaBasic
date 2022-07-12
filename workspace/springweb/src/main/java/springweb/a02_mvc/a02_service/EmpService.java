@@ -1,6 +1,8 @@
 package springweb.a02_mvc.a02_service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,9 +50,25 @@ public class EmpService {
 
 		System.out.println("# 다중 열/다중 행 데이터 확인 #");
 		System.out.println(dao2.getEmpList30().size());
+		
+		System.out.println("# 직책별 평균 급여");
+		Emp jobEmp = dao2.getAvgSalJob("CLERK");
+		if(jobEmp!=null) System.out.println(jobEmp.getJob()+":"+
+				jobEmp.getSal());
+		
+		Map<String, Double> salmap = new HashMap<String, Double>();
+		salmap.put("start",1000.0);
+		salmap.put("end",3000.0);
+		System.out.println("검색된 사원의 건수(1000~3000):"
+								+dao2.getSalSch(salmap).size());
 
-		
-		
+		dao2.insertSalgrade(new Salgrade(7, 5001,6000));
+		System.out.println("# 급여 등급 등록 완료");
+				
 		return dao.getEmpList(sch);
+	}
+	
+	public List<Emp> getEmpJob(String job){
+		return dao2.getEmpJob(job);
 	}
 }

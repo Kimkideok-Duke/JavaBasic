@@ -81,4 +81,28 @@
   	resultType의 가능한 변수 유형
   		int, double, string,
   		boolean(DB - 0,1) -->
+  		
+  		
+	<select id="getAvgSalJob" resultType="emp" parameterType="string">
+		SELECT job, round(avg(sal)) sal
+		FROM emp
+		WHERE job = #{job}
+		GROUP BY job
+	</select>
+	<select id="getSalSch" resultType="emp" parameterType="hashMap">
+		SELECT *
+		FROM emp
+		WHERE sal BETWEEN #{start} AND #{end}
+	</select>
+	<insert id="insertSalgrade" parameterType="salgrade">
+		INSERT INTO salgrade011 values(#{grade},#{losal},#{hisal})
+	</insert>
+	
+	
+	<select id="getEmpJob" resultType="emp" parameterType="string">
+		SELECT ename, job, sal
+		FROM emp
+		WHERE 1=1
+		AND job LIKE '%'||#{job}||'%'
+	</select>
   </mapper>

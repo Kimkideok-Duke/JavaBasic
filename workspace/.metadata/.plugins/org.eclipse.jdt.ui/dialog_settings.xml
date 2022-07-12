@@ -68,7 +68,7 @@
 		<item key="OmitCallToSuper" value="false"/>
 	</section>
 	<section name="DialogBounds_AddUnimplementedConstructorsDialog">
-		<item key="DIALOG_X_ORIGIN" value="713"/>
+		<item key="DIALOG_X_ORIGIN" value="707"/>
 		<item key="DIALOG_Y_ORIGIN" value="306"/>
 		<item key="DIALOG_WIDTH" value="549"/>
 		<item key="DIALOG_HEIGHT" value="569"/>
@@ -92,7 +92,7 @@
 		<item key="RemoveFinal" value="false"/>
 	</section>
 	<section name="DialogBounds_GetterSetterTreeSelectionDialog">
-		<item key="DIALOG_X_ORIGIN" value="705"/>
+		<item key="DIALOG_X_ORIGIN" value="699"/>
 		<item key="DIALOG_Y_ORIGIN" value="239"/>
 		<item key="DIALOG_WIDTH" value="557"/>
 		<item key="DIALOG_HEIGHT" value="636"/>

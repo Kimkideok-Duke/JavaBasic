@@ -1,5 +1,11 @@
 package springweb.Homework;
 
+import java.util.Date;
+
+import org.springframework.stereotype.Repository;
+
+import springweb.a02_mvc.a04_vo.Emp;
+
 public class Hw0708 {
 //	2022-07-08
 //	[1단계:개념] 1. mybatis framework를 통해 데이터 베이스를 처리할려고 한다. 기본 환경 설정 구성을 예제를 통해서 기술하세요.

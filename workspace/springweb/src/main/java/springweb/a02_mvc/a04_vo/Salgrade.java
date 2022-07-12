@@ -2,8 +2,8 @@ package springweb.a02_mvc.a04_vo;
 
 public class Salgrade {
 	private int grade;
-	private int losal;
-	private int hisal;
+	private double losal;
+	private double hisal;
 	public Salgrade() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -20,16 +20,16 @@ public class Salgrade {
 	public void setGrade(int grade) {
 		this.grade = grade;
 	}
-	public int getLosal() {
+	public double getLosal() {
 		return losal;
 	}
-	public void setLosal(int losal) {
+	public void setLosal(double losal) {
 		this.losal = losal;
 	}
-	public int getHisal() {
+	public double getHisal() {
 		return hisal;
 	}
-	public void setHisal(int hisal) {
+	public void setHisal(double hisal) {
 		this.hisal = hisal;
 	}
 	

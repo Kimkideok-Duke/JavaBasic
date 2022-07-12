@@ -17,7 +17,7 @@
       )
   	</select>
   	<select id="getEnameSalRange" resultType="String">
-  		SELECT ename
+	  SELECT ename
       FROM emp
       WHERE sal>=1000 AND sal<=3000
   	</select>
