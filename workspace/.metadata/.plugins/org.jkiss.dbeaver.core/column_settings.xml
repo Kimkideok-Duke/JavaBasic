@@ -19,9 +19,9 @@
 		<column name="Name" visible="true" order="0" width="133"/>
 	</item>
 	<item id="scriptSelectorViewer">
-		<column name="Script" visible="true" order="0" width="326"/>
+		<column name="Script" visible="true" order="0" width="336"/>
 		<column name="Time" visible="true" order="1" width="335"/>
-		<column name="Info" visible="true" order="2" width="214"/>
-		<column name="Folder" visible="true" order="3" width="509"/>
+		<column name="Info" visible="true" order="2" width="216"/>
+		<column name="Folder" visible="true" order="3" width="498"/>
 	</item>
 </items>

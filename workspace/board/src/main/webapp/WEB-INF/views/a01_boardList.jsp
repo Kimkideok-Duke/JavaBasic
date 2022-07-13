@@ -35,6 +35,9 @@
    function goInsert(){
 		location.href="${path}/boardInsertForm.do"
 	}
+   function goDetail(no){
+   		location.href="${path}/boardDetail.do?no="+no;
+   }
 </script>
 </head>
 
@@ -52,7 +55,7 @@
        		value="${board.writer}"/>
        		<!-- Board sch -->
        <button class="btn btn-info" type="submit">Search</button>
-       <button type="button" onclick="goInsert()">등록화면</button>
+       <button class="btn btn-reg" type="button" onclick="goInsert()">등록화면</button>
     </nav>
    </form>
    <table class="table table-hover table-striped">
@@ -73,7 +76,7 @@
     </thead>   
     <tbody>
    	   <c:forEach var="bd" items="${blist}">
-       <tr><td>${bd.no}</td><td>${bd.subject}</td><td>${bd.writer}</td>
+       	   <tr ondblclick="goDetail(${bd.no})"><td>${bd.no}</td><td>${bd.subject}</td><td>${bd.writer}</td>
        	   <td><fmt:formatDate value="${bd.regdte}"/>
        	   </td><td>${bd.readcnt}</td></tr>
        </c:forEach>

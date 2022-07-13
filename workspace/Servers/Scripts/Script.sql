@@ -55,3 +55,20 @@ WHERE JOB = 'SALESMAN'
 GROUP BY JOB;
 
 SELECT * FROM emp;
+SELECT * FROM emp01;
+
+/*
+UPDATE EMP01
+	SET ename = #{ename},
+		job = #{job},
+		mgr = #{mgr},
+		sal = #{sal},
+		comm = #{comm},
+		deptno = #{deptno}
+WHERE empno = #{empno}
+
+DELETE
+FROM EMP01
+WHERE empno = #{empno}
+*/
+

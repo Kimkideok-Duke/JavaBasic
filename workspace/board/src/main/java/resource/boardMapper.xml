@@ -19,6 +19,29 @@
 		insert into board011 values(board_seq.nextval, 0, #{subject}, #{content}, #{writer},
 						 0, sysdate, sysdate)
 	</insert>
+	
+	<select id="getBoardDetail" resultType="board" parameterType="int">
+		select * from board011 where no = #{no}
+	</select>
+	
+	<update id="readCountup" parameterType="int">
+		update board011
+			set readcnt = readcnt+1
+			where no = #{no}
+	</update>
+	
+	<update id="updateBoard" parameterType="board">
+		UPDATE board011
+			SET subject = #{subject},
+				content = #{content},
+				uptdte = sysdate
+		WHERE NO = #{no}
+	</update>
+	<delete id="deleteBoard" parameterType="int">
+		DELETE
+		FROM board011
+		WHERE NO = #{no}
+	</delete>
 </mapper>
 
 

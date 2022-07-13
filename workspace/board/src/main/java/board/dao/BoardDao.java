@@ -11,4 +11,9 @@ public interface BoardDao {
 	public List<Board> boardList(Board sch);
 	
 	public void insertBoard(Board ins);
+	
+	public Board getBoardDetail(int no);
+	public void readCountup(int no);
+	public void updateBoard(Board upt);
+	public void deleteBoard(int no);
 }

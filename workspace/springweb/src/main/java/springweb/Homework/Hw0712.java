@@ -101,6 +101,7 @@ public class Hw0712 {
 
 //	[1단계:확인] 3. 현재 만들어진 dao(DaoExp01)를 기준으로 화면을 만들어 요청값과 모델 데이터를 처리하세요
 //	         1) 사원번호로 상세 사원정보 검색
+/*
 dao
     public List<Emp> getEmpEmpno(int empno);
 mapper
@@ -167,4 +168,5 @@ controller
         d.addAttribute("elist", service.getMaxDeptno(deptno));
         return "WEB-INF/views/a02_mvc/Hw0712_getMaxDeptno.jsp";
     }
+*/
 }

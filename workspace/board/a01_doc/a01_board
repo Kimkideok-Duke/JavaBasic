@@ -133,8 +133,18 @@
 		}
 
 	2) 모델데이터 처리
+		public String getList(Model d){
+			d.addAttribute("모델명", service.XXXX);
+		}
+	3) 화면(view)
+		${모델명}
+		${모델명.property}
+3. view <==> controller <==> service <==> dao <==> mybatis <==> DB서버
+	브라우저 http://..... 주소 ==> mapping되는 서버의 controller 메서드 호출
+	브라우저 http://..... 주소 ?key=value
+		==> mapping되는 서버의 controller 메서드 @RequestParam("key") String
 
-3. controller ==> service --> dao
+
 	BoardController BoardService BoardDao (mybatis) mapper
 	요청 subject, writer							 parameterType="board"
 		Board ==> Board ==> Board					#{subject} getSubject()
@@ -150,11 +160,15 @@
 
 
 4. controller에서 모델 데이터를 화면에 보내기
+	d.addAttribute("msg", "Y");
+	d.addAttribute("emp",service.getDetail(1000))	public Emp getDetail(int empno)
+	d.addAttribute("empList", service.getEmpList(sch)); public List<Emp> getEmpList;
 
 5. 화면에서 받아온 모델 데이터 처리하기
-
-
-
+	${msg}
+	${emp.empno} ${emp.ename} ${emp.job}
+	<c:forEach var="emp" items="${empList}"
+		${emp.empno} ${emp.ename} ...
 
 # 메인리스트 화면 처리 2단계(계층형sql)
 
@@ -210,6 +224,7 @@
 	2) 등록 폼 화면 구성 (a02_boardInsert.jsp)
 		boardInsert.do?subject=첫째글
 
+		action="${path}/boardInsert.do"
 		<form action="${path}/boardInsert.do" method="post">
 			제목 : <input name="subject" value=""/>
 			내용 : <textarea name="content" >
@@ -230,10 +245,152 @@
 	3) view단(a02_boardInsert.jsp)
 		등록후 처리 내용 (js)
 		등록이 완료되었습니다. 계속 등록하시겠습니까?
-		var isInsert = "${isInsert}"
+		var isInsert = "${isInsert}" // controller 모델데이터 받기
 		if(isInsert=="Y"){
 			if(!confirm("등록 성공했습니다\n계속등록하시겠습니까?")){
 				// 취소 입력시 조회화면 이동
 				location.href="${path/boardList.do"
 			}
 		}
+6. 첨부 파일 처리
+
+# 상세화면 로딩
+1. sql
+	1) select * from board where no = #{no}
+	2) update board
+		set readcnt = readcnt+1
+		where no = #{no}
+2. vo 확인
+3. dao/mapper : 
+	public Board getBoardDetail(int no);
+	public void readCountup(int no);
+4. service
+	public Board getBoardDetail(int no){
+		dao.readCountup(no);
+
+		return dao.getBoardDetail(no);
+	}
+5. view단 상세화면 기본 인터페이스 결정
+	리스트 화면에서 특정 row클릭시 get 방식으로 no와 함께 상세화면 controller 호출
+	<tr ondbclick="goDetail(${board.no})">
+	function goDetail(no){
+		location.href="${path}/boardDetail.do?no="+no;
+	}
+6. controller
+	기능 메서드 선언/요청값 처리
+	@RequestMapping("boardDetail.do")
+	public String boardDetail(@RequestParam("no") int no, Model d){
+		d.addAttribute("board", service.getBoardDetail(no));
+
+		return "상세화면 jsp 페이지";
+	}
+7. view
+	<input name="no" value="${board.no}">
+	<input name="subject" value="${board.subject}">
+	<input name="writer" value="${board.writer}">
+	<textarea name="content">${board.content}</textarea>
+	<input name="regdte" value="${board.regdte}">
+	<input name="uptdte" value="${board.uptdte}">
+
+# 수정처리
+
+# 삭제처리
+
+# 화면 구조
+	
+	1. 모델 데이터 처리
+		<input name="no" value="${board.no}">
+		날짜 (주의 : 수정시 - name을 넣으면 vo 못받아서 404 발생)
+		 보기위한 것
+		<input class="form-control" 
+               value='<fmt:formatDate value="${board.regdte}" type="both"/>'/>
+	2. 화면 ui
+		<div class="input-group mb-3">
+			<div class="input-group-prepend">
+				<span class="text-center input-group-text">제 목</span>
+			</div>
+			<!-- 타이틀 -->
+			<input name="subject" class="form-control" 
+				value="${board.subject}" placeholder="제목입력하세요"/>
+			<!-- 입력 항목 -->
+		</div>
+# 수정 삭제
+1. sql 작성
+	UPDATE board011
+		SET subject = #{subject},
+			content = #{content},
+			uptdte = sysdate
+	WHERE NO = #{no}
+
+	DELETE
+	form board011
+	WHERE NO = #{no}
+2. vo 확인 : board
+3. dao 기능메서드
+	public void updateBoard(Board upt);
+	public void deleteBoard(int no);
+4. mapper 추가
+	<update id="updateBoard" parameterType="board">
+		UPDATE board011
+			SET subject = #{subject},
+				content = #{content},
+				uptdte = sysdate
+		WHERE NO = #{no}
+	</update>
+	<delete id="deleteBoard" parameterType="int">
+		DELETE
+		form board011
+		WHERE NO = #{no}
+	</delete>
+5. service 기능 추가.
+6. 뷰(jsp)수정 처리 ui
+	수정버튼 : <Button type="button" onclick="updateProc()">수정</Button>
+	삭제버튼 : <Button type="button" onclick="deleteProct()">삭제</Button>
+	답글버튼 : <Button type="button" onclick="replyProc()">답글</Button>
+	function updateProc(){
+		if(confirm("수정하시겠습니끼?")){
+			// 유효성 check
+			$("form").attr("action","${path}/boardUpdate.do");
+			$("form").submit();
+		}
+	}
+	function deleteProct(){
+		if(confirm("삭제하시겠습니까?")){
+			$("form").attr("action","${path}/boardDelete.do");
+			$("form").submit();
+		}
+	}
+	function replyProc(){
+
+	}
+7. 수정 처리 controller
+	@RequestMapping("updateBoard.do")
+	public String updateBoard(Board upt, Model d) {
+		System.out.println("수정:"+upt.getSubject());
+		d.addAttribute("board",service.updateBoard(upt));
+		d.addAttribute("proc","upt");
+		return "WEB-INF/views/a03_boardDetail.jsp";
+	}
+	@RequestMapping("deleteBoard.do")
+	public String deleteBoard(@RequestParam("no") int no, Model d) {
+		System.out.println("삭제:"+no);
+		d.addAttribute("proc","del");
+		return "WEB-INF/views/a03_boardDetail.jsp";
+	}
+	service
+	public Board updateBoard(Board upt){
+		dao.updateBoard(upt);
+		return dao.detailBoard(upt.getEmpno());
+	}
+8. 뷰(jsp) 수정 처리후 처리
+	js
+	var proc = "${proc}"
+	if(proc=="upt"){
+		if(confirm("수정성공\n조회리스트 화면으로 이동하시겠습니까?")){
+			location.href="${path}/boardList.do";
+		}
+	}
+	if(proc=="del"){
+		alert("삭제성공\n조회 리스트화면으로 이동")
+		location.href="${path}/boardList.do";
+	}

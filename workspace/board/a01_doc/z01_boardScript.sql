@@ -27,4 +27,25 @@ create table board011(
    	from board011
    	order by regdte desc;
    	
-SELECT * FROM BOARD;
+SELECT * FROM BOARD011;
+
+UPDATE board011
+	SET subject = '제목수정1',
+		content = '내용수정2',
+		uptdte = sysdate
+WHERE NO = 1;
+
+/*
+UPDATE board011
+	SET subject = #{subject},
+		content = #{content},
+		uptdte = sysdate
+WHERE NO = #{no};
+
+DELETE
+form board011
+WHERE NO = #{no};
+*/
+DELETE
+form board011
+WHERE NO=1;

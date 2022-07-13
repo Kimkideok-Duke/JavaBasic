@@ -127,4 +127,27 @@
 		GROUP BY deptno
 	</select>
 
+	<!-- Hw0713 -->
+	<select id="getEmp01" resultType="emp">
+		SELECT * FROM emp01
+	</select>
+	<select id="getDetail" resultType="emp" parameterType="int">
+		SELECT * FROM emp01
+		WHERE empno = #{empno}
+	</select>
+	<update id="updateEmp01" parameterType="emp">
+		UPDATE EMP01
+			SET ename = #{ename},
+				job = #{job},
+				mgr = #{mgr},
+				sal = #{sal},
+				comm = #{comm},
+				deptno = #{deptno}
+		WHERE empno = #{empno}
+	</update>
+	<delete id="deleteEmp" parameterType="int">
+		DELETE
+		FROM EMP01
+		WHERE empno = #{empno}
+	</delete>
   </mapper>

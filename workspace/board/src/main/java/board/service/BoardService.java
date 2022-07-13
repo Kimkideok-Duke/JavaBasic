@@ -21,4 +21,16 @@ public class BoardService {
 	public void insertBoard(Board ins) {
 		dao.insertBoard(ins);
 	};
+	
+	public Board getBoardDetail(int no){
+		dao.readCountup(no);
+		return dao.getBoardDetail(no);
+	}
+	public Board updateBoard(Board upt) {
+		dao.updateBoard(upt); // 수정과 함께 수정된 상세 데이터
+		return dao.getBoardDetail(upt.getNo());
+	}
+	public void deleteBoard(int no) {
+		dao.deleteBoard(no);
+	}
 }

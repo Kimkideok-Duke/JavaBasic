@@ -37,4 +37,10 @@ public interface DaoExp01 {
 	public List<Emp> getEmpEmpno(int empno);
 	public List<Emp> getAvgSal(String job);
 	public List<Emp> getMaxDeptno(int deptno);
+
+// 	Hw0713
+	public List<Emp> getEmp01();
+	public Emp getDetail(int empno);
+	public void updateEmp01(Emp upt);
+    public void deleteEmp(int empno);
 }
