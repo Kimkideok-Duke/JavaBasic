@@ -81,4 +81,19 @@ public class EmpService {
 	public List<Emp> getMaxDeptno(int deptno) {
 		return dao2.getMaxDeptno(deptno);
 	}
+	
+	// Hw0713
+	public List<Emp> getEmp01List(){
+		return dao2.getEmp01List();
+	}
+	public Emp getDetail(int empno) {
+		return dao2.getDetail(empno);
+	}
+	public Emp updateEmp01(Emp upt) {
+		dao2.updateEmp01(upt);
+		return dao2.getDetail(upt.getEmpno());
+	}
+    public void deleteEmp(int empno) {
+    	dao2.deleteEmp(empno);
+    }
 }

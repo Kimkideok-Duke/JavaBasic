@@ -39,7 +39,7 @@ public interface DaoExp01 {
 	public List<Emp> getMaxDeptno(int deptno);
 
 // 	Hw0713
-	public List<Emp> getEmp01();
+	public List<Emp> getEmp01List();
 	public Emp getDetail(int empno);
 	public void updateEmp01(Emp upt);
     public void deleteEmp(int empno);

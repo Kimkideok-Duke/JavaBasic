@@ -53,4 +53,29 @@ public class EmpController {
 		d.addAttribute("elist", service.getMaxDeptno(deptno));
 		return "WEB-INF/views/a02_mvc/Hw0712_getMaxDeptno.jsp";
 	}
+	
+	// Hw0713
+	// http://localhost:5080/springweb/getEmp01List.do
+	@RequestMapping("getEmp01List.do")
+	public String getEmp01List(Model d) {
+		d.addAttribute("elist", service.getEmp01List());
+		return "WEB-INF/views/a02_mvc/Hw0713_emp01List.jsp";
+	}
+	@RequestMapping("getDetail.do")
+	public String getDetail(@RequestParam("empno") int empno, Model d) {
+		d.addAttribute("emp", service.getDetail(empno));
+		return "WEB-INF/views/a02_mvc/Hw0713_empDetail.jsp";
+	}
+	@RequestMapping("updateEmp01.do")
+	public String updateEmp01(Emp upt, Model d) {
+		d.addAttribute("emp", service.updateEmp01(upt));
+		d.addAttribute("proc", "upt");
+		return "WEB-INF/views/a02_mvc/Hw0713_empDetail.jsp";
+	}
+	@RequestMapping("deleteEmp.do")
+	public String deleteEmp(@RequestParam("empno") int empno, Model d) {
+		service.deleteEmp(empno);
+		d.addAttribute("proc", "del");
+		return "WEB-INF/views/a02_mvc/Hw0713_empDetail.jsp";
+	}
 }

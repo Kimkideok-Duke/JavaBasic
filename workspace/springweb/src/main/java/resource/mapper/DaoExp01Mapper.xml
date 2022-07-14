@@ -128,7 +128,7 @@
 	</select>
 
 	<!-- Hw0713 -->
-	<select id="getEmp01" resultType="emp">
+	<select id="getEmp01List" resultType="emp">
 		SELECT * FROM emp01
 	</select>
 	<select id="getDetail" resultType="emp" parameterType="int">
