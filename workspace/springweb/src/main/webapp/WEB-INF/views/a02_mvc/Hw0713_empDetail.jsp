@@ -59,7 +59,7 @@
          <div class="input-group-prepend">
             <span class="text-center input-group-text">사원명</span>
          </div>
-         <input name="subject" class="form-control" 
+         <input name="ename" class="form-control" 
             value="${emp.ename}" placeholder="제목입력하세요"/>   
       </div>
       <div class="input-group mb-3">
@@ -80,8 +80,9 @@
          <div class="input-group-prepend">
             <span class="text-center input-group-text">입사일</span>
          </div>
-		   <input class="form-control" 
-               value='<fmt:formatDate value="${emp.hiredate}" type="both"/>'/>
+		   <input name="hiredate_s" class="form-control" 
+               value='<fmt:formatDate value="${emp.hiredate}"
+               pattern="yyyy-MM-dd"/>'placeholder="YYYY-MM-DD"/>
       </div>
       <div class="input-group mb-3">
          <div class="input-group-prepend">

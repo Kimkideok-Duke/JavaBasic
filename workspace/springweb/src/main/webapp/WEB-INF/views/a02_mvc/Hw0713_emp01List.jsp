@@ -61,14 +61,11 @@
       </tr>
     </thead>   
     <tbody>
-       <c:forEach var="emp" items="${empList}">
+       <c:forEach var="emp" items="${elist}">
        <tr ondblclick="goDetail(${emp.empno})"><td>${emp.empno}</td><td>${emp.ename}</td>
        	   <td>${emp.job}</td><td>${emp.sal}</td>
        	   <td>${emp.deptno}</td></tr>
        </c:forEach>
-       
-       <tr><td></td><td></td><td></td><td></td><td></td></tr>
-       <tr><td></td><td></td><td></td><td></td><td></td></tr>
     </tbody>
    </table>    
     

@@ -332,4 +332,22 @@ function goMain(){
 }
 </script>
 */
+
+/*
+2) controller
+    @RequestMapping("emp.do") // 이 컨트롤에 공통된 방식 선언
+    class EmpController
+    // http://localhost:7080/springweb/emp.do?method=list
+    @RequestMapping(params="method=list")
+
+    // http://localhost:7080/springweb/emp.do?method=detail
+    @RequestMapping(params="method=detail")
+
+    // http://localhost:7080/springweb/emp.do?method=update
+    @RequestMapping(params="method=update")
+
+    // http://localhost:7080/springweb/emp.do?method=delete
+    @RequestMapping(params="method=delete")
+
+*/
 }

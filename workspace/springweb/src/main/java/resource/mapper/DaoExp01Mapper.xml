@@ -140,6 +140,7 @@
 			SET ename = #{ename},
 				job = #{job},
 				mgr = #{mgr},
+				hiredate = to_date(#{hiredate_s},'YYYY-MM-DD'),
 				sal = #{sal},
 				comm = #{comm},
 				deptno = #{deptno}
