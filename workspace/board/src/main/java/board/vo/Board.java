@@ -1,6 +1,8 @@
 package board.vo;
 
 import java.util.Date;
+
+import org.springframework.web.multipart.MultipartFile;
 // board.vo.Board
 public class Board {
 	private int no;
@@ -11,6 +13,7 @@ public class Board {
 	private int readcnt;
 	private Date regdte;
 	private Date uptdte;
+	private MultipartFile report;
 	public Board() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -85,6 +88,12 @@ public class Board {
 	}
 	public void setUptdte(Date uptdte) {
 		this.uptdte = uptdte;
+	}
+	public MultipartFile getReport() {
+		return report;
+	}
+	public void setReport(MultipartFile report) {
+		this.report = report;
 	}
 	
 }

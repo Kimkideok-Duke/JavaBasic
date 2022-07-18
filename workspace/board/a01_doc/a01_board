@@ -396,3 +396,5 @@
 		alert("삭제성공\n조회 리스트화면으로 이동")
 		location.href="${path}/boardList.do";
 	}
+
+# 게시판의 기본 DB설계를 통해서 CRUD(create/read/update/delete) 등록/읽기/수정/삭제 처리

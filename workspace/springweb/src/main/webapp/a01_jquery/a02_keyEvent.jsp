@@ -82,6 +82,8 @@
       },function(){
         $("h2").show();
       });
+      // # change() 요소객체의 값이 변경될 때, 처리하는 이벤트
+      // $
    });
    
 </script>
@@ -107,7 +109,8 @@
      <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
        <input class="form-control mr-sm-2" placeholder="제목" />
        <input class="form-control mr-sm-2" placeholder="내용" />
-       <button class="btn btn-info" type="submit">Search</button>
+       <select name="sel01" class="form-control mr-sm-2">
+        <option value="7800">관리자</option>
     </nav>
    </form>
    <table class="table table-hover table-striped">

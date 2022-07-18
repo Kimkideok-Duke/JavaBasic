@@ -45,7 +45,7 @@
 
 </div>
 <div class="container">
-      <form id="frm01" action="${path}/boardInsert.do" 
+      <form id="frm01" enctype="multipart/form-data" action="${path}/boardInsert.do" 
        class="form"  method="post">
       <div class="input-group mb-3">
          <div class="input-group-prepend">
@@ -67,6 +67,13 @@
          </div>
          <textarea name="content" class="form-control" 
             value="" placeholder="내용 입력하세요" /></textarea>
+      </div>
+      <div class="input-group mb-3">
+         <div class="input-group-prepend">
+            <span class="text-center input-group-text">파일첨부</span>
+         </div>
+         <input type="file" name="report" class="form-control" 
+            placeholder="내용 입력하세요"/>
       </div>
       <div class="text-right">
       	<button type="button" onclick="insertProc()" class="btn btn-success">등록</button>

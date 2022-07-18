@@ -43,6 +43,12 @@
       });
       // ex) 3X3 빙고 테이블, 빙고 클릭, 해당 테이블 특정 cell 배경 빨강
       // var rIdx = parseInt(Math.random())
+      // $("다중요소객체").each(function(idx){ $(this) : 포함된 단위 객체 });
+      // <td>1
+      // <td>2
+      // <td>3
+      // <td>4
+      // <td>5
       $("td").each(function(idx){
         $(this).text(idx+1);
       });
@@ -60,7 +66,7 @@
       })
       */
 
-     
+
       // $("h1"), $("#아이디명") : id="btn01"
       // $(".클래스명") class="cls01"
       // $("[속성=속성값]")

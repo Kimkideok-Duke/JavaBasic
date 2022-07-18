@@ -46,21 +46,55 @@
                   // 5) success : function(data){} : 서버에서 전달해주는 데이터(data)
                   // 6) error : function(xhr, status, error){}
                   //     : 서버와 통신에 에러가 발생시 처리해주는 메서드.
-                  
+
 		// [1단계:확인] 4. 아래의 내용을 처리하는 서버단 ajax controller을 메서드를 선언하세요 
 		//             1) http://localhost:7080/springweb/ajax11.do?name=홍길동&height=175.5&weight=68.5
 		//                화면출력 {"p01",{"name":"홍길동","height":175.5,"weight":68.5}}
 		//             2) http://localhost:7080/springweb/ajax12.do?radius=50.2
 		//                화면출력 {"circle":{radius:50.2,dimension:7912.92}}
+
 		// [1단계:확인] 5. 아래 내용을 ajax 통해 controller에서 모델 값을 처리를 통해서 입력과 동시에 출력되게 하세요
 		//             물건명 :[    ] 가격:[     ] 수량:[     ]
-		//             ==> @@을 @@@원에 @@게 구매하여 총비용이 @@@ 원입니다.  
+		//             ==> @@을 @@@원에 @@게 구매하여 총비용이 @@@ 원입니다.
+                  // 1) 요청값 vo 확인
+                  // 2) controller :
+                  //  http://localhost:5080/springweb/ajax13.do?name=사과&price=3000&cnt=2
+                  // 3) 화면 및 이벤트 처리
+                      name = "name" name="price" name="cnt"
+                      class="prodCls"
+                      $(".prodCls").keyup(function(){
+
+                      });
+                  // 4) ajax 처리
+                      $.ajax(function(){
+                        url:"${path}/ajax13.do",
+                        data:$("form").serialze(),
+                        dataType:"json",
+                        success:function(data){
+                          var prod = data.prodect
+                          var show=prod.name+"을 "+prod.price+"원에 "+prod.cnt
+                            +"개 구매하여 총 비용이 "+prod.tot+"원 입니다."
+                          $("#resultTxt").show;
+                        }
+                      })
       --%>
       // [1단계:확인] 2. jquery에서  each 구문을 통한 객체형 배열 처리의 매개변수을 값을 활용하여, 학생들의 이름/국어/영어/수학 점수를 테이블에 출력하세요
       var std1=["홍길동", 90, 80, 70]
       $("#tab01 td").each(function(idx){
         $(this).text(std1[idx++]);
       })
+
+      var studList=[
+          {name: "홍길동", kor:80, eng: 90, math: 100},
+          {name: "김길동", kor: 85, eng: 92, math: 80}, 
+          {name: "마길동", kor: 87, eng: 80, math: 90}
+      ]
+      var addHTML = "";
+      $(studList).each(function(idx, stud){
+          addHTML += "<tr><td>"+stud.name+"</td><td>"+stud.kor+
+              "<Itd><td>"+stud.eng+"</td><td>"+stud.math+"</td></tr>";
+      });
+      $("#showData").htm1(addHTML);
    });
 </script>
 </head>
@@ -70,6 +104,18 @@
     <tr><th>이름</th><th>국어</th><th>영어</th><th>수학</th><tr>
     <tr><td></td><td></td><td></td><td></td><tr>
   </table>
+
+  <div class="container">
+   <form id="frm01" class="form"  method="post">
+     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+       <input name="pname" value="" class="form-control mr-sm-2" placeholder="물건명" />
+       <input name="price" value="0" class="form-control mr-sm-2" placeholder="가격" />
+       <input name="cnt" value="0" class="form-control mr-sm-2" placeholder="갯수" />
+       <button class="btn btn-info" type="submit">Search</button>
+    </nav>
+   </form>
+   <h3 id="resultTxt">
+  </div>
 <body>
 </body>
 </html>

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import board.vo.Board;
+import board.vo.BoardFile;
 // board.dao.BoardDao
 @Repository
 public interface BoardDao {
@@ -16,4 +17,6 @@ public interface BoardDao {
 	public void readCountup(int no);
 	public void updateBoard(Board upt);
 	public void deleteBoard(int no);
+	
+	public void insertFile(BoardFile file);
 }

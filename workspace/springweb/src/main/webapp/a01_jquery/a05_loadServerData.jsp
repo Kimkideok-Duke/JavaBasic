@@ -34,6 +34,13 @@
   $.ajax({속성:속성값,....})
   1) url : 요청주소 - url mapping(controller의 기능 메서드)
   2) data : 요청 query string ex) id=@@@&pass=@@@
+      - 1단계 : data:"id=@@@&pass=@@@"
+      - 2단계 : data:$("form").serialize(),
+          form하위에 종속된 모든 요소 객체들을 name/value으로 mapping
+          하여 모두 다 자동으로 query string을 변경하여 전송한다.
+      - 3단계 : data:{name:"홍길동",age:25}
+          json형 객체로 넘기더라도 자동으로 속성=속성값 형태의 query string
+          으로 만들어 전달한다. ==> ?name=홍길동&age=25
   3) type : get/post
   4) dataType : 결과를 받은 데이터 유형 [json], xml, text
   5) success : function(data){} : 서버에서 전달해주는 데이터(data)
@@ -103,6 +110,15 @@
      <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
        <input class="form-control mr-sm-2" placeholder="제목" />
        <input class="form-control mr-sm-2" placeholder="내용" />
+       <button class="btn btn-info" id="btn05" type="button">serialize처리</button>
+<script>
+    $("btn05").click(function(){
+      $("h2").text($("#frm01").serialize());
+    })
+</script>
+
+
+
        <button class="btn btn-info" id="btn01" type="button">서버데이터 호출1</button>
        <button class="btn btn-info" id="btn02" type="button">서버데이터 호출2</button>
        <button class="btn btn-info" id="btn03" type="button">서버데이터 호출3</button>

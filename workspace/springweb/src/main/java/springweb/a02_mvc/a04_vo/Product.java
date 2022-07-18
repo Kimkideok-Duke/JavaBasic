@@ -4,6 +4,13 @@ public class Product {
 	private String pname;
 	private int price;
 	private int cnt;
+	private int tot;
+	public int getTot() {
+		return tot;
+	}
+	public void setTot(int tot) {
+		this.tot = tot;
+	}
 	public Product() {
 		super();
 		// TODO Auto-generated constructor stub

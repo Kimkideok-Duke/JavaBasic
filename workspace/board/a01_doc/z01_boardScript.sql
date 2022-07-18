@@ -1,3 +1,4 @@
+DROP TABLE BOARD011;
 create table board011(
 		no number primary key,
 		refno number,
@@ -6,7 +7,7 @@ create table board011(
 		writer varchar2(100),
 		readcnt number,
 		regdte date,
-		uptdte date
+		uptdte DATE
 	);
 	create sequence board011_seq
 		start with 1
@@ -43,11 +44,11 @@ UPDATE board011
 WHERE NO = #{no};
 
 DELETE
-form board011
+from board011
 WHERE NO = #{no};
 */
 DELETE
-form board011
+from board011
 WHERE NO=1;
 
 DROP SEQUENCE board_seq01;
@@ -57,5 +58,15 @@ CREATE SEQUENCE board_seq01
 	MAXVALUE 999999
 	increment BY 1;
 
-INSERT INTO board values(
-	board_seq.nextval,0,'첫번째글','내용','홍길동',0,sysdate,sysdate);	
+INSERT INTO board011 values(
+	board_seq01.nextval,0,'첫번째글','내용','홍길동',0,sysdate,sysdate);	
+
+create table boardfile(
+	no number,
+	path varchar2(100),
+	fname varchar2(100),
+	regdte date,
+	uptdte date,
+	etc varchar2(200)
+);
+SELECT * FROM boardfile;
