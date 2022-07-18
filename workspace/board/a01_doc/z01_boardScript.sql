@@ -49,3 +49,13 @@ WHERE NO = #{no};
 DELETE
 form board011
 WHERE NO=1;
+
+DROP SEQUENCE board_seq01;
+CREATE SEQUENCE board_seq01
+	start WITH 1
+	MINVALUE 1
+	MAXVALUE 999999
+	increment BY 1;
+
+INSERT INTO board values(
+	board_seq.nextval,0,'첫번째글','내용','홍길동',0,sysdate,sysdate);	

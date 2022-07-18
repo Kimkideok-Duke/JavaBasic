@@ -383,6 +383,8 @@
 		return dao.detailBoard(upt.getEmpno());
 	}
 8. 뷰(jsp) 수정 처리후 처리
+	상세검색 데이터 처리와 동일하게 수정된 데이터를 모델데이터흫 받아서, el로 출력한다.
+	<input type="text" name="no"
 	js
 	var proc = "${proc}"
 	if(proc=="upt"){

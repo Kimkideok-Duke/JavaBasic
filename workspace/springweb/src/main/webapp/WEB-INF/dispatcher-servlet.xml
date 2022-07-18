@@ -58,9 +58,33 @@
       </bean>
       <!-- 
       3. mybastis에서 자동으로 상속받는 실제 객체를 만들어 주는 dao 인터페이스가 있는 위치
+      	추가 패키지 value="패키지1,패키지2,..."
       springweb.a02_mvc.a03_dao
       -->
       <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
       	<property name="basePackage" value="springweb.a02_mvc.a03_dao"/>
+      </bean>
+      <!-- 
+      # dafault view는 jsp/html
+      1. 추가하여 어떤 경우에는 json 데이터도 출력하고, 어떤 경우에는 파일을 다운로드 할려면 view을 선택적으로
+     	할 수 있는 container에서 선언하여야 한다.
+      -->
+      <!--
+      2. jsp 뷰 선언
+      -->
+      <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+      	<property name="order" value="1"/>
+      </bean>
+      <!--
+      3. 기타 뷰 (json, 파일다운로드, 엑셀 다운로드 등등)
+      -->
+      <bean id="btnViewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver">
+      	<property name="order" value="0"/>
+      </bean>
+      <!--
+      4. json뷰
+      -->
+      <bean id="pageJsonReport" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
+      	<property name="contentType" value="text/html;charset=utf-8"/>
       </bean>
 </beans>

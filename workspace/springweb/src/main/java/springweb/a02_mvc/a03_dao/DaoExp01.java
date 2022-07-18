@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import springweb.a02_mvc.a04_vo.DeptEmp01;
 import springweb.a02_mvc.a04_vo.Emp;
 import springweb.a02_mvc.a04_vo.Salgrade;
+import springweb.a02_mvc.a04_vo.Dept;
 
 @Repository
 public interface DaoExp01 {
@@ -43,4 +44,6 @@ public interface DaoExp01 {
 	public Emp getDetail(int empno);
 	public void updateEmp01(Emp upt);
     public void deleteEmp(int empno);
+    
+    public List<Dept> getDeptList(Map<String, String> map);
 }

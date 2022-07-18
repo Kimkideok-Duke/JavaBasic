@@ -151,4 +151,16 @@
 		FROM EMP01
 		WHERE empno = #{empno}
 	</delete>
+	
+	<select id="getDeptList" resultType="dept" parameterType="hashMap">
+		select *
+		from dept
+		where 1=1
+		<if test="dname != null">
+		and dname like '%'||#{dname}||'%'
+		</if>
+		<if test="loc !=null ">
+		and loc like '%'||#{loc}||'%'			
+		</if>
+	</select>
   </mapper>

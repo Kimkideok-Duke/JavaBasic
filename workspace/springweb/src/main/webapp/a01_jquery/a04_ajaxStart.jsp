@@ -71,13 +71,81 @@
       console.log("물건명:"+prod.pname)
       console.log("가격:"+prod.price)
       console.log("갯수:"+prod.cnt)
+
+      var member = {}
+      member.name = "홍길동"
+      member.id="himan"
+      member.show=function(){
+        console.log(this.name)
+        console.log(this.id)
+      }
+      member.show()
+
+      var array = [
+        {no:1,subject:"첫번째",name:"홍길동",regdate:"2020-07-07",readcnt:5},
+        {no:2,subject:"두번째",name:"마길동",regdate:"2020-08-09",readcnt:3}
+      ]
+      array.push({no:3,subject:"세번째",name:"오길동",regdate:"2021-01-19",readcnt:1})
+      console.log("배열의 갯수:"+array.length)
+
+      // ex) var fruits 로 물건명, 가격, 갯수 -> 객체형 배열
+      //      console.log
+      var fruits = [
+        {no:1,fname:"사과",price:1200,cnt:12},
+        {no:2,fname:"배",price:500,cnt:3}
+      ]
+      for(var i=0;i<fruits.length;i++){
+        console.log("물건명:"+fruits[i].fname);
+        console.log("가격:"+fruits[i].price);
+        console.log("갯수:"+fruits[i].cnt);
+      }
+      $("#loadBtn").click(function(){
+        var addhtml=""
+        // 배열의 갯수만큼 반복처리
+        for(var idx=0; idx<array.length; idx++){
+          var bd = array[idx] // board의 단위 데이터 할당.
+            addhtml+="<tr><td>"+bd.no+"</td><td>"+bd.subject+"</td><td>"+bd.name
+              +"</td><td>"+bd.regdate+"</td><td>"+bd.readcnt+"</td></tr>"
+        }
+        console.log(addhtml)
+        $("#tab01 tbody").html(addhtml);
+      });
+      // ex) 회원 정보 배열형 json형태 id, 이름
+      // 버튼-> memlist 출력
+      var memlist = [
+        {no:1,name:"홍길동",id:"hgd"},
+        {no:2,name:"최길동",id:"mgd"},
+        {no:3,name:"김길동",id:"kgd"}
+      ]
+      $("#loadMem").click(function(){
+        var addhtml=""
+        // 배열의 갯수만큼 반복처리
+        $(memlist).each(function(idx, ml){
+          addhtml+="<h2>"+ml.id+":"+ml.name+"</h2>"
+        });
+        /*
+        for(var idx=0; idx<memlist.length; idx++){
+          var ml = memlist[idx] // board의 단위 데이터 할당.
+            addhtml+="<h2>"+ml.id+":"+ml.name+"</h2>"
+        }*/
+        console.log(addhtml)
+        $("#memList").html(addhtml);
+      });
    });
 </script>
 </head>
 
 <body>
 <div class="jumbotron text-center">
-  <h2 data-toggle="modal" data-target="#exampleModalCenter">타이틀</h2>
+  <input type="button" id="loadMem" value="회원정보로딩"/>
+  <div id="memList">
+    <h2>@@@ : @@@</h2> 아이디 : 이름
+  </div>
+  <h2>타이틀</h2>
+  <h2>타이틀</h2>
+  <h2>타이틀</h2>
+  <h2>타이틀</h2>
+  <h2>타이틀</h2>
 
 </div>
 <div class="container">
@@ -85,10 +153,10 @@
      <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
        <input class="form-control mr-sm-2" placeholder="제목" />
        <input class="form-control mr-sm-2" placeholder="내용" />
-       <button class="btn btn-info" type="submit">Search</button>
+       <button class="btn btn-info" type="button" id="loadBtn">Search</button>
     </nav>
    </form>
-   <table class="table table-hover table-striped">
+   <table id="tab01" class="table table-hover table-striped">
       <col width="10%">
       <col width="50%">
       <col width="15%">
@@ -105,11 +173,9 @@
       </tr>
     </thead>   
     <tbody>
-       <tr><td></td><td></td><td></td><td></td><td></td></tr>
-       <tr><td></td><td></td><td></td><td></td><td></td></tr>
-       <tr><td></td><td></td><td></td><td></td><td></td></tr>
+    
     </tbody>
-   </table>    
+   </table> 
     
 </div>
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

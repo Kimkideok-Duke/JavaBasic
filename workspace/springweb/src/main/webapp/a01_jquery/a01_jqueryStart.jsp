@@ -60,9 +60,9 @@
       $('h3').click(function(){
     	  $('h4').text("cnt:"+(--cnt_h4));
       })
-      // $("태그[속성=속성값")
-      // $("input[name=num01").val("저장")
-      // $("input[name=num01").val() : 호출
+      // $("태그[속성=속성값]")
+      // $("input[name=num01]").val("저장")
+      // $("input[name=num01]").val() : 호출
       $("#btn01").click(function(){
         alert("번호1:"+$("[name=num01]").val());
         var num01Val = $("[name=num01").val();

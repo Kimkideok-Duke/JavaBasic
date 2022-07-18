@@ -57,6 +57,31 @@
           $("#show").text(num1+"X"+num2+"="+(num1*num2))
         }
       });
+      // 주요 이벤트
+      // mouseover/mouseout
+      $("h2").mouseover(function(){
+        $(this).css("background-color", "yellow");
+      });
+      $("h2").mouseout(function(){
+        $(this).css("background-color", "blue");
+      });
+      // hover(function(){마우스 오버시},function(){마우스 아웃시})
+      $("[name=num1]").hover(function(){
+        $(this).css("background-color","red");
+      },function(){
+        $(this).css("background-color","orange");
+      });
+      // # focus() : 해당 요소 객체에 focus했을 때..
+      $("[name=num1]").focus(function(){
+        $(this).css("background-color","yellow");
+        $(this).val("")
+      });
+      // # hide()/show()
+      $("[name=str01]").hover(function(){
+        $("h2").hide();
+      },function(){
+        $("h2").show();
+      });
    });
    
 </script>

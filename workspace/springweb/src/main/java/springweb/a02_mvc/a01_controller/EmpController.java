@@ -1,5 +1,8 @@
 package springweb.a02_mvc.a01_controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -77,5 +80,39 @@ public class EmpController {
 		service.deleteEmp(empno);
 		d.addAttribute("proc", "del");
 		return "WEB-INF/views/a02_mvc/Hw0713_empDetail.jsp";
+	}
+
+
+	@RequestMapping("emplist02.do")
+	public String ajaxExp() {
+		return "WEB-INF/views/a02_mvc/a07_empAjax.jsp";
+	}
+	// http://localhost:5080/springweb/ajaxEmp.do
+	@RequestMapping("ajaxEmp.do")
+	public String ajaxEmp(Model d) {
+		d.addAttribute("empList", service.getEmpList(new Emp("","")));
+		return "pageJsonReport";
+	}
+
+
+	@RequestMapping("deptList10.do")
+	public String deptList10() {
+		return "WEB-INF/views/a02_mvc/a08_deptAjax.jsp";
+	}
+	// http://localhost:5080/springweb/ajaxDept.do
+	@RequestMapping("ajaxDept.do")
+	public String ajaxDept(Model d) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("dname", "");
+		map.put("loc", "");
+		d.addAttribute("dlist", service.getDeptList(map));
+		return "pageJsonReport";
+	}
+	
+	// http://localhost:5080/springweb/ajaxDept.do?empno=7839
+	@RequestMapping("ajaxEmpDetail.do")
+	public String ajaxEmpDetail(@RequestParam("empno") int empno, Model d) {
+		d.addAttribute("emp", service.getDetail(empno));
+		return "pageJsonReport";
 	}
 }

@@ -13,6 +13,7 @@ import springweb.a02_mvc.a03_dao.EmpDao;
 import springweb.a02_mvc.a04_vo.DeptEmp01;
 import springweb.a02_mvc.a04_vo.Emp;
 import springweb.a02_mvc.a04_vo.Salgrade;
+import springweb.a02_mvc.a04_vo.Dept;
 
 @Service
 public class EmpService {
@@ -95,5 +96,9 @@ public class EmpService {
 	}
     public void deleteEmp(int empno) {
     	dao2.deleteEmp(empno);
+    }
+    
+    public List<Dept> getDeptList(Map<String, String> map){
+    	return dao2.getDeptList(map);
     }
 }

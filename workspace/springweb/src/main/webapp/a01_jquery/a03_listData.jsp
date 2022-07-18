@@ -46,6 +46,21 @@
       $("td").each(function(idx){
         $(this).text(idx+1);
       });
+      /*
+      var colors=["red","orange","yellow","green","blue","navy","purple"]
+      <h2 style="background-color:red">
+      <h2>
+      <h2>
+      <h2>
+      <h2>
+      <h2>
+      <h2>
+      $("h2").each(function(idx){
+        $(this).css("background-color",colors[idx]).text(colors[idx])
+      })
+      */
+
+     
       // $("h1"), $("#아이디명") : id="btn01"
       // $(".클래스명") class="cls01"
       // $("[속성=속성값]")
