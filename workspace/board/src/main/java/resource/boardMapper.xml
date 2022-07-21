@@ -3,35 +3,59 @@
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="board.dao.BoardDao">
-	<select id="boardList" resultType="boardfile" parameterType="boardfile">
-		SELECT *
-		FROM boardfile
-		WHERE 1=1
-		<if test="subject!=null">
-		AND subject LIKE '%'||#{subject}||'%'
-		</if>
-		<if test="writer!=null">
-		AND writer LIKE '%'||#{writer}||'%'
-		</if>
-		ORDER BY regdte DESC
+	<!-- public List<Board> totCnt(BoardSch sch); -->
+	<select id="totCnt" parameterType="boardsch"  resultType="int">	 
+		 SELECT count(*)
+	 	 FROM board011
+		 WHERE 1=1		 
+		 <if test="subject!=null">
+		 AND subject LIKE '%'||#{subject}||'%'
+		 </if>
+		 <if test="writer!=null">
+		 AND writer LIKE '%'||#{writer}||'%'
+		 </if>			 	 			 
+	</select>	
+	<select id="boardList" resultType="board" parameterType="boardsch">
+		select *
+		from (
+		 select rownum cnt, level, b.*  
+		 from board011 b 
+		 WHERE 1=1
+		 <if test="subject!=null">
+		 AND subject LIKE '%'||#{subject}||'%'
+		 </if>
+		 <if test="writer!=null">
+		 AND writer LIKE '%'||#{writer}||'%'
+		 </if>
+		 start with refno = 0
+		 connect by prior no = refno
+		 order siblings by no desc  )
+	    where cnt between #{start} and #{end}	 		 	
 	</select>
-	<insert id="insertBoard" parameterType="boardfile">
-		insert into boardfile values(board_seq.nextval, 0, #{subject}, #{content}, #{writer},
-						 0, sysdate, sysdate)
+	<insert id="insertBoard" parameterType="board">
+		insert into board011 values(board_seq01.nextval,#{refno},#{subject},
+			#{content}, #{writer},0, sysdate, sysdate)		
+	</insert>
+	<insert id="insertFile" parameterType="boardfile">
+		insert into  boardfile values(board_seq01.currval,
+		#{path}, #{fname}, sysdate, sysdate, '')
 	</insert>
 	
-	<select id="getBoardDetail" resultType="boardfile" parameterType="int">
-		select * from boardfile where no = #{no}
+	<select id="getBoardDetail" resultType="board" parameterType="int">
+		SELECT b.*, f.fname
+		FROM board011 b, boardfile f
+		WHERE b.no = f.no(+)
+		AND b.no = #{no}
 	</select>
 	
 	<update id="readCountup" parameterType="int">
-		update boardfile
+		update board011
 			set readcnt = readcnt+1
 			where no = #{no}
 	</update>
 	
-	<update id="updateBoard" parameterType="boardfile">
-		UPDATE boardfile
+	<update id="updateBoard" parameterType="board">
+		UPDATE board011
 			SET subject = #{subject},
 				content = #{content},
 				uptdte = sysdate
@@ -39,14 +63,9 @@
 	</update>
 	<delete id="deleteBoard" parameterType="int">
 		DELETE
-		FROM boardfile
+		FROM board011
 		WHERE NO = #{no}
 	</delete>
-	
-	<insert id="insertFile" parameterType="boardfile">
-		insert into boardfile values(board_seq01.currval,
-		#{path}, #{fname}, sysdate, sysdate, '')
-	</insert>
 </mapper>
 
 

@@ -72,4 +72,8 @@
       -->
       <bean id="multipartResolver"
       		class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+      <!-- 
+      6. 다운로드 뷰
+      -->
+	  <bean id="downloadViewer" class="board.util.DownloadViewer"></bean> 
 </beans>

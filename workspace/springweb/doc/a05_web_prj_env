@@ -1,10 +1,66 @@
 # 개발 환경 설정
 1. 설정 내용
-    1) 고정 아이피
-        server 컴퓨터를 지정하여, 고정ip 실행을 처리
-        db서버 확인
-    2) DB 서버 설정
-        - 방화벽 처리
-    3) svn 서버(git 대체 가능)
+	1) 고정 아이피
+		server 컴퓨터를 지정하여, 고정ip 실행을 처리..
+		db서버 확인
+		
+		
+	2) DB 서버 설정
+		- 방화벽 처리
+	   oracle 서버 설치
+		
+	3) svn 서버(git 대체 가능)
+		
+	4) web 서버 설정
+	
+# 프로젝트 진행에 필요한 [고정 ip] 설정
+1) 고정ip의 필요
+	vpn 
+	사용할 서버에 실행 - 연결된 ip로  svn, 웹서버 DB 서버 처리가 가능하다.
+	조별로 고정ip 처리할 조
+		
+2) svn설정
+	서버 : visual svn server 구글에 검색해서 설치 (server가 있는 pc)
+		https://고정ip/svn/저장소    https://desktop-bpp6jf4/svn/webprj01
+		https://106.10.23.227/svn/webprj01   prj_user01/1111
+	클라이언트 : eclipse : svn 검색 후, 설치..
 
-    4) web 서버 설정
+3) 웹서버설정
+	- 웹서버를 실행 : 고정 아이피가 있는 곳에서 웹 서버를 실행..
+	
+4) DB서버설정
+	- 프로젝트 진행  계정 만들기.
+# 서버 담당자 pc에서 system/1111 계정으로 접근해서
+1. 프로젝트에서 사용할 계정을 위와 같이 만들고..
+GRANT CONNECT, resource, unlimited tablespace 
+	TO project01 IDENTIFIED BY 1111;
+2. 접속해서 간단하게 테이블을 만들 후, 외부에서 접속해서
+데이터베이스를 사용할 수 있는지 여부를 확인한다.
+conn project01/1111;
+create table tab01(name varchar2(50));
+insert into tab01 values('홍길동');
+commit;
+select * from tab01;
+
+# svn
+1. commit : client ==> server
+2. update : server ==> client
+3. 주의 사항
+	1) commit를 할려면 현재 파일과 폴드 정보가 서버와 동일
+		
+	2) 비교를 통한 commit 상세기능 확인
+	3) 소스는 각자폴드를 만들어서 진행
+	4) 공통소스 폴드는 해당 담당자만 관리할 수 있게 처리한다.
+	5) 충돌이 날 때, 소스가 locked 되는 경우가 있을 땐,
+		team==>refresh/cleanup
+	6) replace with : 최신의 서버 파일로 대체
+	7) 최종적으로 소스 처리가 안될 때, 삭제하고 다시 import 처리
+		
+		
+		
+
+		 
+	
+	
+		
+	

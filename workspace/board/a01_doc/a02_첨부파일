@@ -77,13 +77,62 @@
 				공통 mybatis.		BoardFile boardfile
 				dao public void insertFile(BoardFile file);
 				mapper
-					<insert id="" parameterType="boardfile">
-						insert into boardfile values(board_seq.currval,
-						#{path}, #{fname}, sysdate, sysdate, '')
-					</insert>
+				<insert id="insertFile" parameterType="boardfile">
+					insert into  boardfile values(board_seq.currval,
+					#{path}, #{fname}, sysdate, sysdate, '')
+				</insert>
+			# 게시판의 기본정보 연결되는 key값으로 파일정보를 등록 처리..
+			board_seq.nextval, board_seq.currval	
+			insert into board values(board_seq.nextval,0,#{subject},
+			#{content}, #{writer},0, sysdate, sysdate)	
+			insert into  boardfile values(board_seq.currval,
+			#{path}, #{fname}, sysdate, sysdate, '')
+		
 	5) 파일 다운로드 처리를 위한 기본 처리 프로세스와 실제 코드
 		1. 기본 프로세스
 			상생화면에서 첨부파일을 확인하고, 해당파일을 클릭 후, 다운로드시,
 			다운로드 컨트롤러를 통해서 다운 정보를 전달하고, 이 정보를 모델로 설정하여
 			다운로드 뷰를 호출하여, 해당 정보(파일명/경로명)와 동일한 파일을 다운로드
 			뷰에 의해 다운이 된다. 
+
+# 첨부파일 다운로드 처리
+1. 다운로드 환경
+	1) 다운로드 뷰를 생성
+		model : 파일명 지정
+		한글파일을 encoding 처리
+		목적 : 해당 view를 통해서 서버에 있는 파일을 client에 전달하기 위한 목적
+		client ==(클릭/다운로드요청)==> server
+					파일명(모델명)
+
+				<==(파일을 전송)	=== viewer
+					stream형식		 받은 모델명을 기준으로 서버내에
+									해당 경로에 파일이 있는지 확인
+									한글 encoding
+		파일다운로드뷰
+			전달해온 model명을 기준으로 전송할 파일 객체 File f = new File(@@@)
+			한글파일명인 경우 encoding
+			response(반응객체)에 탑재하여 client에 전송한다.
+
+	2) 다운로드 뷰 컨테이너 등록
+
+	3) 다운로드 controller 처리
+
+2. 다운로드 상세화면에서 로딩 처리
+	1) DB 처리
+		dao에 기존 게시물 정보(게시물 번호)로 다운로드 처리할 수 있게 등록
+		public String getFileName(int no);
+		XXXMapper
+		<select id="getFileName" parameterType="int">
+			select fname
+			from boardfile
+			where no = #{no}
+		</select>
+	2) service ==> controller
+		d.addAttribute("fname",service.getFileName(board.getNo()));
+3. jsp
+	<input name="fname" value="${fname}"/>
+	해당 파일 클릭시, 다운로드 controller 호출,
+4. 다운로드 controller
+	/downLoad.do
+
+	return "다운로드뷰(컨테이너에 "

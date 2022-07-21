@@ -21,8 +21,8 @@
    td{text-align:center;}
 </style>
 <style>
-   .input-group-text{width:100%;background-color:#cfffdf;color:black;font-weight:bolder;}
-   .input-group-prepend{width:20%;}
+	.input-group-text{width:100%;background-color:#cfffdf;color:black;font-weight:bolder;}
+	.input-group-prepend{width:20%;}
 </style>
 <script src="${path}/a00_com/jquery.min.js"></script>
 <script src="${path}/a00_com/popper.min.js"></script>
@@ -47,33 +47,34 @@
 <div class="container">
       <form id="frm01" enctype="multipart/form-data" action="${path}/boardInsert.do" 
        class="form"  method="post">
+       <input type="text" name="refno" value="${empty param.refno?'0': param.refno}"/>
       <div class="input-group mb-3">
          <div class="input-group-prepend">
             <span class="text-center input-group-text">제 목</span>
          </div>
          <input name="subject" class="form-control" 
-            value="" placeholder="제목입력하세요" />   
+            value="${param.subject }" placeholder="제목입력하세요" />   
       </div>
 	  <div class="input-group mb-3">
          <div class="input-group-prepend">
             <span class="text-center input-group-text">작성자</span>
          </div>
          <input name="writer" class="form-control" 
-            value="" placeholder="작성자입력하세요" />   
+            value="${param.writer }" placeholder="작성자입력하세요" />   
       </div>
       <div class="input-group mb-3">
          <div class="input-group-prepend">
             <span class="text-center input-group-text">내 용</span>
          </div>
-         <textarea name="content" class="form-control" 
-            value="" placeholder="내용 입력하세요" /></textarea>
+         <textarea name="content" class="form-control" rows="10"
+            placeholder="내용을 입력하세요">${param.content}</textarea>
       </div>
       <div class="input-group mb-3">
          <div class="input-group-prepend">
             <span class="text-center input-group-text">파일첨부</span>
          </div>
          <input type="file" name="report" class="form-control" 
-            placeholder="내용 입력하세요"/>
+            placeholder="파일첨부"/>
       </div>
       <div class="text-right">
       	<button type="button" onclick="insertProc()" class="btn btn-success">등록</button>

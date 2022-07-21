@@ -70,3 +70,29 @@ create table boardfile(
 	etc varchar2(200)
 );
 SELECT * FROM boardfile;
+
+create table boardfile(
+	no number,
+	path varchar2(100),
+	fname varchar2(100),
+	regdte date,
+	uptdte date,
+	etc varchar2(200)
+);
+SELECT * FROM boardfile;
+
+INSERT INTO BOARDFILE values(board_seq01.nextval, #{path}, #{fname}, sysdate, sysdate, '');
+
+SELECT b.*, f.fname
+FROM board b, boardfile f
+WHERE b.NO = f.no(+)
+AND b.NO = #{NO};
+
+SELECT level, b.*
+FROM board011 b
+WHERE 1=1
+AND subject LIKE '%'||''||'%'
+AND writer LIKE '%'||''||'%'
+start with refno = 0
+connect by prior no = refno
+order siblings by no desc;

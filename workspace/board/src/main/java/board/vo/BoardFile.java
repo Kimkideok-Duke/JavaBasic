@@ -1,7 +1,7 @@
 package board.vo;
 
 import java.util.Date;
-
+// board.vo.BoardFile
 public class BoardFile {
 	private int no;
 	private String path;
@@ -13,20 +13,12 @@ public class BoardFile {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public BoardFile(int no, String path, String fname, Date regdte, Date uptdte, String etc) {
-		super();
-		this.no = no;
-		this.path = path;
-		this.fname = fname;
-		this.regdte = regdte;
-		this.uptdte = uptdte;
-		this.etc = etc;
-	}
 	public BoardFile(String path, String fname) {
 		super();
 		this.path = path;
 		this.fname = fname;
 	}
+
 	public int getNo() {
 		return no;
 	}

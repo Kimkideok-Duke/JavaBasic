@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import board.service.BoardService;
 import board.vo.Board;
+import board.vo.BoardSch;
 
 @Controller
 public class BoardController {
@@ -16,7 +17,7 @@ public class BoardController {
 	
 	// http://localhost:5080/board/boardList.do
 	@RequestMapping("boardList.do")
-	public String boardList(Board sch, Model d) {
+	public String boardList(BoardSch sch, Model d) {
 		// Board sch : 요청값을 받아서 service단에 전달
 		
 		// 서비스에서 받아온 ArrayList<Board> 객체를 blist라는
@@ -41,21 +42,21 @@ public class BoardController {
 	@RequestMapping("boardDetail.do")
 	public String boardDetail(@RequestParam("no") int no, Model d){
 		d.addAttribute("board", service.getBoardDetail(no));
-		return "WEB-INF/views/a03_boardDetail.jsp";
+		return "WEB-INF/views/a04_boardDetail.jsp";
 	}
 	@RequestMapping("updateBoard.do")
 	public String updateBoard(Board upt, Model d) {
 		System.out.println("수정:"+upt.getSubject());
 		d.addAttribute("board", service.updateBoard(upt));
 		d.addAttribute("proc", "upt");
-		return "WEB-INF/views/a03_boardDetail.jsp";
+		return "WEB-INF/views/a04_boardDetail.jsp";
 	}
 	@RequestMapping("deleteBoard.do")
 	public String deleteBoard(@RequestParam("no") int no, Model d) {
 		System.out.println("삭제:"+no);
 		service.deleteBoard(no);
 		d.addAttribute("proc", "del");
-		return "WEB-INF/views/a03_boardDetail.jsp";
+		return "WEB-INF/views/a04_boardDetail.jsp";
 	}
 }
 
