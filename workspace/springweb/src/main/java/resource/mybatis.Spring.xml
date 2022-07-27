@@ -11,6 +11,7 @@
 		<typeAlias alias="deptemp01" type="springweb.a02_mvc.a04_vo.DeptEmp01"/>
 		<typeAlias alias="Salgrade" type="springweb.a02_mvc.a04_vo.Salgrade"/>
 		<typeAlias alias="boardfile" type="springweb.z01_vo.BoardFile"/>
+		<typeAlias alias="calendar" type="springweb.a02_mvc.a04_vo.Calendar"/>
 		
 	</typeAliases>
 	<!-- 사용할 sql파일 처리 
@@ -24,6 +25,7 @@
 		<mapper resource="resource/mapper/DaoExpMapper.xml"/>
 		<mapper resource="resource/mapper/DaoExp01Mapper.xml"/>
 		<mapper resource="resource/mapper/DaoSalgradeMapper.xml"/>
+		<mapper resource="resource/mapper/CalendarMapper.xml"/>
 	</mappers>
 	
 </configuration>

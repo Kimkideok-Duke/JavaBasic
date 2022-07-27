@@ -56,8 +56,8 @@
 	</section>
 	<section name="DBeaver.StandardErrorDialog">
 		<item key="showDetails" value="true"/>
-		<item key="DIALOG_X_ORIGIN" value="793"/>
-		<item key="DIALOG_Y_ORIGIN" value="481"/>
+		<item key="DIALOG_X_ORIGIN" value="719"/>
+		<item key="DIALOG_Y_ORIGIN" value="450"/>
 		<item key="DIALOG_WIDTH" value="469"/>
 		<item key="DIALOG_HEIGHT" value="370"/>
 		<item key="DIALOG_FONT_NAME" value="1|.AppleSystemUIFont|11.0|0|COCOA|1|.AppleSystemUIFont"/>

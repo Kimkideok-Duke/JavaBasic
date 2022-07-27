@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="${path}/a00_com/bootstrap.min.css" >
 <link rel="stylesheet" href="${path}/a00_com/jquery-ui.css" >
 <style>
-   td{text-align:center;}
+	td{text-align:center;}
 </style>
 <script src="${path}/a00_com/jquery.min.js"></script>
 <script src="${path}/a00_com/popper.min.js"></script>
@@ -27,49 +27,79 @@
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
 <script type="text/javascript">
-   $(document).ready(function(){
-      <%-- 
-      
-      --%>
-      $("#schBtn").click(function(){
-    	  $.ajax({
-    		  url:"${path}/ajaxEmp.do",
-    		  dataType:"json",
-    		  success:function(data){
-            var list = data.empList
-            var addHTML=""
-            $(list).each(function(idx, emp){
-              addHTML+="<tr><td>"+emp.empno+"</td><td>"+emp.ename+"</td><td>"+emp.job+"</td><td>"+
-                                  emp.sal+"</td><td>"+emp.deptno+"</td></tr>"
-            });
-    			  console.log(addHTML)
-            $("#empList").html(addHTML)
-    		  }
-    	  })
-      });
-   });
+	$(document).ready(function(){
+		<%-- 
+		
+		--%>	
+		$("#schBtn").click(function(){
+			$.ajax({
+				url:"${path}/ajaxEmp.do",
+				dataType:"json",
+				success:function(data){
+					// data.모델명  : m.addAttribute("empList", ser...)
+					var list = data.empList
+					var addHTML=""
+					$(list).each(function(idx, emp){ // 변수명이 중요하지 않고, 순서.
+						addHTML+="<tr><td>"+emp.empno+"</td><td>"+emp.ename+"</td>"+
+							"<td>"+emp.job+"</td><td>"+emp.sal+"</td>"+
+							"<td>"+emp.deptno+"</td></tr>"  
+					});
+					console.log(addHTML)
+					$("#empList").html(addHTML)
+				}
+			});
+		});
+		$(".sch").keyup(function(){
+			var enameVal = $("[name=ename]").val()
+			var jobVal = $("[name=job]").val()
+			//$("h2").text("ename="+enameVal+"&job="+jobVal)
+			// 입력후, enter키를 입력시, 조회 처리..
+			if(event.keyCode==13){
+				$.ajax({
+					url:"${path}/ajaxEmp.do",
+					data:"ename="+enameVal+"&job="+jobVal,
+					dataType:"json",
+					success:function(data){
+						// data.모델명  : m.addAttribute("empList", ser...)
+						var list = data.empList
+						var addHTML=""
+						$(list).each(function(idx, emp){ // 변수명이 중요하지 않고, 순서.
+							addHTML+="<tr><td>"+emp.empno+"</td><td>"+emp.ename+"</td>"+
+								"<td>"+emp.job+"</td><td>"+emp.sal+"</td>"+
+								"<td>"+emp.deptno+"</td></tr>"  
+						});
+						console.log(addHTML)
+						$("#empList").html(addHTML)
+					}
+				});			
+			}
+			
+		});
+		
+	});
 </script>
 </head>
 
 <body>
 <div class="jumbotron text-center">
-  <h2>사원정보 Ajax</h2>
+  <h2 >사원정보 Ajax</h2>
 
 </div>
 <div class="container">
-   <form id="frm01" class="form-inline"  method="post">
-     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-       <input class="form-control mr-sm-2" placeholder="제목" />
-       <input class="form-control mr-sm-2" placeholder="내용" />
-       <button class="btn btn-info" type="button" id="schBtn">Search</button>
-    </nav>
-   </form>
+	<form id="frm01" class="form-inline"  method="post">
+  	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+	    <input class="sch form-control mr-sm-2" placeholder="사원명" name="ename"/>
+	    <input class="sch form-control mr-sm-2" placeholder="직책명" name="job"/>
+	    <button class="btn btn-info" type="button" id="schBtn">Search</button>
+	    <!-- <button> 기본 타입이 submit  -->
+ 	</nav>
+	</form>
    <table class="table table-hover table-striped">
-      <col width="10%">
-      <col width="50%">
-      <col width="15%">
-      <col width="15%">
-      <col width="10%">
+   	<col width="20%">
+   	<col width="20%">
+   	<col width="20%">
+   	<col width="20%">
+   	<col width="20%">
     <thead>
     
       <tr class="table-success text-center">
@@ -79,13 +109,10 @@
         <th>급여</th>
         <th>부서번호</th>
       </tr>
-    </thead>   
+    </thead>	
     <tbody id="empList">
-       <tr><td></td><td></td><td></td><td></td><td></td></tr>
-       <tr><td></td><td></td><td></td><td></td><td></td></tr>
-       <tr><td></td><td></td><td></td><td></td><td></td></tr>
     </tbody>
-   </table>    
+	</table>    
     
 </div>
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -98,16 +125,16 @@
         </button>
       </div>
       <div class="modal-body">
-      <form id="frm02" class="form"  method="post">
-        <div class="row">
-         <div class="col">
-           <input type="text" class="form-control" placeholder="사원명 입력" name="ename">
-         </div>
-         <div class="col">
-           <input type="text" class="form-control" placeholder="직책명 입력" name="job">
-         </div>
-        </div>
-       </form> 
+		<form id="frm02" class="form"  method="post">
+	     <div class="row">
+	      <div class="col">
+	        <input type="text" class="form-control" placeholder="사원명 입력" name="ename">
+	      </div>
+	      <div class="col">
+	        <input type="text" class="form-control" placeholder="직책명 입력" name="job">
+	      </div>
+	     </div>
+	    </form> 
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

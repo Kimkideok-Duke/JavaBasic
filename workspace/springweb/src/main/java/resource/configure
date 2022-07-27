@@ -1,6 +1,6 @@
 jdbc.driver=oracle.jdbc.driver.OracleDriver
-jdbc.url=jdbc:oracle:thin:@106.10.23.227:1521:xe
-jdbc.user=scott
-jdbc.pass=tiger
+jdbc.url=jdbc:oracle:thin:@220.73.54.156:1521:xe
+jdbc.user=project01
+jdbc.pass=1111
 # 파일 서버정보
 upload=/Users/kideokkim/a01_javaexp/workspace/springweb/src/main/webapp/z01_upload

@@ -128,15 +128,18 @@
     		</td><td>${bd.readcnt}</td></tr>
     	</c:forEach>
     </tbody>
-	</table>    
+	</table>
+	<!-- 
+	previous
+	-->
 	<ul class="pagination justify-content-end">
 	  
-	  <li class="page-item"><a class="page-link" href="javascript:goPage(${boardSch.startBlock })">Previous</a></li>
-	  <c:forEach var="cnt" begin="1" end="${boardSch.pageCount}">
+	  <li class="page-item"><a class="page-link" href="javascript:goPage(${boardSch.startBlock-1})">Previous</a></li>
+	  <c:forEach var="cnt" begin="${boardSch.startBlock}" end="${boardSch.endBlock}">
 	  	<li class="page-item ${boardSch.curPage==cnt?'active':''}">
 	  		<a class="page-link" href="javascript:goPage(${cnt})">${cnt}</a></li>
 	  </c:forEach>
-	  <li class="page-item"><a class="page-link" href="#">Next</a></li>
+	  <li class="page-item"><a class="page-link" href="${boardSch.endBlock+1}">Next</a></li>
 	</ul>    
 </div>
 	<script type="text/javascript">
