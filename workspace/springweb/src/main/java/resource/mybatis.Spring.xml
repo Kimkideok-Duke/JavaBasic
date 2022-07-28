@@ -5,6 +5,7 @@
 	<!-- vo객체 alias 지정 
 		리턴할 객체, 매개변수로 처리할 vo.
 	-->
+	
 	<typeAliases>
 		<typeAlias alias="emp" type="springweb.a02_mvc.a04_vo.Emp"/>
 		<typeAlias alias="dept" type="springweb.a02_mvc.a04_vo.Dept"/>
@@ -27,5 +28,4 @@
 		<mapper resource="resource/mapper/DaoSalgradeMapper.xml"/>
 		<mapper resource="resource/mapper/CalendarMapper.xml"/>
 	</mappers>
-	
 </configuration>

@@ -16,9 +16,9 @@
 	</select> 
 	<insert id="insertCalendar" parameterType="calendar" >
 		insert into calendar values(cal_seq.nextval,#{title},#{start},
-			#{end},#{content},#{borderColor},#{backgroundColor},#{textColor},
+			#{end},#{content},null,#{backgroundColor},#{textColor},
 			#{allDay})				
-	</insert>
+	</insert>	
 	<update id="updateCalendar" parameterType="calendar">
 	 UPDATE calendar
 	    SET title = #{title},
@@ -33,5 +33,5 @@
 	<delete id="deleteCalendar" parameterType="int" >
 	   DELETE FROM calendar
 	   WHERE id= #{id}
-	</delete> 
+	</delete>  	
 </mapper>

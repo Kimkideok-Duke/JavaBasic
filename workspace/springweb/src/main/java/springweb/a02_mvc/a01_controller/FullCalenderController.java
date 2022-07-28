@@ -17,23 +17,27 @@ public class FullCalenderController {
 	public String calendar() {
 		return "WEB-INF/views/a02_mvc/a20_fullcalendar.jsp";
 	}
-	// http://localhost:5080/springweb/calList.do
+	// http://localhost:5080/springweb/calList.do callist
 	@RequestMapping("calList.do")
 	public String calList(Model d) {
 		d.addAttribute("callist", service.getCalList());
 		return "pageJsonReport";
 	}
-	// http://localhost:5080/springweb/calList.do
+	// http://localhost:5080/springweb/calInsert.do
 	@RequestMapping("calInsert.do")
 	public String calInsert(Calendar ins) {
 		service.insertCalendar(ins);
 		
 		// 등록 후, 초기화면으로 이동
 		return "redirect:/calendar.do";
-	}
+	} // calUpdate.do calDelete.do
 	// http://localhost:5080/springweb/calUpdate.do
 	@RequestMapping("calUpdate.do")
 	public String updateCalendar(Calendar upt) {
+		System.out.println("## 수정 ##");
+		System.out.println(upt.getTitle());
+		
+		
 		service.updateCalendar(upt);
 		return "redirect:/calendar.do";
 	}
@@ -44,3 +48,4 @@ public class FullCalenderController {
 		return "redirect:/calendar.do";
 	}
 }
+
