@@ -11,7 +11,7 @@
 	==> $("선택자").html("표현할 html코드"),  $("선택자").html()
 	.속성 = "속성값" ex) domObj.align="center"
 	==> $("선택자").attr("속성","속성값")
-	.style.속성 = "속성값 ex) domObj.style.backgroundColor="red"
+	.style.속성 = "속성값" ex) domObj.style.backgroundColor="red"
 	==> $("선택자").css("속성","속성값") 
 		ex) $("h1").css("background-color","blue");
 		ex) $("h1").css({"color":"blue","border":"1px solid red"});
