@@ -7,6 +7,5 @@ INDEX VERSION 1.4+/Users/kideokkim/a01_javaexp/workspace/.metadata/.plugins/org.
 3458085567.index
 1308981857.index
 2783801031.index
-3458085567.index
 2870821930.index
 3645688346.index

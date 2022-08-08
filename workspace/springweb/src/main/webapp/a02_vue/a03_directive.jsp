@@ -53,7 +53,7 @@
 		var vm = new Vue({
 			el:".container",
 			data:{name:"홍길동", age:25, loc:"서울신림",
-				  img01:"re.PNG",
+				  img01:"5c32e1ee5bc195dde5c4715d85e7babe.jpg",
 				text01:"<h3>안녕</h3>",
 				dir01:"center", id:"himan"}
 		})
