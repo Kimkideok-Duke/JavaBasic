@@ -31,6 +31,8 @@ INDEX VERSION 1.131
 /webprj/src/main/java
 /Users/kideokkim/a01_javaexp/workspace/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/2691026311.index
 /webprj/src/main/java
+/Users/kideokkim/a01_javaexp/workspace/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/3458085567.index
+/springweb/src/main/java
 /Users/kideokkim/a01_javaexp/workspace/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/1361839922.index
 /webprj/src/main/java
 /Users/kideokkim/a01_javaexp/workspace/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/66250392.index
