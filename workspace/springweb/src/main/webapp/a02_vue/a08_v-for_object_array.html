@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/springweb/a00_com/bootstrap.min.css" >
+<style>
+	td{text-align:center;}
+</style>
+<script src="/springweb/a00_com/jquery.min.js"></script>
+<script src="/springweb/a00_com/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		var vm = new Vue({
+			el:".container",
+			data:{msg:"객체형 배열",
+				students:[
+					{name:"홍길동",kor:80, eng:80, math:90},
+					{name:"김길동",kor:60, eng:30, math:60},
+					{name:"신길동",kor:80, eng:100, math:70},
+					{name:"최길동",kor:84, eng:80, math:75},
+					{name:"고길동",kor:34, eng:89, math:100}
+				]}
+		});	
+		// ex)
+	});
+</script>
+</head>
+<body>
+
+<div class="container">
+	<div class="jumbotron text-center">
+	  <h2 >{{msg}}</h2>
+	</div>
+   <table class="table table-hover table-striped">
+   	<col width="10%">
+   	<col width="50%">
+   	<col width="15%">
+   	<col width="15%">
+   	<col width="10%">
+    <thead>
+    
+      <tr class="table-success text-center">
+        <th>번호</th>
+        <th>이름</th>
+        <th>국어</th>
+        <th>영어</th>
+        <th>수학</th>
+        <th>총점</th>
+        <th>평균</th>
+      </tr>
+    </thead>	
+    <tbody>
+    	<tr v-for="(stud, idx) in students">
+    		<td>{{idx+1}}</td><td>{{stud.name}}</td><td>{{stud.kor}}</td><td>{{stud.eng}}</td><td>{{stud.math}}</td>
+    		<td>{{Number(stud.kor)+Number(stud.eng)+Number(stud.math)}}</td>
+    		<td>{{(parseInt(stud.kor)+parseInt(stud.eng)+parseInt(stud.math))/3}}</td>
+    	</tr>
+    	
+    </tbody>
+	</table>       
+</div>
+</body>
+</html>
